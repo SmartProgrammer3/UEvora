@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <script>
+        function main() {
+            let gc = document.getElementById("acanvas").getContext("2d");   
+            gc.fillStyle = "lightgray";
+            gc.fillRect(0,0,128,128);
+            
+            //guarda estado inicial da tela
+            gc.translate(64,64);
+            gc.rotate(0.785398);
+            gc.beginPath();
+            gc.fillStyle = "orange";
+            gc.fillRect(0,0,16,16); // Cria o retangulo
+            gc.closePath();
+            //repoe estado da tela inial 
+        }
+      </script>
+</head>
+<body>
+    <canvas id="acanvas" height="128px" width="128px">
+        <script>main();</script>
+    </canvas>
+</body>
+</html>

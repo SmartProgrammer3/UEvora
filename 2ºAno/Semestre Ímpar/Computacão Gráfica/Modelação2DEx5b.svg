@@ -1,0 +1,21 @@
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd%22%3E
+<svg width="256" height="256"
+    xmlns="http://www.w3.org/2000/svg"
+    xmlns:xlink="http://www.w3.org/1999/xlink%22%3E
+    <!-- conteúdo do documento SVG -->
+    <rect
+      x = "0"
+      y = "0"
+      width="256" 
+      height="256" 
+      fill="lightgray" 
+    />
+    <rect 
+      transform="translate(128,128), rotate(45)" 
+      x= "-32"
+      y= "-32"
+      width="64" 
+      height="64" 
+      fill="steelblue"
+    />
+</svg>

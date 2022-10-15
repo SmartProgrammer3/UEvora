@@ -7,6 +7,7 @@ public class Nome {
         String nomeProprio = scanner.nextLine();
         String nomeMeio = scanner.nextLine();
         String apelido = scanner.nextLine();
+        scanner.close();
         char meio;
 
         meio = nomeMeio.charAt(0);

@@ -5,11 +5,10 @@ import java.util.Scanner;
 public class TemperaturaCF {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
-        int grausCelsius = scanner.nextInt();
-        double grausFahrenheit = (1.8 * grausCelsius) + 32;
-        
+        double grausCelsius = scanner.nextDouble();
         scanner.close();
 
+        double grausFahrenheit = (1.8 * grausCelsius) + 32;
         System.out.println(grausFahrenheit);
     }
 }

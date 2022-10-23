@@ -1,0 +1,44 @@
+1) Indicar as chaves primárias, candidatas e estrangeiras de cada
+relação.
+→Relação membro
+Chaves candidatas: {IdMemb} {IdMemb, Nome}
+Chaves primárias: {IdMemb}
+Chaves estrangeiras: {}
+
+→Relação amigo
+Chaves candidatas: {IdMemb1, IdMemb2 }
+Chaves primárias: { IdMemb1, IdMemb2 }
+Chave estrangeiras: { IdMemb1, IdMemb2 } da biblioteca membros
+
+→Relação gosta
+Chaves candidatas: {IdMemb, ISBN}
+Chaves primárias: {IdMemb, ISBN}
+Chaves estrangeiras: {IdMemb } da biblioteca membros
+			         {ISBN} da biblioteca livro
+
+→Relação leu
+Chaves candidatas: {IdMemb, ISBN}
+Chaves primárias: {IdMemb, ISBN}
+Chaves estrangeiras: {IdMemb} da biblioteca membros
+			         {ISBN} da biblioteca livro
+
+→Relação livro
+Chaves candidatas: {ISBN}
+Chaves primárias: {ISBN}
+Chaves estrangeiras: {}
+
+→Relação genero
+Chaves candidatas: {ISBN, Genero}
+Chaves primárias: {ISBN, Genero}
+Chaves estrangeiras: {ISBN} da biblioteca livro
+
+→Relação autoria
+Chaves candidatas: {ISBN, Coda }
+Chaves primárias: {ISBN, Coda}
+Chaves estrangeiras: {ISBN} da biblioteca livro
+			         {Coda} da biblioteca livro
+
+→Relação autor
+Chaves candidatas: { Coda } { Coda, Nome}
+Chaves primárias: { Coda }
+Chaves estrangeiras: {}

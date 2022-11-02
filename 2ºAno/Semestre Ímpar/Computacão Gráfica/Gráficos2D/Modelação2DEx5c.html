@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <script>
+        function main() {
+            let gc = document.getElementById("acanvas").getContext("2d");   
+            gc.fillStyle = "lightgray";
+            gc.fillRect(0,0,128,128);
+
+            gc.fillRect(0,0,16,16); 
+            gc.fillStyle = "orange";
+            gc.closePath();
+        }
+      </script>
+</head>
+<body>
+    <canvas id="acanvas" height="128px" width="128px">
+        <script>main();</script>
+    </canvas>
+</body>
+</html>

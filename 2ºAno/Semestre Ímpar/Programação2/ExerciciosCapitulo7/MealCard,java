@@ -1,0 +1,23 @@
+public class MealCard {
+    private int points;
+    static final int DEFAULT_POINTS = 100;
+    
+    // Construir primeiro construtor sem parametros, usar com
+    // o default
+    public MealCard(){
+        points = DEFAULT_POINTS;
+    }
+    // This means we are not returning a copy of an object, but
+    // only the reference of this object
+    public MealCard(int points2){
+        points = points2;
+    }
+    
+    public int getPoints(){
+        return points;
+    }
+    
+    public void setPoints(int x){
+        points = x;
+    } 
+}

@@ -1,0 +1,244 @@
+<svg 
+     width="700" height="500"
+     viewBox="30 0 140 190"
+	   xmlns="http://www.w3.org/2000/svg" 
+     	xmlns:xlink="http://www.w3.org/1999/xlink">
+
+   <defs>
+
+      <!--roda-->
+      <g id="roda">
+         <circle cx="50" cy="50" r="20" stroke-width="1" />
+			<circle cx="50" cy="50" r="15"
+			stroke="DeepSkyBlue" stroke-width="1" fill="DeepSkyBlue"/>
+         <!--Raios-->
+         <line x1="50" y1="50" x2="35" y2="50"
+			stroke-linecap="round" stroke="black" stroke-width="1"/>
+			<line x1="50" y1="50" x2="65" y2="50"
+			stroke-linecap="round" stroke="black" stroke-width="1"/>
+			<line x1="50" y1="50" x2="35" y2="50"
+			stroke-linecap="round" stroke="black" stroke-width="1" transform=" translate(50,-21) rotate(45)"/>
+			<line x1="50" y1="50" x2="35" y2="50"
+			stroke-linecap="round" stroke="black" stroke-width="1" transform="translate(-10,39) rotate(-45)"/>
+			<line x1="50" y1="50" x2="35" y2="50"
+			stroke-linecap="round" stroke="black" stroke-width="1" transform="translate(-21,50) rotate(-45)"/>
+			<line x1="50" y1="50" x2="35" y2="50"
+			stroke-linecap="round" stroke="black" stroke-width="1" transform="translate(61,-10) rotate(45)"/>
+         <line x1="50" y1="35" x2="50" y2="65"
+			stroke-linecap="round" stroke="black" stroke-width="1" />
+      </g>
+      <!--Quadrante da bicicleta-->
+      <g id="Quadrante" >
+         <line x1="81" y1="65" x2="120" y2="100"
+         stroke-linecap="round" style="stroke:yellow; stroke-width:5"/>
+         <line x1="70" y1="100" x2="80" y2="65"
+         stroke-linecap="round" style="stroke:red; stroke-width:5"/>
+         <line x1="120" y1="100" x2="130" y2="70"
+		   stroke-linecap="round" style="stroke:yellow; stroke-width:5"/>
+         <!--corrente -->
+         <circle cx="120" cy="103" r="10" fill="yellow"/>
+         <circle cx="160" cy="100" r="5" fill="yellow"/>
+         <path d="
+            M 160 95  
+            L 120 93
+            L 120 113
+            L 160 105
+
+         " fill="yellow"/>
+         <circle cx="120" cy="103" r="6" fill="goldenrod"/>
+         
+         <!--pedal-->
+         <line x1="120" y1="103" x2="110" y2="110" stroke-linecap="round"
+         style="stroke:lightgrey; stroke-width:3"/>
+         <line x1="107" y1="110" x2="113" y2="110" stroke-linecap="round"
+         style="stroke:dimgrey; stroke-width:3"/>
+         
+         <!--celim-->
+         <circle cx="120" cy="63" r="3" fill="red"/>
+         <circle cx="133" cy="65" r="5" fill="red"/>
+         <path d="
+            M 120 66
+            L 133 70
+            L 133 60
+            L 120 60
+         " fill="red" />
+      </g>
+
+      <g id="chão">
+         <!--Chão-->
+          <line x1="-300" y1="130" x2="300" y2="130" 
+         style="stroke:black; stroke-width:20"/>
+         <!--tracejado-->
+         
+         <line x1="-290" y1="130" x2="-270" y2="130" 
+         style="stroke:white; stroke-width:2.5"/>
+         <line x1="-260" y1="130" x2="-240" y2="130" 
+         style="stroke:white; stroke-width:2.5"/>
+         <line x1="-230" y1="130" x2="-210" y2="130" 
+         style="stroke:white; stroke-width:2.5"/>
+         <line x1="-200" y1="130" x2="-180" y2="130" 
+         style="stroke:white; stroke-width:2.5"/>
+         <line x1="-170" y1="130" x2="-150" y2="130" 
+         style="stroke:white; stroke-width:2.5"/>
+         <line x1="-140" y1="130" x2="-120" y2="130" 
+         style="stroke:white; stroke-width:2.5"/>
+         <line x1="-110" y1="130" x2="-90" y2="130" 
+         style="stroke:white; stroke-width:2.5"/>
+         <line x1="-80" y1="130" x2="-60" y2="130" 
+         style="stroke:white; stroke-width:2.5"/>
+         <line x1="-50" y1="130" x2="-30" y2="130" 
+         style="stroke:white; stroke-width:2.5"/>
+         <line x1="-20" y1="130" x2="0" y2="130" 
+         style="stroke:white; stroke-width:2.5"/>
+         <line x1="10" y1="130" x2="30" y2="130" 
+         style="stroke:white; stroke-width:2.5"/>
+         <line x1="40" y1="130" x2="60" y2="130" 
+         style="stroke:white; stroke-width:2.5"/>
+         <line x1="70" y1="130" x2="90" y2="130" 
+         style="stroke:white; stroke-width:2.5"/>
+         <line x1="100" y1="130" x2="120" y2="130" 
+         style="stroke:white; stroke-width:2.5"/>
+         <line x1="130" y1="130" x2="150" y2="130" 
+         style="stroke:white; stroke-width:2.5"/>
+         <line x1="160" y1="130" x2="180" y2="130" 
+         style="stroke:white; stroke-width:2.5"/>
+         <line x1="190" y1="130" x2="210" y2="130" 
+         style="stroke:white; stroke-width:2.5"/>
+         <line x1="220" y1="130" x2="240" y2="130" 
+         style="stroke:white; stroke-width:2.5"/>
+         <line x1="250" y1="130" x2="270" y2="130" 
+         style="stroke:white; stroke-width:2.5"/>
+         <line x1="280" y1="130" x2="300" y2="130" 
+         style="stroke:white; stroke-width:2.5"/>
+      
+      </g>
+      <!--giador-->
+      <g id="guiador">
+         <line x1="71" y1="64" x2="75" y2="55" stroke-linecap="round"
+            style="stroke:grey; stroke-width:3"/>
+            <path fill= "none" d="
+               M 75 55
+               Q 72 55 72 52 
+               Q 72 49 75 49
+               L 80 49
+            " style="stroke:grey; stroke-width:3"/>
+            <line x1="80" y1="49" x2="90" y2="49" stroke-linecap="round"
+            style="stroke:blue; stroke-width:4"/>
+            <!--Campainha-->
+            <path id="campainha" d=" 
+            M 75 45 
+            L 73.5 45
+            " stroke-linecap="round"
+            style="stroke:RED; stroke-width:4" />
+      </g>
+      <!--Ceu-->
+      <linearGradient id="grad1">
+        	<stop offset="0.10" stop-color="yellow"/>
+            <stop offset="0.15" stop-color="orange"/>
+            <stop offset="0.3" stop-color="DeepSkyBlue"/>
+      
+        </linearGradient>
+        
+      <g id="ceu" >
+         <rect x="0" y="0" width="250" height="300"
+    	fill="DeepSkyBlue"/>
+         <rect x="-40" y="-150" width="300" height="300"
+    	fill="url(#grad1)"
+    	transform="rotate(45)"/>
+      <rect x="-200" y="190" width="500" height="300"
+    	fill="white"/>
+      </g>
+
+      <!-- simbolo da placa de Évora-->
+      <g id="simbolo" >
+      <circle cx="15" cy="15" r="15" fill="white" style="stroke:black; stroke-width:2"/>
+      <path d="
+         M 12.5 29.7902
+         L 12.5 22.5
+         L 5 15
+         L 15 5
+         L 25 15
+         L 17.5 22.5
+         L 17.5 29.7902
+      " style="stroke:black; stroke-width:2" fill="white"/>
+      <path d="
+         M 16.5 29.6
+         L 13.5 29.6
+         L 13.5 31
+         L 16.5 31
+
+      " fill="white"/>
+      </g>
+      <!--placa de Évora-->
+      <g id="placa">
+      <line x1="20" y1="128" x2="20" y2="70"
+		stroke-linecap="round"
+		style="stroke:gray; stroke-width:6"/>
+      <rect x="-10" y="30" width="60" height="40"
+      fill="white" stroke="black" rx="3"/>
+      <text font-family="Calibri" font-size="20" x="-3" y="67" fill="black">Évora</text>
+      <use xlink:href="#simbolo" transform="translate(-5,35) scale(0.4)"/>
+      </g>
+      <!--Bandeira de portugal-->
+      <g id="bandeira">
+      <linearGradient id="grad2">
+        	<stop offset="0.454" stop-color="green"/>
+            <stop offset="0.2" stop-color="red"/>
+      
+        </linearGradient>
+          <line x1="160" y1="100" x2="160" y2="30"
+		   stroke-linecap="round" style="stroke:brown; stroke-width:3"/>
+         <rect x="160" y="30" width="55" height="30"
+      	fill="url(#grad2)"/>
+         <circle cx="185" cy="45" r="8" fill="yellow" />
+         
+      </g>
+      
+
+   </defs>
+   <!--junção do varios objetos para formar a imagem-->
+   <use xlink:href="#ceu"/>
+   <use xlink:href="#placa" transform="translate(110,50)"/>
+   <use xlink:href="#roda" fill="lime" transform="translate(20,100)"/>
+   <use xlink:href="#roda" fill="cyan" transform="translate(110,100)"/>
+   <use xlink:href="#Quadrante" transform="translate(0,50)" />
+   <use xlink:href="#bandeira" transform="translate(0,50)" />
+   
+   <use xlink:href="#guiador" fill="lime" transform="translate(9,50)"/>
+   <use xlink:href="#chão" transform="translate(0,50)"/>
+    <!--animações-->
+   <animateTransform 
+        xlink:href="#placa"
+		attributeName="transform"
+		attributeType="XML"
+		type="translate"
+		from="-300 0"
+		to="300 0"
+		dur="5s"
+		begin="0s"
+		repeatCount="indefinite"
+		fill="freeze"/>
+  
+   <animateTransform
+		xlink:href="#roda"
+		attributeName="transform"
+		attributeType="XML"
+		type="rotate"
+		from="0 50 50 "
+		to="-360 50 50 "
+		dur="4s"
+		begin="0s"
+		repeatCount="indefinite"
+		fill="freeze"/>
+   <animateTransform 
+        xlink:href="#chão"
+		attributeName="transform"
+		attributeType="XML"
+		type="translate"
+		from="-50 0 "
+		to="250 0 "
+		dur="6s"
+		begin="0s"
+		repeatCount="indefinite"
+		fill="freeze"/>
+</svg>

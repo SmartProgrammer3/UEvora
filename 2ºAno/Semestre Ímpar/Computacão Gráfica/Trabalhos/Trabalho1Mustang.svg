@@ -1,0 +1,119 @@
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg width = "1000" height = "1000"
+    xmlns="http://www.w3.org/2000/svg"
+    xmlns:xlink="http://www.w3.org/1999/xlink">
+
+    <defs>
+        <g id = "rodas">     
+            <circle cx = "0" cy = "0" r = "20" fill="#000000"/>
+            <circle cx = "0" cy = "0" r = "15" fill="#504f4f"/>
+            <circle cx = "0" cy = "0" r = "5" fill="#fefcfc"/>
+        </g>
+        <g id = "rodas">     
+            <circle cx = "0" cy = "0" r = "20" fill="#000000"/>
+            <circle cx = "0" cy = "0" r = "15" fill="#504f4f"/>
+            <circle cx = "0" cy = "0" r = "5" fill="#fefcfc"/>
+        </g>
+
+        <path id = "sirene" stroke = "black" fill = "yellow" stroke-width="3" d="
+        M 0 0
+        L 30 0
+        Q 15 -50 0 0
+        " />
+        <path id = "janelaCondutor" stroke = "black" stroke-width="3" d="
+        M 0 0 
+        L 27 0
+        L 27 30
+        L -15 30
+        z
+        "/>
+        <g id = "retangulos">
+            <rect width="40" height="50" stroke = "black" stroke-width="3"/>
+        </g>
+
+        <g id = "escadas">
+            <rect width="3" height="20" stroke = "gray" fill = "gray" stroke-width="1"/>
+        </g>
+
+    </defs>
+
+
+    <path stroke = "black" stroke-width="3" d="
+    M 225 495
+    L 275 495" />
+    
+    <use xlink:href = "#rodas" transform="translate(250,500)"/>
+    <use xlink:href = "#rodas" transform="translate(430,500)"/>
+
+    <use xlink:href = "#retangulos" transform="translate(192,490) scale(0.8,0.4)" fill = "black"/>
+    <use xlink:href = "#retangulos" transform="translate(275,488) scale(0.5,0.4)" fill = "black" />
+
+    <rect width="300" height="20" stroke = "gray" fill = "none" stroke-width="3" transform="translate(210,350) rotate(5)" />
+
+
+    <use xlink:href = "#escadas" transform="translate(210,350) rotate(5)"/>
+    <use xlink:href = "#escadas" transform="translate(230,352) rotate(5)"/>
+    <use xlink:href = "#escadas" transform="translate(250,355) rotate(5)"/>
+    <use xlink:href = "#escadas" transform="translate(270,356) rotate(5)"/>
+    <use xlink:href = "#escadas" transform="translate(290,357) rotate(5)"/>
+    <use xlink:href = "#escadas" transform="translate(310,358) rotate(5)"/>
+    <use xlink:href = "#escadas" transform="translate(330,360) rotate(5)"/>
+    <use xlink:href = "#escadas" transform="translate(350,361) rotate(5)"/>
+    <use xlink:href = "#escadas" transform="translate(370,362) rotate(5)"/>
+    <use xlink:href = "#escadas" transform="translate(390,364) rotate(5)"/>
+    <use xlink:href = "#escadas" transform="translate(410,366) rotate(5)"/>
+    <use xlink:href = "#escadas" transform="translate(430,368) rotate(5)"/>
+    <use xlink:href = "#escadas" transform="translate(450,370) rotate(5)"/>
+    <use xlink:href = "#escadas" transform="translate(470,372) rotate(5)"/>
+    <use xlink:href = "#escadas" transform="translate(490,373) rotate(5)"/>
+
+    <path stroke = "black" fill = "red" stroke-width="3" d="
+    M 200 490
+    L 193 450
+    Q 200 420 205 385
+    L 298 385
+    Q 298 385 305 395
+    L 495 395
+    Q 497 405 497 485
+    Q 500 485 500 495
+    L 445 495
+    L 455 495
+    L 445 475
+    L 415 475
+    L 405 495
+    L 413 495  
+    L 405 495 
+    L 400 503
+    L 296 503
+    L 296 490
+    L 275 490
+    L 265 475
+    L 235 475
+    L 225 490
+    z " />
+
+    <rect width="60" height="90" stroke = "black" fill = "yellow" transform="translate(340,413)"stroke-width="3"/>
+
+    <path stroke = "black" stroke-width="3" d="
+    M 235 495
+    L 225 495" />
+    
+    <use xlink:href = "#sirene" transform="translate(210,385)"/>
+    <use xlink:href = "#janelaCondutor" fill="#3700ff" transform="translate(220,405)"/>
+
+    <use xlink:href = "#retangulos" transform="translate(260,405)" fill ="none"/> <!--Porta-->
+    <use xlink:href = "#retangulos" transform="translate(265,410) scale(0.3,0.55)" fill ="#868686"/> <!-- Janela da porta-->
+    <use xlink:href = "#retangulos" transform="translate(283,410) scale(0.3,0.55)" fill ="#868686"/> <!-- Janela da porta-->
+    <use xlink:href = "#retangulos" transform="translate(278,430) scale(0.1,0.1)" fill ="#a65656"/> <!-- Maçaneta da porta-->
+    
+    <path stroke = "black" fill = "none" stroke-width="3" d="
+    M 305 395
+    L 305 485
+    L 296 503
+    " />
+
+    <text font-family="Calibri" font-size="20" x="405" y="440" fill="black">Bombeiros</text>
+    <text font-family="Calibri" font-size="20" x="410" y="460" fill="black">de Évora</text>
+</svg>
+
+

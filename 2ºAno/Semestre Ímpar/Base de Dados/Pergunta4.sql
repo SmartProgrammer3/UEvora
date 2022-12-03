@@ -125,11 +125,13 @@
         From gosta
         GROUP BY  idmemb)
 
+
     SELECT DISTINCT idmemb2
         from(select max(livro) as livro
         from contarAmigos) as gosta, amigo, contarAmigos
         where gosta.livro=contarAmigos.livro and amigo.idmemb1=contarAmigos.idmemb;
     /* Algebra relacional*/
+
 
 /* 4l) */
     /* SQL */
@@ -138,6 +140,9 @@
     where livro.isbn = genero.isbn
     group by titulo;
     /* Algebra relacional*/
+    π titulo, COUNT (genero)
+    σ livro . isbn = genero . isbn (livro × genero)
+
 
 /* 4m) */
     /* SQL */
@@ -149,6 +154,10 @@
     WHERE livro.isbn=gosta.isbn AND genero.isbn=gosta.isbn AND livro.isbn=genero.isbn 
     GROUP BY titulo;
     /* Algebra relacional*/
+    π titulo, COUNT (isbn) → numerodegeneros, COUNT (isbn) → numerodegostos
+    γ titulo, COUNT (isbn)
+    σ livro . isbn = gosta . isbn ^ genero . isbn = gosta . isbn ^ livro . isbn = genero . isbn (livro ⋈ genero ⋈ gosta)
+
 
 /* 4n) */
     /* SQL */
@@ -161,6 +170,10 @@
     WHERE autor.coda = autoria.coda AND autoria.isbn = gosta.isbn AND autoria.isbn = livro.isbn AND autoria.isbn = genero.isbn
     GROUP BY  autor.nome;
     /* Algebra relacional*/
+    π autor . nome, COUNT (isbn) → numerosdelivros, COUNT (isbn) → numerodegeneros, COUNT (isbn) → numerodegostos
+    γ nome, COUNT (isbn)
+    σ autor . coda = autoria . coda ^ autoria . isbn = gosta . isbn ^ autoria . isbn = livro . isbn ^ autoria . isbn = genero . isbn (autor ⋈ autoria ⋈ livro ⋈ gosta ⋈ genero)
+
 
 /* 4o) */
     /* SQL */
@@ -172,6 +185,10 @@
     WHERE membro.idmemb=amigo.idmemb1 AND membro.idmemb=gosta.idmemb
     GROUP BY nome;
     /* Algebra relacional*/
+    π nome, COUNT (idmemb2) → numerodeamigos, COUNT (isbn) → numerodelivrosquegosta
+    γ nome, COUNT (idmemb2), COUNT (isbn)
+    σ membro . idmemb = amigo . idmemb1 ^ membro . idmemb = gosta . idmemb (membro ⋈ amigo ⋈ gosta)
+
 
 /* 4p) */
     /* SQL */
@@ -187,9 +204,7 @@
                     SELECT idmemb2
                     FROM amigo
                     WHERE amigo.idmemb1 = amigo1.idmemb));
-
     /* Algebra relacional*/
-
 
 
 /* 4q) */

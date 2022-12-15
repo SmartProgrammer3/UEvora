@@ -9,11 +9,6 @@
             <circle cx = "0" cy = "0" r = "15" fill="#504f4f"/>
             <circle cx = "0" cy = "0" r = "5" fill="#fefcfc"/>
         </g>
-        <g id = "rodas">     
-            <circle cx = "0" cy = "0" r = "20" fill="#000000"/>
-            <circle cx = "0" cy = "0" r = "15" fill="#504f4f"/>
-            <circle cx = "0" cy = "0" r = "5" fill="#fefcfc"/>
-        </g>
 
         <path id = "sirene" stroke = "black" fill = "yellow" stroke-width="3" d="
         M 0 0

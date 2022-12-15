@@ -3,12 +3,11 @@
     xmlns="http://www.w3.org/2000/svg"
     xmlns:xlink="http://www.w3.org/1999/xlink">
     <defs>
- 
-
         <!--Janela com design 1 (Quadrado)-->
         <g id = "janelas1">
             <rect x="0" y="0" width="15" height="20"/>
         </g>
+
         <!--Janela com design 2 (Redonda)-->
         <path id = "janelas2" stroke = "black" fill = "" d="
         M 0 0
@@ -17,7 +16,6 @@
         L 15 0
         Q 7.5 -7.5 0 0 
         "/>
-
 
         <!--Gradiente do céu (Gradiente azul)-->
         <linearGradient id="gradienteCeu" x1="55%" y1="-20%" x2="40%" y2="80%">
@@ -80,6 +78,17 @@
       	fill="url(#gradienteBandeiraVerdeVermelho)"/>
         <!--Circulo amarelo da bandeira-->  
          <circle cx="180" cy="45" r="4" fill="yellow" /> 
+        </g>
+
+        <!--Placa aviso--> 
+        <g id="placa">
+            <line x1="20" y1="0" x2="20" y2="0"
+            stroke-linecap="round"
+            style="stroke:gray; stroke-width:6"/>
+            <rect x="-10" y="30" width="70" height="40"
+            fill="white" stroke="black" rx="3"/>
+            <text font-family="Calibri" font-size="20" x="-3" y="67" fill="black">Évora</text>
+            <use xlink:href="#simbolo" transform="translate(-5,35) scale(0.4)"/>
         </g>
 
     </defs>
@@ -245,6 +254,8 @@
     
     <use xlink:href = "#bandeira" transform="translate(730,270)"/>
 
+    <use xlink:href = "#placa" transform="translate(200,568)"/>
+  
 </svg>
 
 

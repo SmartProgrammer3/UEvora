@@ -4,10 +4,15 @@
     xmlns:xlink="http://www.w3.org/1999/xlink">
 
     <defs>
-    <g id = "carroGtr">
+
         <linearGradient id="gradientegtr" x1="35%" y1="-20%" x2="23%" y2="100%">
             <stop offset="30%" style="stop-color:#edb42e;stop-opacity:1" /> <!--Amarelado--> 
             <stop offset="90%" style="stop-color:#f45218;stop-opacity:1" /> <!--Alaranjado--> 
+        </linearGradient>
+
+        <linearGradient id="luzneon" x1="50%" y1="10%" x2="50%" y2="120%">
+            <stop offset="10%" style="stop-color:#0c6818;stop-opacity:1" />
+            <stop offset="50%" style="stop-color:#18f435;stop-opacity:10" />
         </linearGradient>
 
         <path id="janelagtr" stroke = "black" stroke-width="2" d="
@@ -25,7 +30,23 @@
         <g id = "rodas">     
             <circle cx = "0" cy = "0" r = "25" fill="#000000"/>
             <circle cx = "0" cy = "0" r = "17" fill="#ad2f2f"/>
-            <circle cx = "0" cy = "0" r = "6" fill="#e8dede"/>
+            <circle cx = "0" cy = "0" r = "6" fill="#635e5e"/>
+            <path stroke = "#e8dede"  fill = "none" stroke-width="2" d="
+                M 0 6
+                L 0 17
+            " />  
+            <path stroke = "#e8dede"  fill = "none" stroke-width="2" d="
+                M 0 -6
+                L 0 -17
+            " />  
+            <path stroke = "#e8dede"  fill = "none" stroke-width="2" d="
+                M 6 0
+                L 17 0
+            " />  
+            <path stroke = "#e8dede"  fill = "none" stroke-width="2" d="
+                M -6 0
+                L -17 0
+            " />  
         </g>
 
         <g id = "circulos">     
@@ -35,6 +56,15 @@
     </defs>
     
 
+    <path stroke = "none" fill ="url(#luzneon)" stroke-width="3" d="
+        M 17 305
+        L 10 307
+        Q 20 315 45 315
+        L 280 315
+        Q 290 312 315 315 
+        L 315 306
+    " />
+       
     <use xlink:href = "#rodas" transform="translate(70,300)"/>
     <use xlink:href = "#rodas" transform="translate(250,300)"/>
 
@@ -66,7 +96,7 @@
     Q 10 310 42 310
     Q 42 305 47 305
     L 42 305  
-    Q 37 280 72 270
+    Q 33 280 72 270
     Q 107 280 100 312
      " />
 
@@ -75,7 +105,7 @@
     <use xlink:href = "#circulos" fill="red" transform="translate(320,262) scale(0.5,1.2)"/> <!--Farol traseiro--> 
     <use xlink:href = "#janelagtr" fill="white" transform="translate(-10,10)"/> 
        
-       
+
     <!--Porta--> 
     <path stroke = "black" fill ="none" stroke-width="3" d="
         M 120 260

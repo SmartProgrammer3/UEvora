@@ -10,11 +10,11 @@
 
         <!--Janela com design 2 (Redonda)-->
         <path id = "janelas2" stroke = "black" fill = "" d="
-        M 0 0
-        L 0 15
-        L 15 15
-        L 15 0
-        Q 7.5 -7.5 0 0 
+            M 0 0
+            L 0 15
+            L 15 15
+            L 15 0
+            Q 7.5 -7.5 0 0 
         "/>
 
         <!--Gradiente do céu (Gradiente azul)-->
@@ -22,48 +22,251 @@
             <stop offset="0%" style="stop-color:#33ccff;stop-opacity:1" />
             <stop offset="70%" style="stop-color:#002e4d;stop-opacity:1" />
         </linearGradient>
+
         <!--Gradiente das nuvens (Gradiente cinzento)-->
         <linearGradient id="gradienteNuvens" x1="85%" y1="0%" x2="50%" y2="90%">
             <stop offset="0%" style="stop-color:#504f4f;stop-opacity:1" />
             <stop offset="80%" style="stop-color:#8c8a8a;stop-opacity:1" />
         </linearGradient>
+
         <!--Nuvem com design 1 (Mais pequena)-->
         <path id="NuvemTipo1" stroke = "gray" fill = "url(#gradienteNuvens)" d="
-        M 750 40
-        Q 740 35 720 55
-        Q 700 60 715 85
-        Q 720 105 740 110
-        Q 755 120 760 122
-        Q 775 116 785 110
-        Q 795 125 825 120
-        Q 845 100 835 95
-        Q 855 75 850 60
-        Q 860 50 820 30
-        Q 780 45 750 40z
+            M 750 40
+            Q 740 35 720 55
+            Q 700 60 715 85
+            Q 720 105 740 110
+            Q 755 120 760 122
+            Q 775 116 785 110
+            Q 795 125 825 120
+            Q 845 100 835 95
+            Q 855 75 850 60
+            Q 860 50 820 30
+            Q 780 45 750 40
         "/>
         <!--Nuvem com design 2 (Maior)-->
         <path id="NuvemTipo2" stroke = "gray" fill = "url(#gradienteNuvens)" d="
-        M 450 50
-        Q 440 60 445 70
-        Q 435 75 445 90
-        Q 460 110 475 115
-        Q 485 120 490 125
-        Q 500 110 510 105
-        Q 530 120 540 115
-        Q 550 110 560 100
-        Q 580 120 600 105
-        Q 615 120 620 104
-        Q 630 95 635 80
-        Q 650 75 635 50
-        Q 630 20 610 25
-        Q 600 15 570 35
-        Q 550 20 520 40
-        Q 510 50 480 15
-        Q 470 35 450 50
+            M 450 50
+            Q 440 60 445 70
+            Q 435 75 445 90
+            Q 460 110 475 115
+            Q 485 120 490 125
+            Q 500 110 510 105
+            Q 530 120 540 115
+            Q 550 110 560 100
+            Q 580 120 600 105
+            Q 615 120 620 104
+            Q 630 95 635 80
+            Q 650 75 635 50
+            Q 630 20 610 25
+            Q 600 15 570 35
+            Q 550 20 520 40
+            Q 510 50 480 15
+            Q 470 35 450 50
         "/>
 
+        <g id = "rodas">     
+            <circle cx = "0" cy = "0" r = "20" fill="#000000"/>
+            <circle cx = "0" cy = "0" r = "15" fill="#504f4f"/>
+            <circle cx = "0" cy = "0" r = "5" fill="#fefcfc"/>
+        </g>
 
+        <path id = "sirene" stroke = "black" fill = "yellow" stroke-width="3" d="
+        M 0 0
+        L 30 0
+        Q 15 -50 0 0
+        " />
+        <path id = "janelaCondutor" stroke = "black" stroke-width="3" d="
+        M 0 0 
+        L 27 0
+        L 27 30
+        L -15 30
+        z
+        "/>
+
+        <g id = "retangulos">
+            <rect width="40" height="50" stroke = "black" stroke-width="3"/>
+        </g>
+
+        <g id = "escadas">
+            <rect width="3" height="20" stroke = "gray" fill = "gray" stroke-width="1"/>
+        </g>
+
+
+<!-- -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- --> 
+<!-- Objeto principal - Carro dos Bombeiros -->   
+<!-- -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- --> 
+        <g id = "carroBombeiro">
+                
+            <path stroke = "black" stroke-width="3" d="
+            M 225 495
+            L 275 495" />
+            
+            <use xlink:href = "#rodas" transform="translate(250,500)"/>
+            <use xlink:href = "#rodas" transform="translate(430,500)"/>
+
+            <use xlink:href = "#retangulos" transform="translate(192,490) scale(0.8,0.4)" fill = "black"/>
+            <use xlink:href = "#retangulos" transform="translate(275,488) scale(0.5,0.4)" fill = "black" />
+
+            <rect width="300" height="20" stroke = "gray" fill = "none" stroke-width="3" transform="translate(210,350) rotate(5)" />
+
+
+            <use xlink:href = "#escadas" transform="translate(210,350) rotate(5)"/>
+            <use xlink:href = "#escadas" transform="translate(230,352) rotate(5)"/>
+            <use xlink:href = "#escadas" transform="translate(250,355) rotate(5)"/>
+            <use xlink:href = "#escadas" transform="translate(270,356) rotate(5)"/>
+            <use xlink:href = "#escadas" transform="translate(290,357) rotate(5)"/>
+            <use xlink:href = "#escadas" transform="translate(310,358) rotate(5)"/>
+            <use xlink:href = "#escadas" transform="translate(330,360) rotate(5)"/>
+            <use xlink:href = "#escadas" transform="translate(350,361) rotate(5)"/>
+            <use xlink:href = "#escadas" transform="translate(370,362) rotate(5)"/>
+            <use xlink:href = "#escadas" transform="translate(390,364) rotate(5)"/>
+            <use xlink:href = "#escadas" transform="translate(410,366) rotate(5)"/>
+            <use xlink:href = "#escadas" transform="translate(430,368) rotate(5)"/>
+            <use xlink:href = "#escadas" transform="translate(450,370) rotate(5)"/>
+            <use xlink:href = "#escadas" transform="translate(470,372) rotate(5)"/>
+            <use xlink:href = "#escadas" transform="translate(490,373) rotate(5)"/>
+
+            <path stroke = "black" fill = "red" stroke-width="3" d="
+                M 200 490
+                L 193 450
+                Q 200 420 205 385
+                L 298 385
+                Q 298 385 305 395
+                L 495 395
+                Q 497 405 497 485
+                Q 500 485 500 495
+                L 445 495
+                L 455 495
+                L 445 475
+                L 415 475
+                L 405 495
+                L 413 495  
+                L 405 495 
+                L 400 503
+                L 296 503
+                L 296 490
+                L 275 490
+                L 265 475
+                L 235 475
+                L 225 490
+            z " />
+
+            <rect width="60" height="90" stroke = "black" fill = "yellow" transform="translate(340,413)"stroke-width="3"/>
+
+            <path stroke = "black" stroke-width="3" d="
+            M 235 495
+            L 225 495" />
+            
+            <use xlink:href = "#sirene" transform="translate(210,385)"/>
+            <use xlink:href = "#janelaCondutor" fill="#3700ff" transform="translate(220,405)"/>
+
+            <use xlink:href = "#retangulos" transform="translate(260,405)" fill ="none"/> <!--Porta-->
+            <use xlink:href = "#retangulos" transform="translate(265,410) scale(0.3,0.55)" fill ="#868686"/> <!-- Janela da porta-->
+            <use xlink:href = "#retangulos" transform="translate(283,410) scale(0.3,0.55)" fill ="#868686"/> <!-- Janela da porta-->
+            <use xlink:href = "#retangulos" transform="translate(278,430) scale(0.1,0.1)" fill ="#a65656"/> <!-- Maçaneta da porta-->
+            
+            <path stroke = "black" fill = "none" stroke-width="3" d="
+            M 305 395
+            L 305 485
+            L 296 503
+            " />
+
+            <text font-family="Calibri" font-size="20" x="405" y="440" fill="black">Bombeiros</text>
+            <text font-family="Calibri" font-size="20" x="410" y="460" fill="black">de Évora</text>
+        </g>
+
+<!-- -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- --> 
+<!-- Objeto acompanhante - carro Gtr -->   
+<!-- -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- --> 
+        <g id = "rodasGtr">     
+            <circle id = "rodasGtr" cx = "0" cy = "0" r = "25" fill="#000000"/>
+            <circle cx = "0" cy = "0" r = "17" fill="#ad2f2f"/>
+            <circle cx = "0" cy = "0" r = "6" fill="#e8dede"/>
+        </g>
+
+        <g id = "circulos">     
+            <circle cx = "0" cy = "0" r = "5" stroke = "black"/>
+        </g>
+   
+        <g id = "carroGtr">
+            <linearGradient id="gradientegtr" x1="35%" y1="-20%" x2="23%" y2="100%">
+                <stop offset="30%" style="stop-color:#edb42e;stop-opacity:1" /> <!--Amarelado--> 
+                <stop offset="90%" style="stop-color:#f45218;stop-opacity:1" /> <!--Alaranjado--> 
+            </linearGradient>
+
+            <path id="janelagtr" stroke = "black" stroke-width="2" d="
+                M 130 250
+                L 180 220
+                Q 200 222 240 228
+                L 215 225
+                L 205 246
+                L 215 225
+                L 240 228
+                L 250 245
+                z" />  
+
+            <use xlink:href = "#rodasGtr" transform="translate(70,300)"/>
+            <use xlink:href = "#rodasGtr" transform="translate(250,300)"/>
+
+            <!--Corpo do Gtr--> 
+            <path stroke = "black" fill = "url(#gradientegtr)" stroke-width="3" d="
+                M 92 303
+                L 98 310
+                L 220 310
+                Q 220 305 230 305
+                L 220 305
+                Q 215 280 250 270
+                Q 285 280 280 305
+                L 272 305
+                L 280 305
+                L 280 310
+                Q 290 303 315 310
+                Q 325 280 320 260
+                L 315 245
+                Q 320 235 310 240
+                Q 305 230 325 220
+                L 290 220
+                L 280 228
+                L 310 235
+                L 280 228
+                Q 170 210 120 250
+                L 115 250   
+                L 110 248
+                Q 60 250 20 270
+                Q 18 270 20 300
+                Q 10 310 42 310
+                Q 42 305 47 305
+                L 42 305  
+                Q 37 280 72 270
+                Q 107 280 100 312
+            " />
+
+            <use xlink:href = "#circulos" fill="none" transform="translate(280,270)"/> <!--Tanque combustível--> 
+            <use xlink:href = "#circulos" fill="red" transform="translate(315,260) scale(0.5,1.2)"/> <!--Farol traseiro--> 
+            <use xlink:href = "#circulos" fill="red" transform="translate(320,262) scale(0.5,1.2)"/> <!--Farol traseiro--> 
+            <use xlink:href = "#janelagtr" fill="white" transform="translate(-10,10)"/> <!--Janela do gtr--> 
+
+
+            <!--Porta--> 
+            <path stroke = "black" fill ="none" stroke-width="3" d="
+            M 120 260
+            Q 118 265 120 270
+            L 120 300
+            L 125 305
+            L 190 305
+            L 195 298
+            L 120 298
+            L 195 298
+            L 215 265
+            L 210 256
+            " />
+            <!--Fechadura da porta--> 
+            <use xlink:href = "#circulos" fill="none" transform="translate(200,265) scale(1.5,0.4)" /> 
+            <text font-family="Calibri" font-size="15" x="125" y="280" fill="black">Paul Walker</text>
+
+        </g>
     
+<!-- -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- --> 
         <g id="bandeira">
         <!--Gradiente bandeira-->        
         <linearGradient id="gradienteBandeiraVerdeVermelho">
@@ -219,17 +422,15 @@
     <use xlink:href = "#janelas1" transform="translate(810,510)"/>
     <use xlink:href = "#janelas1" transform="translate(810,550)"/>
     <use xlink:href = "#janelas1" transform="translate(810,590)"/>
-    <use xlink:href = "#janelas1" fill="yellow" transform="translate(810,630)"/>
     <use xlink:href = "#janelas1" transform="translate(840,470)"/>
     <use xlink:href = "#janelas1" transform="translate(840,510)"/>
     <use xlink:href = "#janelas1" fill="yellow" transform="translate(840,550)"/>
     <use xlink:href = "#janelas1" fill="yellow" transform="translate(840,590)"/>
-    <use xlink:href = "#janelas1" transform="translate(840,630)"/>
     <use xlink:href = "#janelas1" fill="yellow" transform="translate(870,470)"/>
     <use xlink:href = "#janelas1" transform="translate(870,510)"/>
     <use xlink:href = "#janelas1" transform="translate(870,550)"/>
     <use xlink:href = "#janelas1" transform="translate(870,590)"/>
-    <use xlink:href = "#janelas1" transform="translate(870,630)"/>
+  
 
     <use xlink:href = "#janelas1" transform="translate(905,590)"/>
     <use xlink:href = "#janelas1" transform="translate(905,630)"/>
@@ -254,8 +455,9 @@
     
     <use xlink:href = "#bandeira" transform="translate(730,270)"/>
 
-    <use xlink:href = "#placa" transform="translate(200,568)"/>
-  
+    <use xlink:href = "#carroBombeiro" transform="translate(480,300)"/>
+
+    <use xlink:href = "#carroGtr" transform="translate(200,480)"/>
 </svg>
 
 

@@ -1,0 +1,100 @@
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg width = "1000" height = "1000"
+    xmlns="http://www.w3.org/2000/svg"
+    xmlns:xlink="http://www.w3.org/1999/xlink">
+
+    <defs>
+    <g id = "carroGtr">
+        <linearGradient id="gradientegtr" x1="35%" y1="-20%" x2="23%" y2="100%">
+            <stop offset="30%" style="stop-color:#edb42e;stop-opacity:1" /> <!--Amarelado--> 
+            <stop offset="90%" style="stop-color:#f45218;stop-opacity:1" /> <!--Alaranjado--> 
+        </linearGradient>
+
+        <path id="janelagtr" stroke = "black" stroke-width="2" d="
+            M 130 250
+            L 180 220
+            Q 200 222 240 228
+            L 215 225
+            L 205 246
+            L 215 225
+            L 240 228
+            L 250 245
+            z
+        " />  
+            
+        <g id = "rodas">     
+            <circle cx = "0" cy = "0" r = "25" fill="#000000"/>
+            <circle cx = "0" cy = "0" r = "17" fill="#ad2f2f"/>
+            <circle cx = "0" cy = "0" r = "6" fill="#e8dede"/>
+        </g>
+
+        <g id = "circulos">     
+            <circle cx = "0" cy = "0" r = "5" stroke = "black"/>
+        </g>
+
+    </defs>
+    
+
+    <use xlink:href = "#rodas" transform="translate(70,300)"/>
+    <use xlink:href = "#rodas" transform="translate(250,300)"/>
+
+    <path stroke = "black" fill = "url(#gradientegtr)" stroke-width="3" d="
+    M 92 303
+    L 98 310
+    L 220 310
+    Q 220 305 230 305
+    L 220 305
+    Q 215 280 250 270
+    Q 285 280 280 305
+    L 272 305
+    L 280 305
+    L 280 310
+    Q 290 303 315 310
+    Q 325 280 320 260
+    L 315 245
+    Q 320 235 310 240
+    Q 305 230 325 220
+    L 290 220
+    L 280 228
+    L 310 235
+    L 280 228
+    Q 170 210 120 250
+    L 115 250   
+    L 110 248
+    Q 60 250 20 270
+    Q 18 270 20 300
+    Q 10 310 42 310
+    Q 42 305 47 305
+    L 42 305  
+    Q 37 280 72 270
+    Q 107 280 100 312
+     " />
+
+    <use xlink:href = "#circulos" fill="none" transform="translate(280,270)"/> 
+    <use xlink:href = "#circulos" fill="red" transform="translate(315,260) scale(0.5,1.2)"/> <!--Farol traseiro--> 
+    <use xlink:href = "#circulos" fill="red" transform="translate(320,262) scale(0.5,1.2)"/> <!--Farol traseiro--> 
+    <use xlink:href = "#janelagtr" fill="white" transform="translate(-10,10)"/> 
+       
+       
+    <!--Porta--> 
+    <path stroke = "black" fill ="none" stroke-width="3" d="
+        M 120 260
+        Q 118 265 120 270
+        L 120 300
+        L 125 305
+        L 190 305
+        L 195 298
+        L 120 298
+        L 195 298
+        L 215 265
+        L 210 256
+    " />
+    <!--Fechadura da porta--> 
+    <use xlink:href = "#circulos" fill="none" transform="translate(200,265) scale(1.5,0.4)" /> 
+    <text font-family="Calibri" font-size="15" x="125" y="280" fill="black">Paul Walker</text>
+    </g>
+</defs>
+
+
+ <use xlink:href = "#carroGtr" transform="translate(500,300)"/>
+</svg>

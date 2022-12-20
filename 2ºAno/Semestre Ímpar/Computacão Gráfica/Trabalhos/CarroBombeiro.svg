@@ -92,9 +92,9 @@
         </g>
 
 
-<!-- -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- --> 
+<!-- XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX --> 
 <!-- Objeto principal - Carro dos Bombeiros -->   
-<!-- -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- --> 
+<!-- XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX --> 
         <g id = "carroBombeiro">
                 
             <path stroke = "black" stroke-width="3" d="
@@ -151,7 +151,7 @@
                 L 225 490
             z " />
 
-            <rect width="60" height="90" stroke = "black" fill = "yellow" transform="translate(340,413)"stroke-width="3"/>
+            <rect width="60" height="90" stroke = "black" fill = "yellow" transform="translate(340,413)" stroke-width="3"/>
 
             <path stroke = "black" stroke-width="3" d="
             M 235 495
@@ -175,9 +175,9 @@
             <text font-family="Calibri" font-size="20" x="410" y="460" fill="black">de Évora</text>
         </g>
 
-<!-- -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- --> 
+<!-- XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX --> 
 <!-- Objeto acompanhante - carro Gtr -->   
-<!-- -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- --> 
+<!-- XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX --> 
         <g id = "rodasGtr">     
             <circle id = "rodasGtr" cx = "0" cy = "0" r = "25" fill="#000000"/>
             <circle cx = "0" cy = "0" r = "17" fill="#ad2f2f"/>
@@ -266,7 +266,7 @@
 
         </g>
     
-<!-- -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- --> 
+<!-- XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX --> 
         <g id="bandeira">
         <!--Gradiente bandeira-->        
         <linearGradient id="gradienteBandeiraVerdeVermelho">
@@ -302,7 +302,7 @@
     	transform="translate(500,500)"/>
 
     <!--Estrada(Chão a preto)-->
-    <line x1="-300" y1="850" x2="1000" y2="850" style="stroke:black; stroke-width:300;"/>
+    <line x1="-300" y1="850" x2="1100" y2="850" style="stroke:black; stroke-width:300;"/>
     <!--Tracejados-->
     <line x1="10" y1="850" x2="70" y2="850" 
     style="stroke:white; stroke-width:7"/>
@@ -340,9 +340,9 @@
     z" />
     <!--Janelas do prédio a vermelho escuro-->
     <use xlink:href = "#janelas2" transform="translate(742,380)"/>
-    <use xlink:href = "#janelas2" fill="yellow"transform="translate(772,380)"/>
+    <use xlink:href = "#janelas2" fill="yellow" transform="translate(772,380)"/>
     <use xlink:href = "#janelas2" transform="translate(712,410)"/>
-    <use xlink:href = "#janelas2" fill="yellow"transform="translate(742,410)"/>
+    <use xlink:href = "#janelas2" fill="yellow" transform="translate(742,410)"/>
     <use xlink:href = "#janelas2" transform="translate(772,410)"/>
     <use xlink:href = "#janelas2" fill="yellow" transform="translate(802,410)"/>
     <use xlink:href = "#janelas2" transform="translate(712,440)"/>
@@ -455,9 +455,8 @@
     
     <use xlink:href = "#bandeira" transform="translate(730,270)"/>
 
-    <use xlink:href = "#carroBombeiro" transform="translate(480,300)"/>
-
-    <use xlink:href = "#carroGtr" transform="translate(200,480)"/>
+    <use id="carroBombeiroUsado" xlink:href = "#carroBombeiro" transform="translate(480,300)"/>
+    <use id="carroGtrUsado" xlink:href = "#carroGtr" transform="translate(200,480)"/>
 </svg>
 
 

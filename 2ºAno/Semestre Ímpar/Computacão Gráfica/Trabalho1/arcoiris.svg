@@ -1,0 +1,58 @@
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg width = "1500" height = "1500"
+    xmlns="http://www.w3.org/2000/svg"
+    xmlns:xlink="http://www.w3.org/1999/xlink">
+
+    <path stroke = "#8F00FF" fill = "#8F00FF" stroke-width="3" d="
+        M 200 800
+        Q 600 300 1000 800
+        L 1020 800
+        Q 600 270 180 800
+        L 200 800 
+    " />
+    <path stroke = "#4B0082" fill = "#4B0082" stroke-width="3" d="
+        M 180 800
+        L 160 800
+        Q 600 240 1040 800
+        L 1020 800
+        Q 600 270 180 800
+    " />
+    <path stroke = "#45b8f6" fill = "#45b8f6" stroke-width="3" d="
+        M 160 800
+        L 140 800
+        Q 600 210 1060 800
+        L 1040 800
+        Q 600 240 160 800
+    " />
+    <path stroke = "#1fd655" fill = "#1fd655" stroke-width="3" d="
+        M 140 800
+        L 120 800
+        Q 600 180 1080 800
+        L 1060 800
+        Q 600 210 140 800
+    " />
+
+    <path stroke = "#FFFF00" fill = "#FFFF00" stroke-width="3" d="
+        M 120 800
+        L 100 800
+        Q 600 150 1100 800
+        L 1080 800
+        Q 600 180 120 800
+    " />
+
+    <path stroke = "#FFA500" fill = "#FFA500" stroke-width="3" d="
+        M 100 800
+        L 80 800
+        Q 600 120 1120 800
+        L 1100 800
+        Q 600 150 100 800
+    " />
+
+    <path stroke = "#FF0000" fill = "#FF0000" stroke-width="3" d="
+        M 80 800
+        L 60 800
+        Q 600 90 1140 800
+        L 1120 800
+        Q 600 120 80 800
+    " />  
+</svg>

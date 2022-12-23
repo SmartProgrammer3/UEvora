@@ -1,0 +1,27 @@
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg width = "1500" height = "1500"
+    xmlns="http://www.w3.org/2000/svg"
+    xmlns:xlink="http://www.w3.org/1999/xlink">
+
+    <defs>
+        <g id="tronco">
+            <path stroke = "black" fill = "#705a46" stroke-width="3" d="
+            M 400 450
+            L 700 300
+            Q 740 230 660 220
+            L 365 365
+            " />  
+
+            <circle cx = "400" cy = "400" r = "50" fill="#705a46" stroke = "black" stroke-width="3"/>
+        </g>
+        <g id = "ConjuntoDeTroncos">
+            <use xlink:href = "#tronco" transform="translate(100,160)"/>
+            <use xlink:href = "#tronco" transform="translate(200,180)"/>
+            <use xlink:href = "#tronco" transform="translate(300,200)"/>
+            <use xlink:href = "#tronco" transform="translate(160,100)"/>
+            <use xlink:href = "#tronco" transform="translate(255,120)"/>         
+        </g>
+    </defs>
+    <use xlink:href = "#ConjuntoDeTroncos" transform="translate(0,0)"/>    
+    
+</svg>

@@ -4,7 +4,7 @@ import java.util.*;
 public class ExercisePets {
     public static void main(String[] args) {
         Scanner s = new Scanner(System.in);
-        ArrayList<Pet> animais = new ArrayList<Pet>();
+        ArrayList<Pets> animais = new ArrayList<Pets>();
         String line;
         String cor_pelo;
         int peso;
@@ -29,7 +29,7 @@ public class ExercisePets {
         }
         catch(NoSuchElementException e){
             s.close();
-            for(Pet p: animais){
+            for(Pets p: animais){
                 System.out.println(p);
             }
         }

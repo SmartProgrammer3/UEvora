@@ -1,32 +1,35 @@
 package ExerciciosCapitulo13;
 
-public class Pets {
-    protected String nome;
-    protected char especie;
 
-    protected Pets(char newEspecie, String newNome){
-        setEspecie(newEspecie);
-        setNome(newNome);
+public abstract class Pets{
+    protected String name;
+    protected char species;
+
+    public Pets(char s, String n){
+        this.species = s;
+        this.name = n;
+    }
+    public String getName() {
+        return name;
     }
 
-    public String getNome(){
-        return nome;
+
+    public char getSpecies() {
+        return species;
     }
 
-    public char getEspecie(){
-        return especie;
+
+    public void setName(String name) {
+        this.name = name;
     }
 
-    public void setNome(String newNome){
-        nome = newNome;
+
+    public void setSpecies(char species) {
+        this.species = species;
     }
 
-    public void setEspecie(char newEspecie){
-        especie = newEspecie;
-    }
-
-    public String toString() { //Só dar print 
-        return especie + " " + nome;
+    @Override
+    public String toString() {
+        return  species + " " + name;
     }
 }
-

@@ -1,0 +1,24 @@
+Em Java, os métodos de classe são aqueles que pertencem à classe e não aos objetos criados a partir dessa classe. 
+Eles são conhecidos como métodos estáticos e podem ser chamados diretamente a partir da classe, sem a necessidade de criar uma instância da classe.
+
+Por outro lado, os métodos de objeto são aqueles que pertencem aos objetos criados a partir de uma classe. 
+Eles são chamados de métodos de instância e precisam de uma instância da classe para serem chamados.
+
+Exemplo:
+                                public class MinhaClasse {
+
+                                // método de classe
+                                    public static void metodoEstatico() {
+                                        // código do método
+                                    }
+
+                                // método de objeto
+                                    public void metodoDeInstancia() {
+                                        // código do método
+                                    }
+                                }
+                                // chamando os métodos
+                                MinhaClasse.metodoEstatico(); // chamando o método de classe diretamente da classe
+
+                                MinhaClasse obj = new MinhaClasse(); // criando uma instância da classe
+                                obj.metodoDeInstancia(); // chamando o método de objeto a partir da instância

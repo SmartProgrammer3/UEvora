@@ -1,5 +1,8 @@
 package ExerciciosCapitulo3;
+import java.text.NumberFormat;
+import java.util.Locale;
 import java.util.Scanner;
+
 
 public class VolumeEsfera {
     public static void main(String[] args) {
@@ -12,6 +15,9 @@ public class VolumeEsfera {
         
         double volumeDaEsfera = (4.0 * Math.PI * Math.pow(raioEsfera, 3)) / 3.0; // Formula volume da esfera
 
-        System.out.println(volumeDaEsfera);
+        NumberFormat nf = NumberFormat.getInstance(Locale.US);
+        nf.setMinimumFractionDigits(2);
+        nf.setMaximumFractionDigits(2);
+        System.out.println(nf.format(volumeDaEsfera));
     }
 }

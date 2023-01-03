@@ -50,6 +50,22 @@ function modeloNovo(){ //Criar modelo
             x: 0,
             y: 0,
             vx: 0.5,
+        },
+        flocos: {
+            x: 0,
+            y: 0,
+            vy: 0.5,
+            vx: 0.05,
+        },
+        nuvens1: {
+            x: 0,
+            y: 0,
+            vx: 0.1,
+        },
+        nuvens2: {
+            x: 0,
+            y: 0,
+            vx: 0.2,
         }
     }
 
@@ -67,6 +83,10 @@ function update(){
     let predios = this.predios;
     let arcoiris = this.arcoiris;
     let arvores = this.arvores;
+    let flocos = this.flocos;
+    let nuvens1 = this.nuvens1;
+    let nuvens2 = this.nuvens2;
+
 
 
     if(gtr.x < 600){
@@ -107,8 +127,16 @@ function update(){
         predios.x = 0;
         arcoiris.x = 0;
         arvores.x = 0;
+        flocos.x = 0;
+        flocos.y = 0;
+        nuvens1.x = 0;
+        nuvens2.x = 0;
     }
 
+    nuvens1.x += nuvens1.vx;
+    nuvens2.x += nuvens2.vx;
+    flocos.x += flocos.vx
+    flocos.y += flocos.vy
     arvores.x += arvores.vx;
     arcoiris.x += arcoiris.vx;
     predios.x += predios.vx;
@@ -134,7 +162,9 @@ function contexto(){ //Vai buscar os objetos
     let rodasBombeiro_SVG = document.getElementById("rodas");
     let arcoIris_SVG = document.getElementById("arcoiris");
     let arvores_SVG = document.getElementById("conjuntoDeArvores");
-
+    let flocosDeNeve_SVG = document.getElementById("conjuntoFlocosDeNeve");
+    let nuvens1_SVG = document.getElementById("NuvemTipo1");
+    let nuvens2_SVG = document.getElementById("NuvemTipo2");
 
     let context = {
         carrogtr_SVG: carrogtr_SVG,
@@ -146,6 +176,9 @@ function contexto(){ //Vai buscar os objetos
         rodasBombeiro_SVG: rodasBombeiro_SVG,
         arcoIris_SVG: arcoIris_SVG,
         arvores_SVG: arvores_SVG,
+        flocosDeNeve_SVG: flocosDeNeve_SVG,
+        nuvens1_SVG: nuvens1_SVG,
+        nuvens2_SVG: nuvens2_SVG,
     };
 
     context.render = render;
@@ -200,6 +233,22 @@ function render(model){
     this.arvores_SVG.setAttribute(
         "transform", `translate(${arvores_x}, ${arvores_y})`); 
 
+    let flocos_x = model.flocos.x;
+    let flocos_y = model.flocos.y;
+    this.flocosDeNeve_SVG.setAttribute(
+        "transform", `translate(${flocos_x}, ${flocos_y})`); 
+
+    let nuvens1_x = model.nuvens1.x;
+    let nuvens1_y = model.nuvens1.y;
+    this.nuvens1_SVG.setAttribute(
+        "transform", `translate(${nuvens1_x}, ${nuvens1_y})`); 
+
+    let nuvens2_x = model.nuvens2.x;
+    let nuvens2_y = model.nuvens2.y;
+    this.nuvens2_SVG.setAttribute(
+        "transform", `translate(${nuvens2_x}, ${nuvens2_y})`); 
+    
+        
 }
 
 function main(){

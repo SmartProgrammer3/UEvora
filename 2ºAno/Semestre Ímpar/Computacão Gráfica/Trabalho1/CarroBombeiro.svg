@@ -569,6 +569,59 @@
             <use xlink:href = "#arvores" transform="translate(250,500) scale(0.3,0.4)"/>
         </g>
 
+        <path id="caminhoFlocos" stroke = "blue" fill = "blue" stroke-width="3" d="
+        M 25 -10 
+        L 25 -30
+        L 40 -45
+        Q 45 -50 40 -55
+        L 25 -40
+        L 25 -60
+        L 40 -75
+        Q 45 -80 40 -85
+        L 25 -70
+        L 25 -85
+        Q 20 -95 15 -85
+        L 15 -70
+        L 0 -85
+        Q -5 -80 0 -75
+        L 15 -60
+        L 15 -40
+        L 0 -55
+        Q -5 -50 0 -45
+        L 15 -30
+        L 15 -10
+        L -10 10 "/>
+
+        <g id="hexagonoFloco">
+            <path stroke = "blue" fill = "blue" stroke-width="3" d="
+            M 20 0 
+            L 0 20
+            L 0 40
+            L 20 60
+            L 40 40
+            L 40 20 z"/>
+        </g>
+        <g id="flocoDeNeve">
+            <use xlink:href = "#hexagonoFloco"  transform="translate(-13,-10) scale(1.65,1.4)"/>
+            <use xlink:href = "#caminhoFlocos"  transform="translate(0,0)"/>
+            <use xlink:href = "#caminhoFlocos"  transform="translate(40,60) rotate(180)"/>
+            <use xlink:href = "#caminhoFlocos"  transform="translate(50,25) rotate(120)"/>
+            <use xlink:href = "#caminhoFlocos"  transform="translate(25,-5) rotate(60)"/>
+            <use xlink:href = "#caminhoFlocos"  transform="translate(-10,35) rotate(-60)"/>
+            <use xlink:href = "#caminhoFlocos"  transform="translate(15,65) rotate(-120)"/>
+        </g>
+        <g id="conjuntoFlocosDeNeve">
+            <use xlink:href = "#flocoDeNeve"  transform="translate(200,100) scale(0.1, 0.1)"/>
+            <use xlink:href = "#flocoDeNeve"  transform="translate(300,60) scale(0.1, 0.1)"/>
+            <use xlink:href = "#flocoDeNeve"  transform="translate(400,90) scale(0.1, 0.1)"/>
+            <use xlink:href = "#flocoDeNeve"  transform="translate(600,60) scale(0.1, 0.1)"/>
+            <use xlink:href = "#flocoDeNeve"  transform="translate(750,65) scale(0.1, 0.1)"/>
+            <use xlink:href = "#flocoDeNeve"  transform="translate(820,75) scale(0.1, 0.1)"/>
+            <use xlink:href = "#flocoDeNeve"  transform="translate(900,125) scale(0.1, 0.1)"/>
+            <use xlink:href = "#flocoDeNeve"  transform="translate(950,150) scale(0.1, 0.1)"/>
+            <use xlink:href = "#flocoDeNeve"  transform="translate(50,80) scale(0.1, 0.1)"/>
+            <use xlink:href = "#flocoDeNeve"  transform="translate(550,75) scale(0.1, 0.1)"/>
+        </g>
     </defs>
 
     <!--Retângulo para o fundo do céu-->
@@ -576,7 +629,7 @@
         fill="url(#gradienteCeu)"
         transform="translate(500,500)"/>
 
-
+    <use xlink:href = "#conjuntoFlocosDeNeve" transform="translate(0,0) " />  
     <use xlink:href = "#arcoiris" transform="translate(-600,-150) scale(0.95,1.1)"/>
     <use xlink:href = "#conjuntoDeArvores" transform="translate(0,460) scale(0.3,0.3)"/>
     <use xlink:href = "#conjuntoDeArvores" transform="translate(50,460) scale(0.3,0.3)"/>
@@ -601,5 +654,5 @@
     
     <use id="carroGtrUsado" xlink:href = "#carroGtr" transform="translate(200,480)"/>
     <use id="carroBombeiroUsado" xlink:href = "#carroBombeiro" transform="translate(480,300)"/>
-    
+
 </svg>

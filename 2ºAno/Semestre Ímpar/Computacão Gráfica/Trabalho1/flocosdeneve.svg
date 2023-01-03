@@ -1,0 +1,53 @@
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg width = "15500" height = "15500"
+    xmlns="http://www.w3.org/2000/svg"
+    xmlns:xlink="http://www.w3.org/1999/xlink">
+    <defs>
+
+        <path id="caminhoFlocos" stroke = "blue" fill = "blue" stroke-width="3" d="
+            M 25 -10 
+            L 25 -30
+            L 40 -45
+            Q 45 -50 40 -55
+            L 25 -40
+            L 25 -60
+            L 40 -75
+            Q 45 -80 40 -85
+            L 25 -70
+            L 25 -85
+            Q 20 -95 15 -85
+            L 15 -70
+            L 0 -85
+            Q -5 -80 0 -75
+            L 15 -60
+            L 15 -40
+            L 0 -55
+            Q -5 -50 0 -45
+            L 15 -30
+            L 15 -10
+            L -10 10 "/>
+        <g id="hexagono">
+            <path stroke = "blue" fill = "blue" stroke-width="3" d="
+            M 20 0 
+            L 0 20
+            L 0 40
+            L 20 60
+            L 40 40
+            L 40 20 z"/>
+
+        </g>
+        <g id="flocoDeNeve">
+            <use xlink:href = "#hexagono"  transform="translate(-13,-10) scale(1.65,1.4)"/>
+            <use xlink:href = "#caminhoFlocos"  transform="translate(0,0)"/>
+            <use xlink:href = "#caminhoFlocos"  transform="translate(40,60) rotate(180)"/>
+            <use xlink:href = "#caminhoFlocos"  transform="translate(50,25) rotate(120)"/>
+            <use xlink:href = "#caminhoFlocos"  transform="translate(25,-5) rotate(60)"/>
+            <use xlink:href = "#caminhoFlocos"  transform="translate(-10,35) rotate(-60)"/>
+            <use xlink:href = "#caminhoFlocos"  transform="translate(15,65) rotate(-120)"/>
+        </g>
+    </defs>
+
+
+      <use xlink:href = "#flocoDeNeve"  transform="translate(400,400)"/>
+
+</svg>

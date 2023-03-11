@@ -6,6 +6,7 @@ function message(text){
 
 function modeloNovo(){ //Criar modelo
     let model = {
+        frames: 0,
         gtr: {
             x: 1000,
             y: 470,
@@ -69,9 +70,7 @@ function modeloNovo(){ //Criar modelo
         }
     }
 
-
     model.update = update;
-
     return model;
 }
 
@@ -133,6 +132,7 @@ function update(){
         nuvens2.x = 0;
     }
 
+    this.frames += 1;
     nuvens1.x += nuvens1.vx;
     nuvens2.x += nuvens2.vx;
     flocos.x += flocos.vx
@@ -153,32 +153,32 @@ function update(){
 }
 
 function contexto(){ //Vai buscar os objetos
-    let carrogtr_SVG = document.getElementById("carroGtrUsado");
-    let rodasgtr_SVG = document.getElementById("rodasGtr");
-    let predios_SVG = document.getElementById("prediosUsados");
-    let tracejados_SVG = document.getElementById("tracejadosUsados");
-    let troncos_SVG = document.getElementById("ConjuntoDeTroncos");
-    let carroBombeiro_SVG = document.getElementById("carroBombeiroUsado");
-    let rodasBombeiro_SVG = document.getElementById("rodas");
-    let arcoIris_SVG = document.getElementById("arcoiris");
-    let arvores_SVG = document.getElementById("conjuntoDeArvores");
-    let flocosDeNeve_SVG = document.getElementById("conjuntoFlocosDeNeve");
-    let nuvens1_SVG = document.getElementById("NuvemTipo1");
-    let nuvens2_SVG = document.getElementById("NuvemTipo2");
+    let svg_CarroGtr = document.getElementById("carroGtrUsado");
+    let svg_RodasGtr = document.getElementById("rodasGtr");
+    let svg_Predios = document.getElementById("prediosUsados");
+    let svg_Tracejados= document.getElementById("tracejadosUsados");
+    let svg_Troncos = document.getElementById("ConjuntoDeTroncos");
+    let svg_CarroBombeiro = document.getElementById("carroBombeiroUsado");
+    let svg_RodasBombeiro = document.getElementById("rodas");
+    let svg_ArcoIris = document.getElementById("arcoiris");
+    let svg_Arvore = document.getElementById("conjuntoDeArvores");
+    let svg_FlocosDeNeve = document.getElementById("conjuntoFlocosDeNeve");
+    let svg_nuvens1 = document.getElementById("NuvemTipo1");
+    let svg_nuvens2 = document.getElementById("NuvemTipo2");
 
     let context = {
-        carrogtr_SVG: carrogtr_SVG,
-        rodasgtr_SVG: rodasgtr_SVG,
-        predios_SVG: predios_SVG,
-        tracejados_SVG: tracejados_SVG,
-        troncos_SVG: troncos_SVG,
-        carroBombeiro_SVG: carroBombeiro_SVG,
-        rodasBombeiro_SVG: rodasBombeiro_SVG,
-        arcoIris_SVG: arcoIris_SVG,
-        arvores_SVG: arvores_SVG,
-        flocosDeNeve_SVG: flocosDeNeve_SVG,
-        nuvens1_SVG: nuvens1_SVG,
-        nuvens2_SVG: nuvens2_SVG,
+        svg_CarroGtr: svg_CarroGtr,
+        svg_RodasGtr: svg_RodasGtr,
+        svg_Predios: svg_Predios,
+        svg_Tracejados: svg_Tracejados,
+        svg_Troncos: svg_Troncos,
+        svg_CarroBombeiro: svg_CarroBombeiro,
+        svg_RodasBombeiro: svg_RodasBombeiro,
+        svg_ArcoIris: svg_ArcoIris,
+        svg_Arvore: svg_Arvore,
+        svg_FlocosDeNeve: svg_FlocosDeNeve,
+        svg_nuvens1: svg_nuvens1,
+        svg_nuvens2: svg_nuvens2,
     };
 
     context.render = render;
@@ -186,70 +186,67 @@ function contexto(){ //Vai buscar os objetos
 }
 
 function render(model){
- 
+    message(`FRAMES: ${model.frames}`);
+
     let gtr_x = model.gtr.x;
     let gtr_y = model.gtr.y; 
-    this.carrogtr_SVG.setAttribute(
+    this.svg_CarroGtr.setAttribute(
         "transform", `translate(${gtr_x}, ${gtr_y})`);
 
-    let rodasGraus = (model.gtr.rodasGtr.angulo) * (180/Math.PI);
-    this.rodasgtr_SVG.setAttribute(
-        "transform", `rotate(${rodasGraus})`);    
+    let rodasGtr = (model.gtr.rodasGtr.angulo) * (180/Math.PI);
+    this.svg_RodasGtr.setAttribute(
+        "transform", `rotate(${rodasGtr})`);    
 
     let predios_x = model.predios.x;
     let predios_y = model.predios.y;
-    message(`${model.predios.x}`);
-    this.predios_SVG.setAttribute(
+    this.svg_Predios.setAttribute(
         "transform", `translate(${predios_x}, ${predios_y})`);
 
     let tracejados_x = model.tracejados.x;
     let tracejados_y = model.tracejados.y;
-    message(`${model.predios.x}`);
-    this.tracejados_SVG.setAttribute(
+    this.svg_Tracejados.setAttribute(
         "transform", `translate(${tracejados_x}, ${tracejados_y})`);
 
-    
     let tronco_x = model.tronco.x;
     let tronco_y = model.tronco.y;
-    this.troncos_SVG.setAttribute(
+    this.svg_Troncos.setAttribute(
         "transform", `translate(${tronco_x}, ${tronco_y})`);
 
     let bombeiro_x = model.bombeiro.x;
     let bombeiro_y = model.bombeiro.y;
-    this.carroBombeiro_SVG.setAttribute(
+    this.svg_CarroBombeiro.setAttribute(
         "transform", `translate(${bombeiro_x}, ${bombeiro_y})`);
 
     let rodasBombeiro = (model.bombeiro.rodasBombeiro.angulo) * (180/Math.PI);
-    this.rodasBombeiro_SVG.setAttribute(
+    this.svg_RodasBombeiro.setAttribute(
         "transform", `rotate(${rodasBombeiro})`);  
 
     let arcoiris_x = model.arcoiris.x;
     let arcoiris_y = model.arcoiris.y;
-    this.arcoIris_SVG.setAttribute(
+    this.svg_ArcoIris.setAttribute(
         "transform", `translate(${arcoiris_x}, ${arcoiris_y})`); 
 
     let arvores_x = model.arvores.x;
     let arvores_y = model.arvores.y;
-    this.arvores_SVG.setAttribute(
+    this.svg_Arvore.setAttribute(
         "transform", `translate(${arvores_x}, ${arvores_y})`); 
 
     let flocos_x = model.flocos.x;
     let flocos_y = model.flocos.y;
-    this.flocosDeNeve_SVG.setAttribute(
+    this.svg_FlocosDeNeve.setAttribute(
         "transform", `translate(${flocos_x}, ${flocos_y})`); 
 
     let nuvens1_x = model.nuvens1.x;
     let nuvens1_y = model.nuvens1.y;
-    this.nuvens1_SVG.setAttribute(
+    this.svg_nuvens1.setAttribute(
         "transform", `translate(${nuvens1_x}, ${nuvens1_y})`); 
 
     let nuvens2_x = model.nuvens2.x;
     let nuvens2_y = model.nuvens2.y;
-    this.nuvens2_SVG.setAttribute(
+    this.svg_nuvens2.setAttribute(
         "transform", `translate(${nuvens2_x}, ${nuvens2_y})`); 
-    
-        
 }
+
 
 function main(){
     message("teste");

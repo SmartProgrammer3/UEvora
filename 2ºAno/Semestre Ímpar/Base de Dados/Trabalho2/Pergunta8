@@ -1,0 +1,182 @@
+Create table Cliente(
+NomeCliente varchar(50) primary key,
+Adesão char(20)
+);
+
+Create table Mensalidade(
+NomeCliente varchar(50),
+valorMensalidade int(20),
+dataDePagamento char(30),
+primary key (NomeCliente, valorMensalidade, dataDePagamento),
+foreign key (NomeCliente) references Cliente on delete restrict,
+);
+
+Create table CartãoCrédito(
+TitularDoCartão varchar(50),
+NúmeroCartão int(20),
+DataExpiração char(20),
+primary key (TitularDoCartão, NúmeroCartão)
+);
+
+Create table Morada(
+Rua varchar(50),
+Cidade char(50),
+País char(50),
+CódigoPostal int(20),
+primary key (Rua, Cidade) 
+);
+
+Create table Login(
+NomeDeUtilizador varchar(50) primary key,
+PalavraPasse char(20)
+);
+
+Create table Filmes(
+url_ varchar(50) primary key,
+DataDeEstreia char(20),
+ResumoDoFilme char(20),
+LocalDoFilme char(20),
+);
+
+Create table Título(
+EmLinguaOriginal varchar(50) primary key,
+EmPortuguês varchar(50),
+Eminglês varchar(50)
+);
+
+Create table Língua(
+Original varchar(50) primary key,
+Dublado varchar(50),
+);
+
+Create table Biografia(
+Nome varchar(50) primary key,
+Nacionalidade varchar(50),
+ListaPrémios varchar(50),
+DataNascimento varchar(50),
+);
+
+Create table Diretores(
+NomeDiretor varchar(50) primary key,
+);
+
+Create table Atores(
+NomeAtor varchar(50) primary key,
+);
+
+Create table Prémios (
+TipoDoPrémio varchar(50),
+DataRecebido varchar(50),
+DataNomeado varchar(50),
+primary key (TipoDoPrémio, DataRecebido)
+);
+
+Create table Cliente_Mensalidade  (
+NomeCliente char(50),
+valorMensalidade int(50),
+dataDePagamento varchar(50),
+primary key (NomeCliente, valorMensalidade, dataDePagamento)
+foreign key (NomeCliente) references Cliente on delete restrict,
+);
+
+Create table Cliente_Login (
+NomeCliente char(50),
+NomeDeUtilizador varchar(50),
+primary key (NomeCliente, NomeDeUtilizador)
+foreign key (NomeCliente) references Cliente on delete restrict,
+foreign key (NomeDeUtilizador) references Login on delete restrict,
+);
+
+Create table Cliente_Morada (
+NomeCliente char(50),
+Rua varchar(50),
+Cidade varchar(50),
+primary key (NomeCliente, Rua)
+foreign key (NomeCliente) references Cliente on delete restrict,
+foreign key (Rua) references Morada on delete restrict
+);
+
+Create table Cliente_CartãoCrédito  (
+NomeCliente char(50),
+TitularDoCartão varchar(50),
+NúmeroCartão varchar(50),
+primary key (NomeCliente, TitularDoCartão),
+foreign key (NomeCliente) references Cliente on delete restrict,
+foreign key (TitularDoCartão) references CartãoCrédito  on delete restrict
+);
+
+Create table Cliente_Filmes_Historial (
+NomeCliente char(50),
+url_ varchar(50),
+DataVisualização varchar(50),
+primary key (NomeCliente, url_),
+foreign key (NomeCliente) references Cliente on delete restrict,
+foreign key (url_ ) references Filmes  on delete restrict
+);
+
+Create table Género (
+url_ varchar(50),
+NomeGénero char(50),
+primary key (url_, NomeGénero),
+foreign key (url_ ) references Filmes  on delete restrict
+);
+
+Create table Filmes_Título  (
+url_ varchar(50),
+EmLinguaOriginal char(50),
+EmPortugûes char(50),
+Eminglês char(50),
+primary key (url_, EmLinguaOriginal),
+foreign key (url_ ) references Filmes  on delete restrict
+);
+
+Create table Filmes_Língua  (
+url_ varchar(50),
+Original char(50),
+Dublado char(50),
+primary key (url_, Original),
+foreign key (url_ ) references Filmes  on delete restrict
+);
+
+Create table Filmes_Atores  (
+url_ varchar(50),
+NomeAtor char(50),
+primary key (url_, NomeAtor),
+foreign key (url_ ) references Filmes  on delete restrict,
+foreign key (NomeAtor ) references Atores  on delete restrict
+);
+
+Create table Filmes_Diretores  (
+url_ varchar(50),
+nomeDiretores char(50),
+primary key (url_, nomeDiretores),
+foreign key (url_ ) references Filmes  on delete restrict,
+foreign key (nomeDiretores ) references Diretores  on delete restrict
+);
+
+Create table Filmes_Prémios  (
+url_ varchar(50),
+tipoDoPrémio char(50),
+DataRecebido char(50),
+primary key (url_, tipoDoPrémio),
+foreign key (url_ ) references Filmes  on delete restrict,
+foreign key (tipoDoPrémio ) references Prémios  on delete restrict
+);
+
+Create table Atores_Prémios  (
+NomeAtor varchar(50),
+tipoDoPrémio char(50),
+DataRecebido char(50),
+primary key (NomeAtor, tipoDoPrémio),
+foreign key (NomeAtor ) references Atores  on delete restrict,
+foreign key (tipoDoPrémio ) references Prémios  on delete restrict
+);
+
+Create table Diretores_Prémios  (
+nomeDiretores varchar(50),
+tipoDoPrémio char(50),
+DataRecebido char(50),
+primary key (nomeDiretores, tipoDoPrémio),
+foreign key (nomeDiretores ) references Diretores  on delete restrict,
+foreign key (tipoDoPrémio ) references Prémios  on delete restrict
+);

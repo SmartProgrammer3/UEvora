@@ -8,15 +8,16 @@
 
     <script type='application/javascript' src='lib/x3dom/x3dom-full.js'> </script>
     <link rel='stylesheet' type='text/css' href='lib/x3dom/x3dom.css' />
+    <script src="script\rolares.js"></script>
     
 </head>
 
 <body>
     <h1 style="text-align: center; color: rgb(91, 54, 54)">Trabalho Computação Gráfica - X3D</h1>
     <h2 style="text-align: center; color: rgb(12, 27, 186)">Luís Gonçalo Carvalho - Nº51817</h2>
-    <div width="512px" height="512px" id="x3d-container" style="display: flex; flex-direction: column; align-items: center;">
+    <div width="768px" height="768px" id="x3d-container" style="display: flex; flex-direction: column; align-items: center;">
 
-        <x3d width = "512px" height="512px">
+        <x3d width = "768px" height="768px">
             <scene>
                 <switch WhichChoice="-1">
                     <extrusion id="r" crossSection="
@@ -328,10 +329,7 @@
                             2 -1 1
                             2.5 0 1
                             3.5 0 1
-                            4 -1 1
-
-
-                            ">
+                            4 -1 1  ">
                         </coordinate>
                     </indexedfaceset>
 
@@ -355,74 +353,83 @@
                         0 0 0
                         0 1 0">     
                     </extrusion>
+
+                    
                 </switch>
 
-                <transform translation="-3.5 0 0" rotation="0 1 1 3.141592654" scale="0.25 0.3 0.3">
-                    <shape>
-                        <appearance>
-                            <twosidedmaterial diffuseColor="red"> </twosidedmaterial>
-                        </appearance>
-                        <x3dgeometrynode use="r"> </x3dgeometrynode>
-                    </shape>
-                </transform>
+                <transform id="palavra" translation="0 0 0" scale="1 1 1">
 
-                <transform translation="-3 -0.3 0" scale="0.13 0.15 0.3">
-                    <shape>
-                        <appearance>
-                            <twosidedmaterial diffuseColor="green"> </twosidedmaterial>
-                        </appearance>
-                        <x3dgeometrynode use="o"> </x3dgeometrynode>
-                    </shape>
-                </transform>
-                
-                <transform translation="-1.35 0 0" rotation="0 1 1 3.141592654" scale="0.3 0.3 0.3">
-                    <shape>
-                        <appearance>
-                            <twosidedmaterial diffuseColor="green"> </twosidedmaterial>
-                        </appearance>
-                        <x3dgeometrynode use="l"> </x3dgeometrynode>
-                    </shape>
-                </transform>
+                    <transform translation="-3.5 0 0" rotation="0 1 1 3.141592654" scale="0.25 0.3 0.3">
+                        <shape>
+                            <appearance>
+                                <twosidedmaterial  diffuseColor="red"> </twosidedmaterial>
+                            </appearance>
+                            <x3dgeometrynode use="r"> </x3dgeometrynode>
+                        </shape>
+                    </transform>
+    
+                    <transform translation="-3 -0.3 0" scale="0.13 0.15 0.3">
+                        <shape>
+                            <appearance>
+                                <twosidedmaterial diffuseColor="cyan"> </twosidedmaterial>
+                            </appearance>
+                            <x3dgeometrynode use="o"> </x3dgeometrynode>
+                        </shape>
+                    </transform>
+                    
+                    <transform translation="-1.35 0 0" rotation="0 1 1 3.141592654" scale="0.3 0.3 0.3">
+                        <shape>
+                            <appearance>
+                                <twosidedmaterial diffuseColor="green"> </twosidedmaterial>
+                            </appearance>
+                            <x3dgeometrynode use="l"> </x3dgeometrynode>
+                        </shape>
+                    </transform>
+    
+                    <transform translation="-0.95 -0.33 0" scale="0.14 0.15 0.3">
+                        <shape>
+                            <appearance>
+                                <twosidedmaterial diffuseColor="yellow"> </twosidedmaterial>
+                            </appearance>
+                            <x3dgeometrynode use="a"> </x3dgeometrynode>
+                        </shape>
+                    </transform>
+    
+                    <transform translation="0.9 0 0" rotation="0 1 1 3.141592654" scale="0.25 0.3 0.3">
+                        <shape>
+                            <appearance>
+                                <twosidedmaterial diffuseColor="black"> </twosidedmaterial>
+                            </appearance>
+                            <x3dgeometrynode use="r"> </x3dgeometrynode>
+                        </shape>
+                    </transform>
+    
+                    <transform translation="1.45 0.1 0" scale="0.2 0.2 0.3">
+                        <shape>
+                            <appearance>
+                                <twosidedmaterial diffuseColor="navy"> </twosidedmaterial>
+                            </appearance>
+                            <x3dgeometrynode use="e"> </x3dgeometrynode>
+                        </shape>
+                    </transform>
+    
+                    
+                    <transform translation="2.8 0 0" rotation="0 1 1 3.141592654" scale="0.2 0.3 0.3">
+                        <shape>
+                            <appearance>
+                                <twosidedmaterial diffuseColor="orange"> </twosidedmaterial>
+                            </appearance>
+                            <x3dgeometrynode use="s"> </x3dgeometrynode>
+                        </shape>
+                    </transform>   
 
-                <transform translation="-0.95 -0.33 0" scale="0.14 0.15 0.3">
-                    <shape>
-                        <appearance>
-                            <twosidedmaterial diffuseColor="red"> </twosidedmaterial>
-                        </appearance>
-                        <x3dgeometrynode use="a"> </x3dgeometrynode>
-                    </shape>
-                </transform>
 
-                <transform translation="0.9 0 0" rotation="0 1 1 3.141592654" scale="0.25 0.3 0.3">
-                    <shape>
-                        <appearance>
-                            <twosidedmaterial diffuseColor="red"> </twosidedmaterial>
-                        </appearance>
-                        <x3dgeometrynode use="r"> </x3dgeometrynode>
-                    </shape>
-                </transform>
-
-                <transform translation="1.45 0.1 0" scale="0.2 0.2 0.3">
-                    <shape>
-                        <appearance>
-                            <twosidedmaterial diffuseColor="red"> </twosidedmaterial>
-                        </appearance>
-                        <x3dgeometrynode use="e"> </x3dgeometrynode>
-                    </shape>
-                </transform>
-
-                
-                <transform translation="2.8 0 0" rotation="0 1 1 3.141592654" scale="0.2 0.3 0.3">
-                    <shape>
-                        <appearance>
-                            <twosidedmaterial diffuseColor="green"> </twosidedmaterial>
-                        </appearance>
-                        <x3dgeometrynode use="s"> </x3dgeometrynode>
-                    </shape>
-                </transform>                
+                </transform>               
             </scene>
         </x3d>
     </div>
+    <div id="terminal" style="font-family: monospace; background-color: gray; text-align: center;"> </div>
+    <script> main(); </script>
 </body>
 
 </html>

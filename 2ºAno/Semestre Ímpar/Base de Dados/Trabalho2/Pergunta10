@@ -1,0 +1,49 @@
+/* a) */
+SELECT DISTINCT Filmes_Título.EmLinguaOriginal
+FROM Filmes_Título NATURAL INNER JOIN Filmes NATURAL INNER JOIN Género
+WHERE Filmes_Título.url_ == Filmes.url_ AND Filmes.url_ == Género.url_ AND NomeGénero == 'Thriler' AND NomeGénero == 'Mistério'
+
+
+/* b) */
+SELECT DISTINCT Cliente.NomeCliente
+FROM Cliente INNER JOIN Cliente_Mensalidade
+WHERE Cliente.NomeCliente == Cliente_Mensalidade.NomeCliente AND Cliente_Mensalidade.dataDePagamento > '1/12/2022'
+
+/* c) */
+SELECT DISTINCT Filmes.url_
+FROM Filmes NATURAL INNER JOIN Filmes_Língua NATURAL INNER JOIN Filmes_Atores NATURAL INNER JOIN Biografia
+WHERE Filmes.url_ == Filmes_Língua.url_ AND Filmes_Língua.EmLinguaOriginal = 'Inglês' AND Filmes.url_ == Filmes_Atores.url_ 
+        AND Filmes_Atores.NomeAtor == Biografia.Nome AND Biografia.Nacionalidade = 'França'
+
+
+/* d) */
+SELECT COUNT(Mensalidade.valorMensalidade)
+FROM Mensalidade
+WHERE Mensalidade.dataDePagamento > '1-11-2022' AND Mensalidade.dataDePagamento < '1-12-2022'
+
+
+/* e) */
+SELECT Filmes.url_
+FROM Filmes NATURAL INNER JOIN Cliente_Filmes_Historial 
+WHERE FIlmes.url_ == Cliente_Filmes_Historial.url_ AND Cliente_Filmes_Historial.DataVisualização = '2/12/2022'
+
+
+/* f) */
+SELECT Filmes.url_
+FROM Filmes NATURAL INNER JOIN Cliente_Filmes_Historial 
+WHERE FIlmes.url_ == Cliente_Filmes_Historial.url_ AND Cliente.NomeCliente = 'xxx'
+
+
+/* g) */
+SELECT DISTINCT Diretores.nomeDiretores
+FROM Diretores 
+EXCEPT
+SELECT DISTINCT Diretores.nomeDiretores
+FROM Diretores NATURAL INNER JOIN Filmes_Diretores NATURAL INNER JOIN Género
+WHERE DIretores.nomeDiretores == Filmes_Diretores.nomeDiretores AND Filmes_Diretores.url_ == Género.url_ AND Género.NomeGénero = 'fantasia'
+
+
+/* h) */
+SELECT MAX(Filmes_Prémios.tipoDoPrémio) 
+FROM Filmes_Prémios
+

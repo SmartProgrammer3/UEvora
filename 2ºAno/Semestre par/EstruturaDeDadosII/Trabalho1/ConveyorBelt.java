@@ -1,10 +1,11 @@
+package Trabalho1;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.*;
 
 
-public class ConveyorBelts {
+public class ConveyorBelt{
     public static void main(String[] args) throws IOException {
         BufferedReader input = new BufferedReader(new InputStreamReader(System.in));
 
@@ -48,48 +49,55 @@ public class ConveyorBelts {
             }
 
 
-            int maxTotalValue = getMaxTotalValue(products1, products2);
-            System.out.println(maxTotalValue);
-        }
-    }
+            int[][] maxValue = new int[numProducts1 + 1][numProducts2 + 1]; // Matriz para guardar os valores máximos 
+            int[][] minPairs = new int[numProducts1 + 1][numProducts2 + 1]; // Matriz que guarda os respetivos pares (número minimo) para cada valor máximo
 
-    /*
-     * Este método tem como objetivo retornar o máximo valor possível.
-     * Recebe como argumentos as listas dos produtos (os conveyor belts)
-     */
-    private static int getMaxTotalValue(List<Product> products1, List<Product> products2) {
-        int maxTotalValue = 0; // Valor máximo inicializado a zero.
-        List<Product> ListaProductsQueFalta1 = new ArrayList<>();
-        List<Product> ListaProductsQueFalta2 = new ArrayList<>();
+            // Estes dois loops vão avaliar cada produto do conveyor belt 1 como cada produto do conveyor belt 2
+            for (int i = 1; i <= numProducts1; i++) { // Conveyor belt 1 
 
-        for (int i = 0; i < products1.size(); i++) { // Percorre a lista de produtos que o conveyor belt 1 tem.
-            for (int j = 0; j < products2.size(); j++) { // Percorre a lista de produtos que o conveyor belt 2 tem.
-                if (products1.get(i).type == products2.get(j).type) { // Se o tipo dos produtos for igual.
-                    int pairValue = products1.get(i).value + products2.get(j).value; // O valor da soma dos dois produtos do mesmo tipo.
+                for (int j = 1; j <= numProducts2; j++) { // Conveyor belt 2
+                    int value = 0; // Valor máximo, inicializado a 0.
 
-                    ListaProductsQueFalta1 = products1.subList(i + 1, products1.size());
-                    ListaProductsQueFalta2 = products2.subList(j + 1, products2.size());
-                    int remainingValue = getMaxTotalValue(ListaProductsQueFalta1, ListaProductsQueFalta2);
+                    if (products1.get(i-1).type == products2.get(j-1).type) { // Se for encontrado um produto do conveyor belt 1 com o mesmo tipo do produto do conveyor belt 2
+                        value = products1.get(i-1).value + products2.get(j-1).value; 
+                    }
 
-                    maxTotalValue = Math.max(maxTotalValue, pairValue + remainingValue);
+                    /*
+                    *  O valor máximo para a posição (i, j) da matriz maxValue é o maior valor, entre o valor da 
+                    *  posição anterior na mesma coluna (i-1, j), ou o maior valor entre a posição anterior na mesma 
+                    *  linha (i, j-1) e o valor da posição diagonal anterior (i-1, j-1) somado com o valor 
+                    *  "value" que foi atualizado anteriormente se houve produtos do mesmo tipo nos 
+                    *   dois conveyor belts.
+                    */
+                    maxValue[i][j] = Math.max(maxValue[i - 1][j], Math.max(maxValue[i][j - 1], maxValue[i - 1][j - 1] + value));
+                     
+                    /*
+                     * Se o valor máximo for igual é o mesmo valor na posição acima na mesma coluna,
+                     * então o número de pares é igual.
+                     */
+                    System.out.println(maxValue[i][j]);
+                    
+                    if (maxValue[i][j] == maxValue[i - 1][j]) {
+                        minPairs[i][j] = minPairs[i - 1][j];
+                    }
+                    /*
+                     * Se o valor máximo for igual na coluna anterior na mesma linha,
+                     * então o número de pares é igual.
+                     */
+                    else if (maxValue[i][j] == maxValue[i][j - 1]) {
+                        minPairs[i][j] = minPairs[i][j - 1];
+                    } else {  // Caso o valor máximo seja diferente.
+                        if (value > 0) { // Se o valor for maior que zero, significa que os produtos são do mesmo tipo.
+                            minPairs[i][j] = minPairs[i - 1][j - 1] + 1; // Aumenta o número de pares.
+                        } else {
+                            minPairs[i][j] = minPairs[i - 1][j - 1];
+                        }
+                    } 
+                    System.out.println(minPairs[i][j]);  
+                    System.out.println("--------------");  
                 }
             }
+            System.out.println(maxValue[numProducts1][numProducts2] + " " + minPairs[numProducts1][numProducts2]);
         }
-        return maxTotalValue;
     }
-
-    private static int getMinNumPairs(List<Product> products1, List<Product> products2) {
-        int[][] dp = new int[products1.size() + 1][products2.size() + 1];
-
-        for (int i = products1.size() - 1; i >= 0; i--) {
-            for (int j = products2.size() - 1; j >= 0; j--) {
-                if (products1.get(i).type == products2.get(j).type) {
-                    dp[i][j] = dp[i + 1][j + 1] + 1;
-                }
-                dp[i][j] = Math.max(dp[i][j], Math.max(dp[i + 1][j], dp[i][j + 1]));
-            }
-        }
-        return dp[0][0];
-    }
-
 }

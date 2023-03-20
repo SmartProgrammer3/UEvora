@@ -1,4 +1,5 @@
-public class Product extends ConveyorBelts{
+package Trabalho1;
+public class Product  {
     String name;
     char type;
     int value;

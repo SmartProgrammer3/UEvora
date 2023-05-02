@@ -101,7 +101,7 @@ public class Teste {
                 break;
             }
 
-
+            System.out.println((linhaPos+1) + " " + (colunaPos+1));
             // Tenta mover a bola para a direita - Avalia a direita da posição
             int colunaDir = colunaPos + 1;
             while (colunaDir < nColunas) { // Tem que estar dentro do limite direito

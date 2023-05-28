@@ -45,7 +45,7 @@ public class Main {
         // Criar o mapa com os valores dados pelo utilizador
         for (int i = 0; i < numeroDeLinhas; i++) {
             String linhaMapa = input.readLine();                      // . (dot) -> Empty location
-            for (int j = 0; j < numeroDeColunas; j++) {               // letra "O" -> ObstÃ¡culo
+            for (int j = 0; j < numeroDeColunas; j++) {               // letra "O" -> Obstáculo
                 mapa[i][j] = linhaMapa.charAt(j);                     // letra "H" -> Buraco (Objetivo onde queremos chegar)
             }
         }

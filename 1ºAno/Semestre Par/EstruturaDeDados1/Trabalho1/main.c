@@ -5,6 +5,7 @@
 #include <stdlib.h>
 #include "fatal.h"
 
+
 int main(int argc, const char *argv[]){
 
     /* //Experimentar as funções da doublelist

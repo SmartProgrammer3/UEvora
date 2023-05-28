@@ -1,0 +1,406 @@
+.globl main
+
+.data
+ foutRGB:   .asciz "/home/luisgoncalo/Documentos/ac1/trabalho/Lena.rgb"  #Path do ficheiro a ser modificado (.rgb).
+ foutGray: .asciz "/home/luisgoncalo/Documentos/ac1/trabalho/LenaGray.gray"   #Path do ficheiro a gray (Imagem em tons cinzentos).
+ foutSobelHorizontal: .asciz "/home/luisgoncalo/Documentos/ac1/trabalho/LenaSobelHorizontal.gray"  #Path do ficheiro filtrado pelo operador Sobel horizontal.
+ foutSobelVertical: .asciz "/home/luisgoncalo/Documentos/ac1/trabalho/LenaSobelVertical.gray"  #Path do ficheiro filtrado pelo operador Sobel vertical.
+ foutContorno: .asciz "/home/luisgoncalo/Documentos/ac1/trabalho/ImagemContorno.gray"  #Path do ficheiro contornos, obtidos pela combinação dos operadores Sobel.
+ 
+ bufferRGB: .space 786432  #Buffer da imagem a rgb (a cores).
+ bufferGray: .space 262144 #Buffer da imagem em tons cinzentos (em gray).
+ 
+ horizontalSobel: .space 262144 #Buffer do sobel horizontal.
+ verticalSobel: .space 262144 #Buffer do sobel vertical.
+ imagemContorno: .space 262144 #Buffer para a imagem contorno.
+ 
+ matrizValoresSobelHorizontal: .byte 1, 0, -1, 2, 0, -2, 1, 0, -1 #Buffer da matriz do operador Sobel na horizontal
+ matrizValoresSobelVertical: .byte 1, 2, 1, 0, 0, 0, -1, -2, -1 #Buffer da matriz do operador Sobel na vertical
+.text
+        
+########################################################################################################################################          
+#Função: read_rgb_image
+#Descrição: Esta função abre o ficheiro da Lena.rgb e lê os 3 bytes de cada pixel da imagem.  
+#Argumentos: a0 - Path do ficheiro Lena.rgb.
+#	     a1 - Endereço do buffer do ficheiro .rgb.
+#	     a2 - Tamanho do buffer do ficheiro .rgb (É 786432 = 512 * 512 * 3).
+########################################################################################################################################          
+  read_rgb_image:
+# Abre o ficheiro da path -> foutRGB  
+  li   a7, 1024    
+  la   a0, foutRGB     
+  li   a1, 0  # Read-only a1 = 0      
+  ecall            
+  mv   s6, a0       
+  
+# Lê o ficheiro aberto 
+  li   a7, 63    
+  la   a1, bufferRGB  
+  li   a2, 786432   
+  ecall             
+
+# Fecha o ficheiro lido
+  li   a7, 57    
+  mv   a0, s6     
+  ecall            
+
+  ret
+
+
+ 
+########################################################################################################################################         
+#Função: rgb_to_gray
+#Descrição: Esta função converte os bits do ficheiro a ser modificado (Lena.rgb) em bits para tons de cinzento
+#	    (ficheiro LenaGray.gray).
+#Argumentos: a0 - Buffer com os valores da imagem a cores (Ficheiro Lena.rgb).
+#	     a1 - Buffer que vai receber os valores da conversão para tons cinzentos (Buffer do ficheiro LenaGray.gray).
+#	     a2 - Tamanho do buffer do ficheiro LenaGray.gray (512 * 512).
+########################################################################################################################################  
+  rgb_to_gray:
+  
+  # I = 0,30R + 0,59G + 0,11B (Fórmula para converter para tons cinzentos.
+  li t0, 30   #Conversor bit vermelho - R.
+  li t1, 59   #Conversor bit verde - G.
+  li t2, 11   #Conversor bit azul - B. 
+  li t3, 100  #Divisor da soma.
+  
+  while:
+
+  lbu t4, 0(a0) #Byte na posição 0 do buffer corresponde ao vermelho.
+  mul t4, t4, t0 #Para converter para tons cinzentos, multiplicar pelo respetivo conversor (Vermelho).
+   
+  lbu t5, 1(a0) #Byte na posição 1 do buffer corresponde ao verde.
+  mul t5, t5, t1 #Para converter para tons cinzentos, multiplicar pelo respetivo conversor (Verde).
+  
+  lbu t6, 2(a0) #Byte na posição 2 do buffer corresponde ao azul.
+  mul t6, t6, t2 #Para converter para tons cinzentos, multiplicar pelo respetivo conversor (Azul).
+  
+  #Fazer a soma dos 3 bytes.
+  add t4, t4, t5 
+  add t4, t4, t6
+  
+  #Dividir a soma por 100.
+  div t4, t4, t3
+  
+  #Após a divisão da soma, guardamos o byte resultante no bufferGray.
+  sb t4, 0(a1)
+
+  addi a0, a0, 3 #Adiciona 3 em 3, para avançar para o próximo pixel, ou seja ler o próximo conjunto de bytes.
+  addi a1, a1, 1 #Avançar para o próximo pixel no bufferGray
+  addi a2, a2, -1  #Subtrair 1 pelo tamanho do bufferGray, porque adicionámos um byte, logo o tamanho decrementa 1.
+  bgt a2, zero, while #Enquanto que o buffer não estiver cheio, ou seja o tamanho não for igual a 0, o ciclo continua.
+
+
+ 
+########################################################################################################################################          
+#Função: write_gray_image
+#Descrição: Esta função escreve num ficheiro gerado, a imagem em tons cinzentos (LenaGray.gray).
+#Argumentos: a0 - Path do ficheiro LenaGray.gray.
+#	     a1 - Buffer da imagem que guarda os valores da imagem a gray.
+#	     a2 - Tamanho do ficheiro .gray (512*512).
+########################################################################################################################################  
+  write_gray_image:
+# Abre o ficheiro da path -> foutGray  
+  li   a7, 1024     
+  la   a0, foutGray 
+  li   a1, 1 #Write-only a1 = 1     
+  ecall             
+  mv   s6, a0       
+  
+#Escreve no ficheiro
+  li   a7, 64    
+  la   a1, bufferGray
+  li   a2, 262144
+  ecall        
+  
+#Fecha o ficheiro 
+  li   a7, 57       
+  mv   a0, s6      
+  ecall            
+  
+  ret
+  
+  
+  
+########################################################################################################################################         
+#Função: convolution
+#Descrição: Esta função calcula a convulação da imagem LenaGray.gray (imagem a tons cinzentos), com o respetivo operador sobel
+#   	    pretendido. 
+#Argumentos: a0 - Buffer que vai receber os valores da convulação. 
+#		  Convulação horizontal: Guarda no buffer horizontalSobel.
+#		  Convulação vertical: Guarda no buffer verticalSobel.
+#	     a1 - Buffer com os valores da imagem em tons cinzentos (LenaGray.gray).
+#	     a2 - Buffer com os valores da matriz dos respetivos operadores Sobel.
+#		  Na horizontal: matrizValoresSobelHorizontal
+#		  Na vertical: matrizValoresSobelVertical
+#	     a3 - Tamanho do buffer que recebe os valores da convulação. (512*512)
+########################################################################################################################################   
+  convolution:
+  
+  while2:
+  lbu t0, 0(a1)  
+  lb t1, 8(a2)   
+  mul t0, t0, t1
+  
+  lbu t2, 1(a1)
+  lb t1, 7(a2)
+  mul t2, t2, t1
+  
+  lbu t3, 2(a1)
+  lb t1, 6(a2)
+  mul t3, t3, t1
+  
+  add t2, t2, t0
+  add t3, t3, t2 
+  
+  
+  lbu t0, 512(a1)
+  lb t1, 5(a2)
+  mul t0, t0, t1
+  
+  lbu t2, 513(a1)
+  lb t1, 4(a2)
+  mul t2, t2, t1
+  
+  lbu t4, 514(a1)
+  lb t1, 3(a2)
+  mul t4, t4, t1
+  
+  add t2, t2, t0
+  add t4, t4, t2 
+  
+  
+  lbu t0, 1024(a1)
+  lb t1, 2(a2)
+  mul t0, t0, t1
+  
+  lbu t2, 1025(a1)
+  lb t1, 1(a2)
+  mul t2, t2, t1
+  
+  lbu t5, 1026(a1)
+  lb t1, 0(a2)
+  mul t5, t5, t1
+  
+  add t2, t2, t0
+  add t5, t5, t2 
+
+  #Soma dos produtos dos elementos de um operador sobel com os respetivos bytes da imagem gray  
+  add t4, t4, t3
+  add t5, t5, t4 
+  
+
+  bgez  t5, if # Vejo se é positivo
+  sub t5, zero, t5 #Faz o absoluto /Complemento para 2, em caso de ser negativo.
+  if: #Se for positivo, a soma divide por quatro
+  li t1, 4 #Divisor do valor absoluto
+  div t5, t5, t1 #Divide o valor absoluto por 4 e obtemos as matrizes Bh e Bv.
+
+
+  sb t5, 0(a0) #Guarda o byte da matriz Bh no buffer horizontalSobel ou o byte da matriz Bv no buffer verticalSobel.
+  addi a0, a0, 1 #Avançar 1 byte no buffer que guarda a convulação.
+  addi a1, a1, 1 #Avançar 1 byte no buffer que guarda a imagem em tons cinzento.
+  addi a3, a3, -1 #Decrementa no tamanho do buffer que recebe os valores da convulação.
+  bgt a3, zero, while2 #Continua até não houver espaço disponível.
+  
+  ret
+  
+  
+ 
+########################################################################################################################################          
+#Função: write_sobelHorizontal_image
+#Descrição: Esta função escreve num ficheiro gerado (.gray), a imagem com a convulação na horizontal, ou seja, 
+#	    a imagem filtrada pelo operador Sobel horizontal.
+#Argumentos: a0 - Path do ficheiro LenaSobelHorizontal.gray (Onde vai guardar o ficheiro filtrado pelo operador
+#		  Sobel horizontal).
+#	     a1 - Buffer da imagem que guarda os valores da convulação na horizontal (horizontalSobel).
+#	     a2 - Tamanho do ficheiro do buffer horizontalSobel. (Tamanho para escrever)
+######################################################################################################################################## 
+  write_sobelHorizontal_image:
+  
+# Abre o ficheiro da path -> foutSobelHorizontal  
+  li   a7, 1024     
+  la   a0, foutSobelHorizontal 
+  li   a1, 1  #Write-only a1 = 1       
+  ecall            
+  mv   s6, a0    
+  
+#Escreve no ficheiro
+  li   a7, 64      
+  la   a1, horizontalSobel
+  li   a2, 262144
+  ecall             
+  
+# Fecha o ficheiro lido
+  li   a7, 57     
+  mv   a0, s6     
+  ecall            
+
+  ret
+  
+  
+  
+ 
+########################################################################################################################################          
+#Função: write_sobelVertical_image
+#Descrição: Esta função escreve num ficheiro gerado (.gray), a imagem com a convulação na vertical, ou seja, 
+#	    a imagem filtrada pelo operador Sobel vertical.
+#Argumentos: a0 - Path do ficheiro LenaSobelVertical.gray (Onde vai guardar o ficheiro filtrado pelo operador
+#		  Sobel vertical).	     
+# 	     a1 - Buffer da imagem que guarda os valores da convulação na vertical (verticalSobel).
+#	     a2 - Tamanho do ficheiro do buffer verticalSobel. (Tamanho para escrever)
+########################################################################################################################################  
+  write_sobelVertical_image:
+  
+# Abre o ficheiro da path -> foutSobelVertital  
+  li   a7, 1024    
+  la   a0, foutSobelVertical
+  li   a1, 1   #Write-only a1 = 1     
+  ecall           
+  mv   s6, a0      
+  
+#Escreve no ficheiro
+  li   a7, 64     
+  la   a1, verticalSobel
+  li   a2, 262144
+  ecall            
+  
+# Fecha o ficheiro lido
+  li   a7, 57       
+  mv   a0, s6      
+  ecall        
+  
+  ret
+  
+ 
+  
+   
+ 
+########################################################################################################################################          
+#Função: contour
+#Descrição: Esta função calcula a imagem final combinando as duas imagens convolvidas.
+#Argumentos: a0 - Buffer que vai receber os valores da combinação das duas imagens convolvidas (imagemContorno). 
+#	     a1 - Buffer da imagem que guarda os valores da convulação na horizontal (horizontalSobel).
+#	     a2 - Buffer da imagem que guarda os valores da convulação na vertical (verticalSobel).
+#	     a3 - Tamanho do buffer que recebe os valores da combinação. (512*512)
+########################################################################################################################################   
+  contour:
+  
+  while3:
+  li t0, 2 #Divisor da soma das matrizes Bh e Bv, vindas da divisão por 4 do valor absoluto.
+  li t1, 255 #Constante para a operação do cálculo da imagem complementar.
+  
+  lb t2, 0(a1) #byte valor absoluto aplicado à matriz horizontal.
+  lb t3, 0(a2) #byte valor absoluto aplicado à matriz vertical.
+  
+  add t2, t2, t3 #Soma das matrizes Bh e Bv. 
+  
+  div t2, t2, t0 #Dividir a soma das matrizes Bh e Bv.
+  
+  sub t2, t1, t2 #Subtrair 255 pela soma das matrizes Bh e Bv, para obter o byte da imagem complementar.
+  
+  sb t2, 0(a0) #Guardar o byte obtido no buffer imagemContorno.
+  addi a0, a0, 1 #Avançar para o próximo byte no buffer imagemContorno.
+  addi a1, a1, 1 #Avançar para o próximo byte no buffer horizontalSobel.
+  addi a2, a2, 1 #Avançar para o próximo byte no buffer verticalSobel.
+  addi a3, a3, -1 #Decrementar o tamanho à medida que é guardado um byte no buffer.
+  bgt a3, zero, while3 #Continuar o ciclo até o buffer estiver cheio.
+  
+ 
+########################################################################################################################################          
+#Função: write_imagemContorno
+#Descrição: Esta função escreve num ficheiro gerado (.gray), a imagem final, com os contornos obtidos combinando os 
+# 	    resultados dos operadores Sobel horizontal e vertical,
+#Argumentos: a0 - Path do ficheiro ImagemContorno.gray (Onde vai guardar o ficheiro final).
+#	     a1 - Buffer da imagem que guarda os valores da imagem final combinando as duas imagens convolvidas (imagemContorno).
+#	     a2 - Tamanho do ficheiro do buffer imagemContorno.
+########################################################################################################################################   
+  write_imagemContorno:
+
+# Abre o ficheiro da path -> foutSobelVertital
+  li   a7, 1024     
+  la   a0, foutContorno
+  li   a1, 1     #Write-only a1 = 1 
+  ecall           
+  mv   s6, a0       
+  
+#Escreve no ficheiro
+  li   a7, 64     
+  la   a1, imagemContorno
+  li   a2, 262144
+  ecall            
+
+# Fecha o ficheiro lido
+  li   a7, 57       
+  mv   a0, s6      
+  ecall             
+
+  ret
+  
+                
+########################################################################################################################################          
+#Função: main
+#Descrição: Esta função é o pilar do programa.Aqui, chama-se todas as outras funções do programa e através da main
+#	    o código pode ser executado.
+########################################################################################################################################                         
+  main:
+  
+  la a0, foutRGB
+  la a1, bufferRGB
+  li a2, 786432
+  jal read_rgb_image
+  
+
+  la a0, bufferRGB
+  la a1, bufferGray
+  li a2, 262144
+  jal rgb_to_gray
+  
+  
+  la a0, foutGray
+  la a1, bufferGray
+  li a2, 262144 
+  jal write_gray_image
+
+ 
+  la a0, horizontalSobel
+  la a1, bufferGray
+  la a2, matrizValoresSobelHorizontal
+  li a3, 262144
+  jal convolution
+  
+  
+  la a0, verticalSobel
+  la a1, bufferGray
+  la a2, matrizValoresSobelVertical
+  li a3, 262144
+  jal convolution
+  
+  
+  la a0, foutSobelHorizontal
+  la a1, horizontalSobel
+  li a2, 262144 
+  jal write_sobelHorizontal_image
+  
+  
+  la a0, foutSobelVertical
+  la a1, verticalSobel
+  li a2, 262144 
+  jal write_sobelVertical_image
+  
+  
+  la a0, imagemContorno
+  la a1, horizontalSobel
+  la a2, verticalSobel
+  li a3, 262144
+  jal contour
+  
+  
+  la a0, foutContorno
+  la a1, imagemContorno
+  li a2, 262144 
+  jal write_imagemContorno
+
+  # Trabalho realizado por: 
+  # Luis Gonçalo nº51817 :)
+  # Pedro Emílio nº52649 :)

@@ -1,0 +1,44 @@
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+
+\title{Citações e Normas Bibliográficas}
+\author{Afonso Hipólito [48781], Luís Carvalho[51817]}
+\date{8 de março de 2023}
+
+\usepackage[sorting=none]{biblatex}
+\bibliography{references}
+%plain text
+\bibliographystyle{plain}
+\PassOptionsToPackage{hyphens}{url}\usepackage{url}
+
+%evita overflow
+\setcounter{biburllcpenalty}{7000}
+\setcounter{biburlucpenalty}{8000}
+
+\begin{document}
+\maketitle
+
+\section{Introdução}
+Neste trabalho utilizámos, como é pedido no enunciado, o \textbf{bibtex} para fazermos as referênias aos artigos mais relevantes que pesquisámos no trabalho 2, da pesquisa bibliográfica. 
+
+\section{Citações}
+
+    % Google Scholar - "bias" + "variance"
+    \cite{citeseerx} \\
+    \cite{yaroslavvb} \\
+    % Yahoo - "Overfitting"
+    \cite{ibmcloud} \\
+    \cite{elitedatascience} \\
+    \cite{geeksover} \\
+    % Yahoo - "bias" + "variance"
+    \cite{medium} \\
+    \cite{medium2} \\ 
+    \cite{analyticsvidhya} \\
+    % Yahoo! - "overfitting" + "bias" + "variance"
+    \cite{towardsdatascience} \\
+    \cite{dustinstansbury}
+    
+
+\printbibliography[title=Referências]
+
+\end{document}

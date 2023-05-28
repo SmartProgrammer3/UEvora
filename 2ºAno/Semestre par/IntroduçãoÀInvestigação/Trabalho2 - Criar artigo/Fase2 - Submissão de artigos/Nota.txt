@@ -1,0 +1,3 @@
+Nota: Esta fase não tem o código em látex, porque ao fazer a versão final do artigo, alterámos o código original, por esse motivo
+não fui a tempo de guardar o código anterior, mas podes basear na versão final, porque apenas alterámos algumas palavras e 
+alguma estrutura do artigo (relativamente às legendas das imagens etc).

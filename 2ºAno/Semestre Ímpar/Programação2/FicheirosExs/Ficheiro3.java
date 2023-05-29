@@ -65,10 +65,9 @@ public class Ficheiro3 {
                 media /= i;
                 String res = min + "|" + max + "|" + String.format("%.3f",media);
                 return res;
-
-
         } catch(Exception e){
             return e.getMessage();
         }
     }
+
 }

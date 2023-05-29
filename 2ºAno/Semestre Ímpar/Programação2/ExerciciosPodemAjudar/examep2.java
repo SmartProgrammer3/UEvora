@@ -1,3 +1,4 @@
+package ExerciciosPodemAjudar;
 public class examep2 {
     public class Intervalo {
         private int inicio;

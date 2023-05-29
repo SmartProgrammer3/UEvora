@@ -1,3 +1,4 @@
+package ExerciciosPodemAjudar;
 public class binarySearchInt{
     int binarySearch(int[] xs, int x) {
         int low = 0; // begin of interval

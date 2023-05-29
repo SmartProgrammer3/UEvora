@@ -1,0 +1,414 @@
+Create table membro (
+    Nome varchar(50),
+    IdMemb char(15) primary key,
+    Pais char(50)
+);
+
+
+Create table autor (
+    Coda char(20) primary key,
+    Nome varchar(50),
+    Pais char(50)
+);
+
+
+Create table livro (
+    ISBN varchar(50) primary key,
+    Titulo char(50)
+);
+
+
+Create table amigo (
+    IdMemb1 varchar(50),
+    IdMemb2 varchar(50),
+    primary key (IdMemb1, IdMemb2),
+    foreign key (IdMemb1) references membro on delete restrict,
+    foreign key (IdMemb2) references membro on delete restrict
+);
+
+
+Create table gosta (
+    IdMemb varchar(50),
+    ISBN char(50),
+    primary key (IdMemb, ISBN),
+    foreign key (IdMemb) references membro on delete restrict,
+    foreign key (ISBN) references livro on delete restrict
+);
+
+
+Create table leu (
+    IdMemb char(50),
+    ISBN char(50),
+    primary key (IdMemb, ISBN),
+    foreign key (IdMemb) references membro on delete restrict,
+    foreign key (ISBN) references livro on delete restrict
+);
+
+
+Create table genero (
+    ISBN varchar(50),
+    Genero char(20),
+    primary key (ISBN, Genero),
+    foreign key (ISBN) references livro on delete restrict
+);
+
+
+Create table autoria (
+    ISBN varchar(50),
+    Coda char(20),
+    primary key (ISBN, Coda),
+    foreign key (ISBN) references livro on delete restrict,
+    foreign key (Coda) references autor on delete restrict
+);
+
+insert into membro values('Joaquim Alberto' , 'af25ji67mn32500' , 'Portugal');               
+insert into membro values('António Maria Juventude' , 'af25ji67mn32501' , 'Portugal'); 
+insert into membro values('Maria das Couves' , 'af25ji67mn32502' , 'Portugal');
+insert into membro values('Moreira Álvares' , 'af25ji67mn32503' , 'Portugal');               
+insert into membro values('Joana Barros' , 'af25ji67mn32504' , 'Portugal');                  
+insert into membro values('Madalena Soares' , 'af25ji67mn32505' , 'Portugal');               
+insert into membro values('Luis Miguel' , 'af25ji67mn32506' , 'Portugal');                   
+insert into membro values('Pedro dos Santos' , 'af25ji67mn32507' , 'Portugal');              
+insert into membro values('Joao Silva' , 'af25ji67mn32508' , 'Portugal');                    
+insert into membro values('Carlos da Gama' , 'af25ji67mn32509' , 'Portugal');               
+insert into membro values('Ana Garcia' , 'af25ji67mn32510' , 'Portugal');                   
+insert into membro values('Ines Sousa' , 'af25ji67mn32511' , 'Portugal');                    
+insert into membro values('Barbara Silva' , 'af25ji67mn32512' , 'Portugal'); 
+insert into membro values('Lourenço Nunes' , 'af25ji67mn32513' , 'Portugal');
+insert into membro values('Teresa Castro' , 'af25ji67mn32514' , 'Portugal');                 
+insert into membro values('Mariana Carvalho' , 'af25ji67mn32515' , 'Portugal');              
+insert into membro values('Tomás Rebelo' , 'af25ji67mn32516' , 'Portugal');                  
+insert into membro values('Miguel Araujo' , 'af25ji67mn32517' , 'Portugal');         
+insert into membro values('Rui Barbosa' , 'af25ji67mn32518' , 'Portugal');                           
+insert into membro values('Nicole' , 'af25ji67mn32519' , 'Portugal');                        
+
+
+insert into livro values('978-3-16-148410-0' , 'Ensaio sobre a Cegueira'); /* José Saramago */ /*Romance*/
+insert into livro values('978-3-16-148410-1' , 'O mar em Casablanca'); /* Francisco José Viegas */ 
+insert into livro values('978-3-16-148410-2' , 'Adeus, Minha Adorada'); /* Policial e Romance - Raymond Chandle*/
+insert into livro values('978-3-16-148410-3' , 'O Rapaz do Caixote de Madeira'); /* Livro com 3 autores -> Leon Leyson e Marilyn J. Harran e Elizabeth B. Leyson */
+insert into livro values('978-3-16-148410-4' , 'A luz de Pequim'); /* Francisco José Viegas */
+insert into livro values('978-3-16-148410-5' , 'Bom dia, Verônica'); /* Livro com 2 autores -> Ilana Casoy e Raphael Montes*/
+insert into livro values('978-3-16-148410-6' , 'Memorial do Convento'); /* José Saramago */ /*Romance*/
+insert into livro values('978-3-16-148410-7' , 'As Crónicas'); /* Lobo Antunes */
+insert into livro values('978-3-16-148410-8' , 'O Sono Eterno'); /*Policial e Romance - Raymond Chandle*/ /*Romance*/
+insert into livro values('978-3-16-148410-9' , 'As Naus: romance'); /* Lobo Antunes */ /*Romance*/
+insert into livro values('978-3-16-148411-0' , 'O mar em Casablanca'); /* Francisco José Viegas */
+
+
+insert into autor values('0000-0000-0000-0000' , 'Raymond Chandle', 'USA');
+insert into autor values('0000-0000-0000-0001' , 'Jose Saramago', 'Portugal');
+insert into autor values('0000-0000-0000-0002' , 'Francisco José Viegas', 'Portugal');
+insert into autor values('0000-0000-0000-0003' , 'Raphael Montes', 'Brasil');
+insert into autor values('0000-0000-0000-0004' , 'Lobo Antunes', 'Portugal');
+insert into autor values('0000-0000-0000-0005' , 'Ilana Casoy', 'Brasil');
+insert into autor values('0000-0000-0000-0006' , 'Leon Leyson', 'Polónia');
+insert into autor values('0000-0000-0000-0007' , 'Marilyn J. Harran', 'USA');
+insert into autor values('0000-0000-0000-0008' , 'Elizabeth B. Leyson', 'USA');
+
+
+insert into autoria values('978-3-16-148410-0'  , '0000-0000-0000-0001');
+
+insert into autoria values('978-3-16-148410-1'  , '0000-0000-0000-0002');
+
+insert into autoria values('978-3-16-148410-2'  , '0000-0000-0000-0000');
+
+insert into autoria values('978-3-16-148410-3'  , '0000-0000-0000-0006');
+insert into autoria values('978-3-16-148410-3'  , '0000-0000-0000-0007');
+insert into autoria values('978-3-16-148410-3'  , '0000-0000-0000-0008');
+
+insert into autoria values('978-3-16-148410-4'  , '0000-0000-0000-0002');
+
+insert into autoria values('978-3-16-148410-5'  , '0000-0000-0000-0003');
+insert into autoria values('978-3-16-148410-5'  , '0000-0000-0000-0005');
+
+insert into autoria values('978-3-16-148410-6'  , '0000-0000-0000-0001');
+
+insert into autoria values('978-3-16-148410-7'  , '0000-0000-0000-0004');
+
+insert into autoria values('978-3-16-148410-8'  , '0000-0000-0000-0000');
+
+insert into autoria values('978-3-16-148410-9'  , '0000-0000-0000-0004');
+
+insert into autoria values('978-3-16-148411-0'  , '0000-0000-0000-0002');
+
+
+insert into genero values('978-3-16-148410-0'  , 'policial');
+insert into genero values('978-3-16-148410-0'  , 'romance');
+
+insert into genero values('978-3-16-148410-1'  , 'policial');
+
+insert into genero values('978-3-16-148410-2'  , 'policial');
+insert into genero values('978-3-16-148410-2'  , 'romance');
+
+insert into genero values('978-3-16-148410-3'  , 'policial');
+insert into genero values('978-3-16-148410-3'  , 'Biografia');
+
+insert into genero values('978-3-16-148410-4'  , 'policial');
+insert into genero values('978-3-16-148410-4'  , 'mistério');
+
+insert into genero values('978-3-16-148410-5'  , 'policial');
+insert into genero values('978-3-16-148410-5'  , 'mistério');
+insert into genero values('978-3-16-148410-5'  , 'drama');
+
+insert into genero values('978-3-16-148410-6'  , 'policial');
+insert into genero values('978-3-16-148410-6'  , 'romance');
+
+insert into genero values('978-3-16-148410-7'  , 'policial');
+
+insert into genero values('978-3-16-148410-8'  , 'policial');
+insert into genero values('978-3-16-148410-8'  , 'romance');
+insert into genero values('978-3-16-148410-8'  , 'mistério');
+
+insert into genero values('978-3-16-148410-9'  , 'policial');
+insert into genero values('978-3-16-148410-9'  , 'romance');
+
+insert into genero values('978-3-16-148411-0'  , 'policial');
+insert into genero values('978-3-16-148411-0'  , 'mistério');
+
+
+insert into amigo values('af25ji67mn32519' , 'af25ji67mn32500');
+insert into amigo values('af25ji67mn32519' , 'af25ji67mn32501');
+insert into amigo values('af25ji67mn32519' , 'af25ji67mn32502');
+insert into amigo values('af25ji67mn32519' , 'af25ji67mn32503');
+insert into amigo values('af25ji67mn32519' , 'af25ji67mn32504');
+insert into amigo values('af25ji67mn32519' , 'af25ji67mn32505');
+insert into amigo values('af25ji67mn32519' , 'af25ji67mn32506');
+insert into amigo values('af25ji67mn32519' , 'af25ji67mn32507');
+insert into amigo values('af25ji67mn32519' , 'af25ji67mn32508');
+insert into amigo values('af25ji67mn32519' , 'af25ji67mn32509');
+insert into amigo values('af25ji67mn32519' , 'af25ji67mn32510');
+insert into amigo values('af25ji67mn32519' , 'af25ji67mn32511');
+insert into amigo values('af25ji67mn32519' , 'af25ji67mn32512');
+insert into amigo values('af25ji67mn32519' , 'af25ji67mn32513');
+insert into amigo values('af25ji67mn32519' , 'af25ji67mn32514');
+insert into amigo values('af25ji67mn32519' , 'af25ji67mn32515');
+insert into amigo values('af25ji67mn32519' , 'af25ji67mn32516');
+insert into amigo values('af25ji67mn32519' , 'af25ji67mn32517');
+insert into amigo values('af25ji67mn32519' , 'af25ji67mn32518');
+
+
+insert into amigo values('af25ji67mn32514' , 'af25ji67mn32500');
+insert into amigo values('af25ji67mn32514' , 'af25ji67mn32501');
+insert into amigo values('af25ji67mn32514' , 'af25ji67mn32502');
+
+insert into amigo values('af25ji67mn32516' , 'af25ji67mn32503');
+insert into amigo values('af25ji67mn32516' , 'af25ji67mn32504');
+insert into amigo values('af25ji67mn32516' , 'af25ji67mn32506');
+
+insert into amigo values('af25ji67mn32511' , 'af25ji67mn32503');
+insert into amigo values('af25ji67mn32511' , 'af25ji67mn32510');
+insert into amigo values('af25ji67mn32511' , 'af25ji67mn32509');
+
+insert into amigo values('af25ji67mn32503' , 'af25ji67mn32501');
+insert into amigo values('af25ji67mn32503' , 'af25ji67mn32504');
+insert into amigo values('af25ji67mn32503' , 'af25ji67mn32508');
+
+insert into amigo values('af25ji67mn32501' , 'af25ji67mn32505');
+insert into amigo values('af25ji67mn32501' , 'af25ji67mn32512');
+insert into amigo values('af25ji67mn32501' , 'af25ji67mn32508');
+
+
+insert into gosta values('af25ji67mn32500' , '978-3-16-148410-3' );
+insert into gosta values('af25ji67mn32501' , '978-3-16-148410-9');
+insert into gosta values('af25ji67mn32502' , '978-3-16-148410-2');
+insert into gosta values('af25ji67mn32503' , '978-3-16-148410-7');
+insert into gosta values('af25ji67mn32504' , '978-3-16-148410-8'); 
+insert into gosta values('af25ji67mn32505' , '978-3-16-148410-4'); 
+insert into gosta values('af25ji67mn32506' , '978-3-16-148410-9');
+insert into gosta values('af25ji67mn32507' , '978-3-16-148410-5');
+insert into gosta values('af25ji67mn32508' , '978-3-16-148410-1'); 
+insert into gosta values('af25ji67mn32509' , '978-3-16-148410-0');
+insert into gosta values('af25ji67mn32510' , '978-3-16-148410-2');
+insert into gosta values('af25ji67mn32511' , '978-3-16-148410-5');
+insert into gosta values('af25ji67mn32512' , '978-3-16-148410-8');
+insert into gosta values('af25ji67mn32513' , '978-3-16-148410-6');
+insert into gosta values('af25ji67mn32514' , '978-3-16-148410-3');
+insert into gosta values('af25ji67mn32515' , '978-3-16-148410-0');
+insert into gosta values('af25ji67mn32516' , '978-3-16-148410-8');
+insert into gosta values('af25ji67mn32517' , '978-3-16-148410-7');
+insert into gosta values('af25ji67mn32518' , '978-3-16-148410-9');
+insert into gosta values('af25ji67mn32519' , '978-3-16-148410-4'); 
+insert into gosta values('af25ji67mn32502' , '978-3-16-148410-9');
+insert into gosta values('af25ji67mn32502' , '978-3-16-148410-4'); 
+insert into gosta values('af25ji67mn32502' , '978-3-16-148410-3');
+insert into gosta values('af25ji67mn32502' , '978-3-16-148410-7');
+insert into gosta values('af25ji67mn32518' , '978-3-16-148410-6');
+insert into gosta values('af25ji67mn32500' , '978-3-16-148410-0' );
+
+insert into gosta values('af25ji67mn32504' , '978-3-16-148410-0'); 
+insert into gosta values('af25ji67mn32504' , '978-3-16-148410-6');
+insert into gosta values('af25ji67mn32508' , '978-3-16-148410-0'); 
+insert into gosta values('af25ji67mn32508' , '978-3-16-148410-6');
+
+insert into gosta values('af25ji67mn32513' , '978-3-16-148410-1'); 
+insert into gosta values('af25ji67mn32513' , '978-3-16-148410-4'); 
+insert into gosta values('af25ji67mn32513' , '978-3-16-148411-0'); 
+insert into gosta values('af25ji67mn32518' , '978-3-16-148410-1'); 
+insert into gosta values('af25ji67mn32518' , '978-3-16-148410-4');
+insert into gosta values('af25ji67mn32518' , '978-3-16-148411-0');
+insert into gosta values('af25ji67mn32500' , '978-3-16-148410-1'); 
+insert into gosta values('af25ji67mn32500' , '978-3-16-148410-4');
+insert into gosta values('af25ji67mn32500' , '978-3-16-148411-0');
+
+
+insert into leu values('af25ji67mn32500' , '978-3-16-148410-7' );
+insert into leu values('af25ji67mn32500' , '978-3-16-148410-1' );
+insert into leu values('af25ji67mn32500' , '978-3-16-148410-4' );
+insert into leu values('af25ji67mn32500' , '978-3-16-148410-5' );
+insert into leu values('af25ji67mn32500' , '978-3-16-148410-0' );
+insert into leu values('af25ji67mn32500' , '978-3-16-148411-0' );
+insert into leu values('af25ji67mn32500' , '978-3-16-148410-3' );
+
+insert into leu values('af25ji67mn32501' , '978-3-16-148410-2' );
+insert into leu values('af25ji67mn32501' , '978-3-16-148410-5' );
+insert into leu values('af25ji67mn32501' , '978-3-16-148410-4' );
+insert into leu values('af25ji67mn32501' , '978-3-16-148410-8' );
+insert into leu values('af25ji67mn32501' , '978-3-16-148410-9' );
+
+insert into leu values('af25ji67mn32502' , '978-3-16-148410-9' );
+insert into leu values('af25ji67mn32502' , '978-3-16-148410-4' );
+insert into leu values('af25ji67mn32502' , '978-3-16-148410-3' );
+insert into leu values('af25ji67mn32502' , '978-3-16-148410-7' );
+insert into leu values('af25ji67mn32502' , '978-3-16-148410-2' );
+
+insert into leu values('af25ji67mn32503' , '978-3-16-148410-7' );
+insert into leu values('af25ji67mn32503' , '978-3-16-148410-2' );
+insert into leu values('af25ji67mn32503' , '978-3-16-148410-6' );
+insert into leu values('af25ji67mn32503' , '978-3-16-148411-0' );
+insert into leu values('af25ji67mn32503' , '978-3-16-148410-0' );
+
+insert into leu values('af25ji67mn32504' , '978-3-16-148410-2' );
+insert into leu values('af25ji67mn32504' , '978-3-16-148410-1' );
+insert into leu values('af25ji67mn32504' , '978-3-16-148410-4' );
+insert into leu values('af25ji67mn32504' , '978-3-16-148410-5' );
+insert into leu values('af25ji67mn32504' , '978-3-16-148410-7' );
+insert into leu values('af25ji67mn32504' , '978-3-16-148410-0' );
+insert into leu values('af25ji67mn32504' , '978-3-16-148410-6' );
+insert into leu values('af25ji67mn32504' , '978-3-16-148410-9' );
+insert into leu values('af25ji67mn32504' , '978-3-16-148410-8' );
+
+insert into leu values('af25ji67mn32505' , '978-3-16-148410-4' );
+insert into leu values('af25ji67mn32505' , '978-3-16-148410-6' );
+insert into leu values('af25ji67mn32505' , '978-3-16-148410-5' );
+
+insert into leu values('af25ji67mn32506' , '978-3-16-148410-8' );
+insert into leu values('af25ji67mn32506' , '978-3-16-148410-2' );
+insert into leu values('af25ji67mn32506' , '978-3-16-148410-9' );
+insert into leu values('af25ji67mn32506' , '978-3-16-148410-7' );
+insert into leu values('af25ji67mn32506' , '978-3-16-148410-6' );
+
+insert into leu values('af25ji67mn32507' , '978-3-16-148410-0' );
+insert into leu values('af25ji67mn32507' , '978-3-16-148410-5' );
+insert into leu values('af25ji67mn32507' , '978-3-16-148410-1' );
+insert into leu values('af25ji67mn32507' , '978-3-16-148410-2' );
+insert into leu values('af25ji67mn32507' , '978-3-16-148411-0' );
+
+insert into leu values('af25ji67mn32508' , '978-3-16-148410-3' );
+insert into leu values('af25ji67mn32508' , '978-3-16-148410-7' );
+insert into leu values('af25ji67mn32508' , '978-3-16-148410-0' );
+insert into leu values('af25ji67mn32508' , '978-3-16-148410-6' );
+insert into leu values('af25ji67mn32508' , '978-3-16-148410-1' );
+
+insert into leu values('af25ji67mn32509' , '978-3-16-148410-5' );
+insert into leu values('af25ji67mn32509' , '978-3-16-148410-2' );
+insert into leu values('af25ji67mn32509' , '978-3-16-148410-1' );
+insert into leu values('af25ji67mn32509' , '978-3-16-148410-9' );
+insert into leu values('af25ji67mn32509' , '978-3-16-148410-0' );
+
+insert into leu values('af25ji67mn32510' , '978-3-16-148410-8' );
+insert into leu values('af25ji67mn32510' , '978-3-16-148410-7' );
+insert into leu values('af25ji67mn32510' , '978-3-16-148410-3' );
+insert into leu values('af25ji67mn32510' , '978-3-16-148411-0' );
+insert into leu values('af25ji67mn32510' , '978-3-16-148410-2' );
+
+insert into leu values('af25ji67mn32511' , '978-3-16-148410-6' );
+insert into leu values('af25ji67mn32511' , '978-3-16-148410-4' );
+insert into leu values('af25ji67mn32511' , '978-3-16-148410-9' );
+insert into leu values('af25ji67mn32511' , '978-3-16-148410-0' );
+insert into leu values('af25ji67mn32511' , '978-3-16-148410-8' );
+
+insert into leu values('af25ji67mn32512' , '978-3-16-148410-1' );
+insert into leu values('af25ji67mn32512' , '978-3-16-148410-5' );
+insert into leu values('af25ji67mn32512' , '978-3-16-148410-7' );
+insert into leu values('af25ji67mn32512' , '978-3-16-148410-2' );
+insert into leu values('af25ji67mn32512' , '978-3-16-148410-9' );
+insert into leu values('af25ji67mn32512' , '978-3-16-148411-0' );
+insert into leu values('af25ji67mn32512' , '978-3-16-148410-8' );
+
+insert into leu values('af25ji67mn32513' , '978-3-16-148410-3' );
+insert into leu values('af25ji67mn32513' , '978-3-16-148410-2' );
+insert into leu values('af25ji67mn32513' , '978-3-16-148410-6' );
+insert into leu values('af25ji67mn32513' , '978-3-16-148410-1' );
+insert into leu values('af25ji67mn32513' , '978-3-16-148410-4' );
+insert into leu values('af25ji67mn32513' , '978-3-16-148411-0' );
+
+insert into leu values('af25ji67mn32514' , '978-3-16-148410-2' );
+insert into leu values('af25ji67mn32514' , '978-3-16-148410-0' );
+insert into leu values('af25ji67mn32514' , '978-3-16-148410-3' );
+insert into leu values('af25ji67mn32514' , '978-3-16-148411-0' );
+insert into leu values('af25ji67mn32514' , '978-3-16-148410-7' );
+insert into leu values('af25ji67mn32514' , '978-3-16-148410-9' );
+
+insert into leu values('af25ji67mn32515' , '978-3-16-148410-7' );
+insert into leu values('af25ji67mn32515' , '978-3-16-148410-9' );
+insert into leu values('af25ji67mn32515' , '978-3-16-148410-6' );
+insert into leu values('af25ji67mn32515' , '978-3-16-148410-0' );
+insert into leu values('af25ji67mn32515' , '978-3-16-148410-1' );
+insert into leu values('af25ji67mn32515' , '978-3-16-148410-4' );
+
+insert into leu values('af25ji67mn32516' , '978-3-16-148410-5' );
+insert into leu values('af25ji67mn32516' , '978-3-16-148410-3' );
+insert into leu values('af25ji67mn32516' , '978-3-16-148410-2' );
+insert into leu values('af25ji67mn32516' , '978-3-16-148410-0' );
+insert into leu values('af25ji67mn32516' , '978-3-16-148410-8' );
+
+insert into leu values('af25ji67mn32517' , '978-3-16-148410-7' );
+insert into leu values('af25ji67mn32517' , '978-3-16-148410-4' );
+insert into leu values('af25ji67mn32517' , '978-3-16-148410-2' );
+insert into leu values('af25ji67mn32517' , '978-3-16-148411-0' );
+
+insert into leu values('af25ji67mn32518' , '978-3-16-148410-8' );
+insert into leu values('af25ji67mn32518' , '978-3-16-148410-2' );
+insert into leu values('af25ji67mn32518' , '978-3-16-148410-6' );
+insert into leu values('af25ji67mn32518' , '978-3-16-148410-4' );
+insert into leu values('af25ji67mn32518' , '978-3-16-148410-3' );
+insert into leu values('af25ji67mn32518' , '978-3-16-148410-5' );
+insert into leu values('af25ji67mn32518' , '978-3-16-148411-0' );
+insert into leu values('af25ji67mn32518' , '978-3-16-148410-9' );
+
+insert into leu values('af25ji67mn32519' , '978-3-16-148410-6' );
+insert into leu values('af25ji67mn32519' , '978-3-16-148410-1' );
+insert into leu values('af25ji67mn32519' , '978-3-16-148410-8' );
+insert into leu values('af25ji67mn32519' , '978-3-16-148410-9' );
+insert into leu values('af25ji67mn32519' , '978-3-16-148411-0' );
+insert into leu values('af25ji67mn32519' , '978-3-16-148410-4' );
+
+
+
+insert into amigo values('oleitor' , 'af25ji67mn32500');
+insert into amigo values('oleitor' , 'af25ji67mn32501');
+insert into amigo values('oleitor' , 'af25ji67mn32506');
+insert into amigo values('oleitor' , 'af25ji67mn32508');
+insert into amigo values('oleitor' , 'af25ji67mn32512');
+insert into amigo values('oleitor' , 'af25ji67mn32513');
+insert into amigo values('oleitor' , 'af25ji67mn32514');
+insert into amigo values('oleitor' , 'af25ji67mn32515');
+insert into amigo values('oleitor' , 'af25ji67mn32518');
+insert into amigo values('oleitor' , 'af25ji67mn32519');
+
+
+insert into gosta values('oleitor' , '978-3-16-148410-9');
+insert into gosta values('oleitor' , '978-3-16-148411-0'); 
+insert into gosta values('oleitor' , '978-3-16-148410-4');
+insert into gosta values('oleitor' , '978-3-16-148410-8');
+insert into gosta values('oleitor' , '978-3-16-148410-6');
+
+insert into leu values('oleitor' , '978-3-16-148410-9');
+insert into leu values('oleitor' , '978-3-16-148410-0');
+insert into leu values('oleitor' , '978-3-16-148411-0');
+insert into leu values('oleitor' , '978-3-16-148410-6');
+insert into leu values('oleitor' , '978-3-16-148410-3');
+insert into leu values('oleitor' , '978-3-16-148410-4');
+insert into leu values('oleitor' , '978-3-16-148410-8');
+insert into leu values('oleitor' , '978-3-16-148410-1');

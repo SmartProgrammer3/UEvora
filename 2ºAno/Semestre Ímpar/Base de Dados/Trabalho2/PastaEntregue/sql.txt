@@ -1,0 +1,391 @@
+Create table Cliente(
+NomeCliente varchar(50) primary key,
+Adesão char(20)
+);
+
+Create table Mensalidade(
+NomeCliente varchar(50),
+valorMensalidade int(20),
+dataDePagamento char(30),
+primary key (NomeCliente, valorMensalidade, dataDePagamento),
+foreign key (NomeCliente) references Cliente on delete restrict,
+);
+
+Create table CartãoCrédito(
+TitularDoCartão varchar(50),
+NúmeroCartão int(20),
+DataExpiração char(20),
+primary key (TitularDoCartão, NúmeroCartão)
+);
+
+Create table Morada(
+Rua varchar(50),
+Cidade char(50),
+País char(50),
+CódigoPostal int(20),
+primary key (Rua, Cidade) 
+);
+
+Create table Login(
+NomeDeUtilizador varchar(50) primary key,
+PalavraPasse char(20)
+);
+
+Create table Filmes(
+url_ varchar(50) primary key,
+DataDeEstreia char(20),
+ResumoDoFilme char(20),
+LocalDoFilme char(20),
+);
+
+Create table Título(
+EmLinguaOriginal varchar(50) primary key,
+EmPortuguês varchar(50),
+Eminglês varchar(50)
+);
+
+Create table Língua(
+Original varchar(50) primary key,
+Dublado varchar(50),
+);
+
+Create table Biografia(
+Nome varchar(50) primary key,
+Nacionalidade varchar(50),
+ListaPrémios varchar(50),
+DataNascimento varchar(50),
+);
+
+Create table Diretores(
+NomeDiretor varchar(50) primary key,
+);
+
+Create table Atores(
+NomeAtor varchar(50) primary key,
+);
+
+Create table Prémios (
+TipoDoPrémio varchar(50),
+DataRecebido varchar(50),
+DataNomeado varchar(50),
+primary key (TipoDoPrémio, DataRecebido)
+);
+
+Create table Cliente_Mensalidade  (
+NomeCliente char(50),
+valorMensalidade int(50),
+dataDePagamento varchar(50),
+primary key (NomeCliente, valorMensalidade, dataDePagamento)
+foreign key (NomeCliente) references Cliente on delete restrict,
+);
+
+Create table Cliente_Login (
+NomeCliente char(50),
+NomeDeUtilizador varchar(50),
+primary key (NomeCliente, NomeDeUtilizador)
+foreign key (NomeCliente) references Cliente on delete restrict,
+foreign key (NomeDeUtilizador) references Login on delete restrict,
+);
+
+Create table Cliente_Morada (
+NomeCliente char(50),
+Rua varchar(50),
+Cidade varchar(50),
+primary key (NomeCliente, Rua)
+foreign key (NomeCliente) references Cliente on delete restrict,
+foreign key (Rua) references Morada on delete restrict
+);
+
+Create table Cliente_CartãoCrédito  (
+NomeCliente char(50),
+TitularDoCartão varchar(50),
+NúmeroCartão varchar(50),
+primary key (NomeCliente, TitularDoCartão),
+foreign key (NomeCliente) references Cliente on delete restrict,
+foreign key (TitularDoCartão) references CartãoCrédito  on delete restrict
+);
+
+Create table Cliente_Filmes_Historial (
+NomeCliente char(50),
+url_ varchar(50),
+DataVisualização varchar(50),
+primary key (NomeCliente, url_),
+foreign key (NomeCliente) references Cliente on delete restrict,
+foreign key (url_ ) references Filmes  on delete restrict
+);
+
+Create table Género (
+url_ varchar(50),
+NomeGénero char(50),
+primary key (url_, NomeGénero),
+foreign key (url_ ) references Filmes  on delete restrict
+);
+
+Create table Filmes_Título  (
+url_ varchar(50),
+EmLinguaOriginal char(50),
+EmPortugûes char(50),
+Eminglês char(50),
+primary key (url_, EmLinguaOriginal),
+foreign key (url_ ) references Filmes  on delete restrict
+);
+
+Create table Filmes_Língua  (
+url_ varchar(50),
+Original char(50),
+Dublado char(50),
+primary key (url_, Original),
+foreign key (url_ ) references Filmes  on delete restrict
+);
+
+Create table Filmes_Atores  (
+url_ varchar(50),
+NomeAtor char(50),
+primary key (url_, NomeAtor),
+foreign key (url_ ) references Filmes  on delete restrict,
+foreign key (NomeAtor ) references Atores  on delete restrict
+);
+
+Create table Filmes_Diretores  (
+url_ varchar(50),
+nomeDiretores char(50),
+primary key (url_, nomeDiretores),
+foreign key (url_ ) references Filmes  on delete restrict,
+foreign key (nomeDiretores ) references Diretores  on delete restrict
+);
+
+Create table Filmes_Prémios  (
+url_ varchar(50),
+tipoDoPrémio char(50),
+DataRecebido char(50),
+primary key (url_, tipoDoPrémio),
+foreign key (url_ ) references Filmes  on delete restrict,
+foreign key (tipoDoPrémio ) references Prémios  on delete restrict
+);
+
+Create table Atores_Prémios  (
+NomeAtor varchar(50),
+tipoDoPrémio char(50),
+DataRecebido char(50),
+primary key (NomeAtor, tipoDoPrémio),
+foreign key (NomeAtor ) references Atores  on delete restrict,
+foreign key (tipoDoPrémio ) references Prémios  on delete restrict
+);
+
+Create table Diretores_Prémios  (
+nomeDiretores varchar(50),
+tipoDoPrémio char(50),
+DataRecebido char(50),
+primary key (nomeDiretores, tipoDoPrémio),
+foreign key (nomeDiretores ) references Diretores  on delete restrict,
+foreign key (tipoDoPrémio ) references Prémios  on delete restrict
+);
+
+insert into Filmes values('https://www.imdb.com/title/tt3581920/?ref_=hm_fanfav_tt_i_1_pd_fp1_r' , '2021-02-02' , 'After a global pandemic destroys civilization.', 'England');               
+insert into Filmes values('https://www.imdb.com/title/tt9764362/?ref_=hm_fanfav_tt_i_2_pd_fp1_r' , '2023-02-07' , 'A young couple travels to a remote island.', 'France' ); 
+insert into Filmes values('https://www.imdb.com/title/tt11564570/?ref_=hm_fanfav_tt_i_3_pd_fp1_r' , '2023-05-30' , 'Famed Southern detective Benoit Blanc travels to Greece for his latest case.', 'France' );
+insert into Filmes values('https://www.imdb.com/title/tt1630029/?ref_=hm_fanfav_tt_i_4_pd_fp1_r' , '2021-08-07' , 'Jake Sully lives with his newfound family.', 'England');               
+insert into Filmes values('https://www.imdb.com/title/tt13131232/?ref_=hm_fanfav_tt_i_5_pd_fp1_r' , '2023-10-02' , 'In the 1970s, an undercover Indian spy takes on a deadly mission.', 'USA');                  
+insert into Filmes values('https://www.imdb.com/title/tt3915174/?ref_=hm_fanfav_tt_i_7_pd_fp1_r' , '2023-12-28' , 'When Puss in Boots discovers that his passion for adventure.', 'USA');               
+insert into Filmes values('https://www.imdb.com/title/tt11813216/?ref_=hm_fanfav_tt_i_8_pd_fp1_r' , '2023-10-10' , 'Two lifelong friends find themselves at an impasse.', 'England');                   
+insert into Filmes values('https://www.imdb.com/title/tt10640346/?ref_=hm_fanfav_tt_i_9_pd_fp1_r' , '2023-10-09' , 'A tale of outsized ambition and outrageous excess.', 'Germany');              
+insert into Filmes values('https://www.imdb.com/title/tt1745960/?ref_=hm_fanfav_tt_i_10_pd_fp1_r' , '2023-07-17' , 'After thirty years, Maverick is still pushing .', 'Canada');                    
+insert into Filmes values('https://www.imdb.com/title/tt6710474/?ref_=hm_fanfav_tt_i_11_pd_fp1_r' , '2023-02-02' , 'A middle-aged Chinese immigrant is swept up into an insane adventure.', 'China');      
+
+
+insert into Título values('https://www.imdb.com/title/tt3581920/?ref_=hm_fanfav_tt_i_1_pd_fp1_r' , 'The Last of Us' , 'O último de nós.', 'The Last of Us');               
+insert into Título values('https://www.imdb.com/title/tt9764362/?ref_=hm_fanfav_tt_i_2_pd_fp1_r' , 'O Menu' , 'O Menu', 'O Menu' ); 
+insert into Título values('https://www.imdb.com/title/tt11564570/?ref_=hm_fanfav_tt_i_3_pd_fp1_r' , 'Glass Onion: One Mistery Knives Out' , 'Glass Onion: Um Mistério Knives Out', 'Glass Onion: Um Mistério Knives Out' );
+insert into Título values('https://www.imdb.com/title/tt1630029/?ref_=hm_fanfav_tt_i_4_pd_fp1_r' , 'Avatar' , 'Avatar: O Caminho da Água', 'Avatar');               
+insert into Título values('https://www.imdb.com/title/tt13131232/?ref_=hm_fanfav_tt_i_5_pd_fp1_r' , 'Mission Majnu' , 'IMission Majnu', 'Mission Majnu');                  
+insert into Título values('https://www.imdb.com/title/tt3915174/?ref_=hm_fanfav_tt_i_7_pd_fp1_r' , 'Puss in boots: the last wish' , 'O Gato das Botas: O Último Desejo', 'Puss in boots: the last wish');               
+insert into Título values('https://www.imdb.com/title/tt11813216/?ref_=hm_fanfav_tt_i_8_pd_fp1_r' , 'The Spirits of Inisherin' , 'Os Espíritos de Inisherin', 'The Spirits of Inisherin');                   
+insert into Título values('https://www.imdb.com/title/tt10640346/?ref_=hm_fanfav_tt_i_9_pd_fp1_r' , 'Babylon' , 'Babylon', 'Babylon');              
+insert into Título values('https://www.imdb.com/title/tt1745960/?ref_=hm_fanfav_tt_i_10_pd_fp1_r' , 'Top Gun: Maverick' , 'Top Gun: Maverick', 'Top Gun: Maverick');                    
+insert into Título values('https://www.imdb.com/title/tt6710474/?ref_=hm_fanfav_tt_i_11_pd_fp1_r' , 'Everything Everywhere at the Same Time' , 'Tudo em Todo o Lado ao Mesmo Tempo', 'Everything Everywhere at the Same Time');         
+
+
+insert into Língua values('https://www.imdb.com/title/tt3581920/?ref_=hm_fanfav_tt_i_1_pd_fp1_r' , 'Inglês' , 'Português');               
+insert into Língua values('https://www.imdb.com/title/tt9764362/?ref_=hm_fanfav_tt_i_2_pd_fp1_r' , 'Francês' , 'Português' ); 
+insert into Língua values('https://www.imdb.com/title/tt11564570/?ref_=hm_fanfav_tt_i_3_pd_fp1_r' , 'Francês' , 'Português' );
+insert into Língua values('https://www.imdb.com/title/tt1630029/?ref_=hm_fanfav_tt_i_4_pd_fp1_r' , 'Inglês' , 'Português');               
+insert into Língua values('https://www.imdb.com/title/tt13131232/?ref_=hm_fanfav_tt_i_5_pd_fp1_r' , 'Americano' , 'Português');                  
+insert into Língua values('https://www.imdb.com/title/tt3915174/?ref_=hm_fanfav_tt_i_7_pd_fp1_r' , 'Americano' , 'Português');               
+insert into Língua values('https://www.imdb.com/title/tt11813216/?ref_=hm_fanfav_tt_i_8_pd_fp1_r' , 'Inglês' , 'Português');                   
+insert into Língua values('https://www.imdb.com/title/tt10640346/?ref_=hm_fanfav_tt_i_9_pd_fp1_r' , 'Alemão' , 'Português');              
+insert into Língua values('https://www.imdb.com/title/tt1745960/?ref_=hm_fanfav_tt_i_10_pd_fp1_r' , 'Canadiano' , 'Português');                    
+insert into Língua values('https://www.imdb.com/title/tt6710474/?ref_=hm_fanfav_tt_i_11_pd_fp1_r' , 'Inglês' , 'Português');         
+
+
+insert into Género values('https://www.imdb.com/title/tt3581920/?ref_=hm_fanfav_tt_i_1_pd_fp1_r' , 'Mistério');     
+insert into Género values('https://www.imdb.com/title/tt3581920/?ref_=hm_fanfav_tt_i_1_pd_fp1_r' , 'Ação');            
+insert into Género values('https://www.imdb.com/title/tt9764362/?ref_=hm_fanfav_tt_i_2_pd_fp1_r' , 'cartoon' ); 
+insert into Género values('https://www.imdb.com/title/tt9764362/?ref_=hm_fanfav_tt_i_2_pd_fp1_r' , 'terror' ); 
+insert into Género values('https://www.imdb.com/title/tt9764362/?ref_=hm_fanfav_tt_i_2_pd_fp1_r' , 'Thriller' ); 
+insert into Género values('https://www.imdb.com/title/tt11564570/?ref_=hm_fanfav_tt_i_3_pd_fp1_r' , 'terror' );
+insert into Género values('https://www.imdb.com/title/tt1630029/?ref_=hm_fanfav_tt_i_4_pd_fp1_r' , 'Mistério');         
+insert into Género values('https://www.imdb.com/title/tt1630029/?ref_=hm_fanfav_tt_i_4_pd_fp1_r' , 'Comédia');               
+insert into Género values('https://www.imdb.com/title/tt1630029/?ref_=hm_fanfav_tt_i_4_pd_fp1_r' , 'Amor');                     
+insert into Género values('https://www.imdb.com/title/tt13131232/?ref_=hm_fanfav_tt_i_5_pd_fp1_r' , 'Amor');            
+insert into Género values('https://www.imdb.com/title/tt13131232/?ref_=hm_fanfav_tt_i_5_pd_fp1_r' , 'Terror');             
+insert into Género values('https://www.imdb.com/title/tt3915174/?ref_=hm_fanfav_tt_i_7_pd_fp1_r' , 'Mistério');         
+insert into Género values('https://www.imdb.com/title/tt3915174/?ref_=hm_fanfav_tt_i_7_pd_fp1_r' , 'Amor');               
+insert into Género values('https://www.imdb.com/title/tt3915174/?ref_=hm_fanfav_tt_i_7_pd_fp1_r' , 'Ação');                     
+insert into Género values('https://www.imdb.com/title/tt11813216/?ref_=hm_fanfav_tt_i_8_pd_fp1_r' , 'Terror');            
+insert into Género values('https://www.imdb.com/title/tt11813216/?ref_=hm_fanfav_tt_i_8_pd_fp1_r' , 'Thriller');                  
+insert into Género values('https://www.imdb.com/title/tt10640346/?ref_=hm_fanfav_tt_i_9_pd_fp1_r' , 'Thriller');  
+insert into Género values('https://www.imdb.com/title/tt10640346/?ref_=hm_fanfav_tt_i_9_pd_fp1_r' , 'policial');                      
+insert into Género values('https://www.imdb.com/title/tt1745960/?ref_=hm_fanfav_tt_i_10_pd_fp1_r' , 'Misterio');                    
+insert into Género values('https://www.imdb.com/title/tt6710474/?ref_=hm_fanfav_tt_i_11_pd_fp1_r' , 'Comédia');         
+
+
+insert into Cliente values('Luis Carvalho' , '26-09-2022');                    
+insert into Cliente values('Gonçalo Prazeres' , '15-08-2022');      
+
+
+insert into Mensalidade values('Luis Carvalho' , '49,99', '26-09-2022');     
+insert into Mensalidade values('Luis Carvalho' , '49,99', '26-10-2022');     
+insert into Mensalidade values('Luis Carvalho' , '49,99', '26-11-2022');     
+insert into Mensalidade values('Luis Carvalho' , '49,99', '26-12-2022');                    
+insert into Mensalidade values('Gonçalo Prazeres' , '49,99', '15-08-2022');   
+insert into Mensalidade values('Gonçalo Prazeres' , '49,99', '15-09-2022');   
+insert into Mensalidade values('Gonçalo Prazeres' , '49,99', '15-10-2022');   
+insert into Mensalidade values('Gonçalo Prazeres' , '49,99', '15-11-2022');   
+insert into Mensalidade values('Gonçalo Prazeres' , '49,99', '15-12-2022');   
+
+
+
+
+insert into Cliente_Filmes_Historial values('Luis Carvalho' , 'https://www.imdb.com/title/tt3581920/?ref_=hm_fanfav_tt_i_1_pd_fp1_r', '27-10-2022');         
+insert into Cliente_Filmes_Historial values('Luis Carvalho' , 'https://www.imdb.com/title/tt11813216/?ref_=hm_fanfav_tt_i_8_pd_fp1_r', '2-11-2022'); 
+insert into Cliente_Filmes_Historial values('Luis Carvalho' , 'https://www.imdb.com/title/tt1745960/?ref_=hm_fanfav_tt_i_10_pd_fp1_r', '7-12-2022'); 
+insert into Cliente_Filmes_Historial values('Luis Carvalho' , 'https://www.imdb.com/title/tt3581920/?ref_=hm_fanfav_tt_i_1_pd_fp1_r', '9-10-2022'); 
+insert into Cliente_Filmes_Historial values('Luis Carvalho' , 'https://www.imdb.com/title/tt3581920/?ref_=hm_fanfav_tt_i_1_pd_fp1_r', '15-11-2022'); 
+insert into Cliente_Filmes_Historial values('Luis Carvalho' , 'https://www.imdb.com/title/tt9764362/?ref_=hm_fanfav_tt_i_2_pd_fp1_r', '7-10-2022');    
+
+    
+insert into Cliente_Filmes_Historial values('Gonçalo Prazeres' , 'https://www.imdb.com/title/tt3581920/?ref_=hm_fanfav_tt_i_1_pd_fp1_r', '27-12-2022');         
+insert into Cliente_Filmes_Historial values('Gonçalo Prazeres' , 'https://www.imdb.com/title/tt11813216/?ref_=hm_fanfav_tt_i_8_pd_fp1_r', '6-11-2022'); 
+insert into Cliente_Filmes_Historial values('Gonçalo Prazeres' , 'https://www.imdb.com/title/tt1630029/?ref_=hm_fanfav_tt_i_4_pd_fp1_r', '13-12-2022');         
+insert into Cliente_Filmes_Historial values('Gonçalo Prazeres' , 'https://www.imdb.com/title/tt13131232/?ref_=hm_fanfav_tt_i_5_pd_fp1_r', '11-09-2022'); 
+
+
+
+
+insert into  Filmes_Atores  values('https://www.imdb.com/title/tt3581920/?ref_=hm_fanfav_tt_i_1_pd_fp1_r' , 'John Cena');
+insert into  Filmes_Atores  values('https://www.imdb.com/title/tt3581920/?ref_=hm_fanfav_tt_i_1_pd_fp1_r' , 'Morgan Freeman');
+insert into  Filmes_Atores  values('https://www.imdb.com/title/tt3581920/?ref_=hm_fanfav_tt_i_1_pd_fp1_r' , 'Johnny Depp');
+insert into  Filmes_Atores  values('https://www.imdb.com/title/tt3581920/?ref_=hm_fanfav_tt_i_1_pd_fp1_r' , 'Samuel L. Jackson');
+insert into  Filmes_Diretores  values('https://www.imdb.com/title/tt3581920/?ref_=hm_fanfav_tt_i_1_pd_fp1_r' , 'Spike Jonze');
+
+insert into  Filmes_Atores  values('https://www.imdb.com/title/tt9764362/?ref_=hm_fanfav_tt_i_2_pd_fp1_r' , 'Jack Nicholson');
+insert into  Filmes_Atores  values('https://www.imdb.com/title/tt9764362/?ref_=hm_fanfav_tt_i_2_pd_fp1_r' , 'Robert De Niro');
+insert into  Filmes_Atores  values('https://www.imdb.com/title/tt9764362/?ref_=hm_fanfav_tt_i_2_pd_fp1_r' , 'Al Pacino');
+insert into  Filmes_Atores  values('https://www.imdb.com/title/tt9764362/?ref_=hm_fanfav_tt_i_2_pd_fp1_r' , 'Denzel Washington');
+insert into  Filmes_Diretores  values('https://www.imdb.com/title/tt9764362/?ref_=hm_fanfav_tt_i_2_pd_fp1_r' , 'Steven Speilberg');
+
+insert into  Filmes_Atores  values('https://www.imdb.com/title/tt11564570/?ref_=hm_fanfav_tt_i_3_pd_fp1_r' , 'Sean Connery');
+insert into  Filmes_Atores  values('https://www.imdb.com/title/tt11564570/?ref_=hm_fanfav_tt_i_3_pd_fp1_r' , 'Harrison Ford');
+insert into  Filmes_Atores  values('https://www.imdb.com/title/tt11564570/?ref_=hm_fanfav_tt_i_3_pd_fp1_r' , 'Tom Hanks');
+insert into  Filmes_Atores  values('https://www.imdb.com/title/tt11564570/?ref_=hm_fanfav_tt_i_3_pd_fp1_r' , 'Denzel Washington');
+insert into  Filmes_Diretores  values('https://www.imdb.com/title/tt11564570/?ref_=hm_fanfav_tt_i_3_pd_fp1_r' , 'Joel');
+insert into  Filmes_Diretores  values('https://www.imdb.com/title/tt11564570/?ref_=hm_fanfav_tt_i_3_pd_fp1_r' , 'Ethan Coen');
+
+insert into  Filmes_Atores  values('https://www.imdb.com/title/tt1630029/?ref_=hm_fanfav_tt_i_4_pd_fp1_r' , 'Marlon Brando');
+insert into  Filmes_Atores  values('https://www.imdb.com/title/tt1630029/?ref_=hm_fanfav_tt_i_4_pd_fp1_r' , 'Dustin Hoffman');
+insert into  Filmes_Atores  values('https://www.imdb.com/title/tt1630029/?ref_=hm_fanfav_tt_i_4_pd_fp1_r' , 'Leonardo DiCaprio');
+insert into  Filmes_Atores  values('https://www.imdb.com/title/tt1630029/?ref_=hm_fanfav_tt_i_4_pd_fp1_r' , 'Kevin Spacey');
+insert into  Filmes_Diretores  values('https://www.imdb.com/title/tt1630029/?ref_=hm_fanfav_tt_i_4_pd_fp1_r' , 'Gus Van Sant');
+
+insert into  Filmes_Atores  values('https://www.imdb.com/title/tt13131232/?ref_=hm_fanfav_tt_i_5_pd_fp1_r' , 'Edward Norton');
+insert into  Filmes_Atores  values('https://www.imdb.com/title/tt13131232/?ref_=hm_fanfav_tt_i_5_pd_fp1_r' , 'Russell Crowe');
+insert into  Filmes_Atores  values('https://www.imdb.com/title/tt13131232/?ref_=hm_fanfav_tt_i_5_pd_fp1_r' , 'Ricardo Darín');
+insert into  Filmes_Atores  values('https://www.imdb.com/title/tt13131232/?ref_=hm_fanfav_tt_i_5_pd_fp1_r' , 'Jack Lemmon');
+insert into  Filmes_Diretores  values('https://www.imdb.com/title/tt13131232/?ref_=hm_fanfav_tt_i_5_pd_fp1_r' , 'Quentin Tarantino');
+
+insert into  Filmes_Atores  values('https://www.imdb.com/title/tt3915174/?ref_=hm_fanfav_tt_i_7_pd_fp1_r' , 'Gene Hackman');
+insert into  Filmes_Atores  values('https://www.imdb.com/title/tt3915174/?ref_=hm_fanfav_tt_i_7_pd_fp1_r' , 'Charles Chaplin');
+insert into  Filmes_Atores  values('https://www.imdb.com/title/tt3915174/?ref_=hm_fanfav_tt_i_7_pd_fp1_r' , 'Paul Newman');
+insert into  Filmes_Atores  values('https://www.imdb.com/title/tt3915174/?ref_=hm_fanfav_tt_i_7_pd_fp1_r' , 'Sean Penn');
+insert into  Filmes_Diretores  values('https://www.imdb.com/title/tt3915174/?ref_=hm_fanfav_tt_i_7_pd_fp1_r' , 'Francis Ford Coppola');
+
+insert into  Filmes_Atores  values('https://www.imdb.com/title/tt11813216/?ref_=hm_fanfav_tt_i_8_pd_fp1_r' , 'Gene Hackman');
+insert into  Filmes_Atores  values('https://www.imdb.com/title/tt11813216/?ref_=hm_fanfav_tt_i_8_pd_fp1_r' , 'Sean Penn');
+insert into  Filmes_Atores  values('https://www.imdb.com/title/tt11813216/?ref_=hm_fanfav_tt_i_8_pd_fp1_r' , 'Samuel L. Jackson');
+insert into  Filmes_Atores  values('https://www.imdb.com/title/tt11813216/?ref_=hm_fanfav_tt_i_8_pd_fp1_r' , 'Gary Oldman');
+insert into  Filmes_Diretores  values('https://www.imdb.com/title/tt11813216/?ref_=hm_fanfav_tt_i_8_pd_fp1_r' , 'Roman Polanski');
+
+insert into  Filmes_Atores  values('https://www.imdb.com/title/tt10640346/?ref_=hm_fanfav_tt_i_9_pd_fp1_r' , 'Tommy Lee Jones');
+insert into  Filmes_Atores  values('https://www.imdb.com/title/tt10640346/?ref_=hm_fanfav_tt_i_9_pd_fp1_r' , 'Michael Caine');
+insert into  Filmes_Atores  values('https://www.imdb.com/title/tt10640346/?ref_=hm_fanfav_tt_i_9_pd_fp1_r' , 'Woody Harrelson');
+insert into  Filmes_Atores  values('https://www.imdb.com/title/tt10640346/?ref_=hm_fanfav_tt_i_9_pd_fp1_r' , 'Gary Oldman');
+insert into  Filmes_Diretores  values('https://www.imdb.com/title/tt10640346/?ref_=hm_fanfav_tt_i_9_pd_fp1_r' , 'Roman Polanski');
+insert into  Filmes_Diretores  values('https://www.imdb.com/title/tt10640346/?ref_=hm_fanfav_tt_i_9_pd_fp1_r' , 'Wes Anderson');
+
+insert into  Filmes_Atores  values('https://www.imdb.com/title/tt1745960/?ref_=hm_fanfav_tt_i_10_pd_fp1_r' , 'Max von Sydow');
+insert into  Filmes_Atores  values('https://www.imdb.com/title/tt1745960/?ref_=hm_fanfav_tt_i_10_pd_fp1_r' , 'Philippe Noiret');
+insert into  Filmes_Atores  values('https://www.imdb.com/title/tt1745960/?ref_=hm_fanfav_tt_i_10_pd_fp1_r' , 'Brad Pitt');
+insert into  Filmes_Atores  values('https://www.imdb.com/title/tt1745960/?ref_=hm_fanfav_tt_i_10_pd_fp1_r' , 'Wagner Moura');
+insert into  Filmes_Diretores  values('https://www.imdb.com/title/tt1745960/?ref_=hm_fanfav_tt_i_10_pd_fp1_r' , 'Peter Jackson');
+
+insert into  Filmes_Atores  values('https://www.imdb.com/title/tt6710474/?ref_=hm_fanfav_tt_i_11_pd_fp1_r' , 'Michael Douglas');
+insert into  Filmes_Atores  values('https://www.imdb.com/title/tt6710474/?ref_=hm_fanfav_tt_i_11_pd_fp1_r' , 'Tom Cruise');
+insert into  Filmes_Atores  values('https://www.imdb.com/title/tt6710474/?ref_=hm_fanfav_tt_i_11_pd_fp1_r' , 'Mel Gibson');
+insert into  Filmes_Atores  values('https://www.imdb.com/title/tt6710474/?ref_=hm_fanfav_tt_i_11_pd_fp1_r' , 'Jeff Bridges');
+insert into  Filmes_Diretores  values('https://www.imdb.com/title/tt6710474/?ref_=hm_fanfav_tt_i_11_pd_fp1_r' , 'Tim Burton');
+
+
+
+
+insert into Cliente_Filmes_Historial values('xxx' , 'https://www.imdb.com/title/tt3581920/?ref_=hm_fanfav_tt_i_1_pd_fp1_r', '2022-12-02'); 
+insert into Cliente_Filmes_Historial values('xxx' , 'https://www.imdb.com/title/tt10640346/?ref_=hm_fanfav_tt_i_9_pd_fp1_r', '2022-10-10'); 
+insert into Cliente_Filmes_Historial values('xxx' , 'https://www.imdb.com/title/tt3915174/?ref_=hm_fanfav_tt_i_7_pd_fp1_r', '2022-25-11'); 
+
+
+
+
+SELECT DISTINCT Filmes_Título.EmLinguaOriginal
+FROM Filmes_Título NATURAL INNER JOIN Filmes NATURAL INNER JOIN Género
+WHERE Filmes_Título.url_ == Filmes.url_ AND Filmes.url_ == Género.url_ AND NomeGénero == 'Thriler' AND NomeGénero == 'Mistério'
+
+
+SELECT DISTINCT Cliente.NomeCliente
+FROM Cliente INNER JOIN Cliente_Mensalidade
+WHERE Cliente.NomeCliente == Cliente_Mensalidade.NomeCliente AND Cliente_Mensalidade.dataDePagamento > '1/12/2022'
+
+SELECT DISTINCT Filmes.url_
+FROM Filmes NATURAL INNER JOIN Filmes_Língua NATURAL INNER JOIN Filmes_Atores NATURAL INNER JOIN Biografia
+WHERE Filmes.url_ == Filmes_Língua.url_ AND Filmes_Língua.EmLinguaOriginal = 'Inglês' AND Filmes.url_ == Filmes_Atores.url_ 
+        AND Filmes_Atores.NomeAtor == Biografia.Nome AND Biografia.Nacionalidade = 'França'
+
+
+SELECT COUNT(Mensalidade.valorMensalidade)
+FROM Mensalidade
+WHERE Mensalidade.dataDePagamento > '1-11-2022' AND Mensalidade.dataDePagamento < '1-12-2022'
+
+
+
+
+SELECT Filmes.url_
+FROM Filmes NATURAL INNER JOIN Cliente_Filmes_Historial 
+WHERE FIlmes.url_ == Cliente_Filmes_Historial.url_ AND Cliente_Filmes_Historial.DataVisualização = '2/12/2022'
+
+
+
+SELECT Filmes.url_
+FROM Filmes NATURAL INNER JOIN Cliente_Filmes_Historial 
+WHERE FIlmes.url_ == Cliente_Filmes_Historial.url_ AND Cliente.NomeCliente = 'xxx'
+
+
+
+SELECT DISTINCT Diretores.nomeDiretores
+FROM Diretores 
+EXCEPT
+SELECT DISTINCT Diretores.nomeDiretores
+FROM Diretores NATURAL INNER JOIN Filmes_Diretores NATURAL INNER JOIN Género
+WHERE DIretores.nomeDiretores == Filmes_Diretores.nomeDiretores AND Filmes_Diretores.url_ == Género.url_ AND Género.NomeGénero = 'fantasia'
+
+
+SELECT MAX(Filmes_Prémios.tipoDoPrémio) 
+FROM Filmes_Prémios
+

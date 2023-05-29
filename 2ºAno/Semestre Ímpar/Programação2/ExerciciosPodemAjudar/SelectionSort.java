@@ -1,3 +1,4 @@
+package ExerciciosPodemAjudar;
 public class SelectionSort {
     public void selectionSort( int[] number){
         int startIndex, minIndex, length, temp;

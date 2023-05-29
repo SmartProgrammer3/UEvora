@@ -1,3 +1,4 @@
+package ExerciciosPodemAjudar;
 public class binarySearchString {
     int binarySearchString3(String[] a, String s){
         int low = 0;

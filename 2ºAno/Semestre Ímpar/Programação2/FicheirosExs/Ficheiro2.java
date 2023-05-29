@@ -1,4 +1,9 @@
 package FicheirosExs;
+
+import java.io.File;
+import java.io.IOException;
+import java.io.PrintWriter;
+
 /*
 Implemente um método (de classe) que guarda num ficheiro de texto as String de um array.
 

@@ -1,4 +1,8 @@
 package FicheirosExs;
+
+import java.io.File;
+import java.util.Scanner;
+
 /*
  Implemente um método (de classe) que lê as palavras do ficheiro de texto criado pelo Exercício 12 06.
 

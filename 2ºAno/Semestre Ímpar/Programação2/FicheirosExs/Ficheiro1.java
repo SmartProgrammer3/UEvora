@@ -1,4 +1,5 @@
 package FicheirosExs;
+import java.io.File;
 import java.util.*;
 /*
 Implemente um método (estático) boolean que testa se um ficheiro existe.
@@ -6,7 +7,7 @@ Na classe dada complete o método public static boolean exists(String) que tem c
 conforme o ficheiro indicado existe ou não.
  */
 public class Ficheiro1 {
-    public class FileProcessor {
+    public static class FileProcessor {
   
         public static boolean exists(String fileName) {
             File file = new File(fileName);

@@ -1,0 +1,122 @@
+\documentclass{report}
+\usepackage[portuguese]{babel}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath}
+\usepackage{natbib}
+\usepackage[nottoc]{tocbibind}
+\usepackage{graphicx}
+\usepackage{subcaption}
+\usepackage{geometry}
+
+\title{\textbf{Conversor de Imagem \\
+{\Large RGB-Gray}} \\
+\vspace{1.5cm}
+\includegraphics[width=0.4\textwidth]{Imagem1.png}
+}
+\author{Pedro Emílio nº 52649 \\ Luís Carvalho nº 51817}
+\vspace{3cm}
+\date{\textbf{Departamento de Informática \\ Arquitetura de computadores I \\ Docente: Miguel Barão}}
+
+\geometry {
+    top=.75cm,
+    bottom=.75cm,
+    rmargin=2cm,
+    lmargin=2cm,
+}
+\begin{document}
+
+\maketitle
+
+\tableofcontents
+
+\chapter{Introdução}
+Este projeto, da disciplina de Arquitetura de Computadores I, divide-se em várias partes.\\
+Na primeira parte pretende-se desenvolver um conjunto de funções, na linguagem assembly RISC-V, que façam uma conversão de uma imagem jpg, a Figura 1.1, para uma imagem em tons de Gray, a Figura 1.2.\\
+De seguida pretende-se filtrar a imagem através do operador de Sobel vertical e horizontal.\\
+Visto que foram obtidas as imagens filtradas, através do operador de Sobel vertical e horizontal (Figura 1.3 e Figura 1.4), foi criado uma função que combina essas duas imagens obtendo-se assim a imagem com o fundo branco e contornos pretos, a Figura 1.5.\\
+
+\begin{figure}[h]
+    \centering
+    
+    \begin{minipage}{.49\textwidth}
+    \centering
+    \includegraphics[width=.6\textwidth]{Lena.jpg}
+    \caption{Lena}
+    \label{fig:my_label}
+    \end{minipage}
+    \hfill
+    \begin{minipage}{.49\textwidth}
+    \centering
+    \includegraphics[width=.6\textwidth]{LenaGray.jpg}
+    \caption{Imagem convertida \\ para escala de Gray.}
+    \label{fig:my_label}
+    \end{minipage}
+\end{figure}
+
+\begin{figure}
+    \centering
+    \includegraphics[width=.3\textwidth]{LenaSobelVertical.jpg}
+    \caption{Imagem filtrada pelo \\ operador Sobel vertical.}
+    \label{fig:my_label}
+\end{figure}
+
+\begin{figure}[h]
+    \centering
+    
+    \begin{minipage}{.49\textwidth}
+    \centering
+    \includegraphics[width=.6\textwidth]{LenaSobelHorizontal.jpg}
+    \caption{Imagem filtrada pelo \\ operador Sobel horizontal..}
+    \label{fig:my_label}
+    \end{minipage}
+    \hfill
+    \begin{minipage}{.49\textwidth}
+    \centering
+    \includegraphics[width=.6\textwidth]{imagemContorno.jpg}
+    \caption{Contornos obtidos combinando os resultados \\ dos operadores Sobel horizontal e vertical.}
+    \label{fig:my_label}
+    \end{minipage}
+\end{figure}
+
+\chapter{Funções Principais}
+
+\section{read\_rgb\_image}
+Esta função tem o propósito de ler um ficheiro com uma imagem no formato RGB para um array em
+memória e tem como parâmetros uma string com o nome do ficheiro que lerá e
+o endereço de um buffer onde a imagem deverá ser escrita.
+
+\section{write\_to\_gray}
+O objetivo desta função é escrever uma imagem em formato GRAY num ficheiro e 
+tem como parâmetros o nome de um ficheiro, um buffer com a imagem e o cumprimento do mesmo.
+
+\section{rgb\_to\_gray}
+Esta função tem como propósito converter uma imagem a cores RGB para uma imagem em tons de GRAY e tem como parâmetros um buffer com a imagem RGB, um buffer onde será colocada a imagem em formato GRAY e o tamanho da imagem.
+
+\section{convolution}
+Esta função tem como objetivo calcular a convolução de uma imagem A com um operador Sobel (matriz
+3×3) e por sua vez colocar o resultado numa matriz B. Esta função tem como parâmetros um buffer
+com a matriz A, um buffer com um dos operadores Sobel e um buffer que conterá
+a imagem filtrada B. A função pode assumir internamente uma dimensão de imagem
+fixa ou ter a dimensão como parâmetros.
+
+\section{contour}
+O propósito desta função é calcular a imagem final (a imagem com o fundo branco e contornos pretos) combinando as duas imagens convolvidas e tem como parâmetros dois buffers com as imagens a combinar e um buffer que vai conter o resultado final.
+
+\chapter{Funções Auxiliares}
+
+\section{write\_sobelHorizontal\_image}
+Esta função escreve num ficheiro gerado (.gray), a imagem com a convulação na horizontal, ou seja, a imagem  filtrada pelo operador Sobel horizontal.
+
+\section{write\_sobelVertical\_image}
+Esta função escreve num ficheiro gerado (.gray), a imagem com a convulação na vertical, ou seja, a imagem filtrada pelo operador Sobel vertical.
+
+\section{write\_imagemContorno}
+Esta função escreve num ficheiro gerado (.gray), a imagem final, com os contornos obtidos combinando os 
+resultados dos operadores Sobel horizontal e vertical,
+
+\chapter{Conclusão}
+Como foi referido anteriormente na introdução, o objetivo deste projeto era criar um programa em assembly RISC-V capaz de converter uma imagem jpg numa imagem de fundo branco com contornos pretos.\\
+Na realização do projeto foi possível atingir todos os objetivos apresentados pelo docente da disciplina, apesar de ter sido muito difícil conciliar o tempo para realizar o projeto enquanto se estudava para exames de outras disciplinas.\\
+
+
+\end{document}

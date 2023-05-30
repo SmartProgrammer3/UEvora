@@ -1,0 +1,292 @@
+CÓDIGOS DO APRENDIZATIONS:
+----------------------------------------
+----------------------------------------
+swap_half:
+     srli t0, a0, 16
+     slli t1, a0, 16				#	troca dos 16 bits da esquerda com os 16 da direita
+     add a0, t0, t1
+     ret
+----------------------------------------
+----------------------------------------
+is_even:
+     andi a0, a0, 1				
+     xori a0, a0, 1				#	retorna 1 se o número é par e 0 se é ímpar
+     ret
+-----------------------------------------
+-----------------------------------------
+negative:
+     slt a0, a0, zero				#	retorna 1 se o número x é negativo e 0 caso contrário
+     ret
+-----------------------------------------
+-----------------------------------------
+positive:
+     slt a0, zero, a0				#	retorna 1 se o número x é positivo e 0 caso contrário
+     ret
+-----------------------------------------
+-----------------------------------------
+add3:
+     add a0, a1, a0
+     add a0, a2, a0				#	soma três valores
+     ret
+------------------------------------------
+------------------------------------------
+upperchar:
+     li t0, 97
+     li t1, 122
+     blt a0, t0, END				#	converte um carácter de letra minúscula para maiúscula.
+     bgt a0, t1, END				#	Se o carácter não for uma letra minúscula, então a função deve retornar o carácter inalterado.
+     addi a0, a0, -32
+				
+     END:
+     ret
+-----------------------------------------
+-----------------------------------------
+abs_diff:
+    bge a1, a0, BIGGER
+    sub a0, a0, a1				#	calcula o valor absoluto da diferença entre a0 e a1
+    j RET
+    
+    BIGGER:
+    sub a0, a1, a0
+    
+    RET:
+    ret
+-----------------------------------------
+-----------------------------------------
+digit_to_int:
+    li t0, 48
+    li t1, 57
+    blt a0, t0, END
+    bgt a0, t1, END				#	converte caracteres ASCII com dígitos nos seus números correspondentes inteiros
+    addi a0, a0, -48				#	digit_to_int('3') deve retornar o inteiro 3, enquanto que digit_to_int('a') deve retornar -1
+    j RET
+    
+    END:
+    li a0, -1
+    
+    RET:
+    ret
+------------------------------------------
+------------------------------------------
+soma3:
+    mv t0, a0
+    li a0, 0
+
+    WHILE:						#	soma os números inteiros no intervalo fechado de x a y, saltando de 3 em 3
+    add a0, a0, t0				#	soma3(5, 11) calcula 5+8+11	
+    addi t0, t0, 3				#	soma3(5, 16) calcula 5+8+11+14
+    ble t0, a1, WHILE
+
+    ret
+------------------------------------------																	
+------------------------------------------
+count_even:
+    li t1, 0
+    beq a0, a1, VER
+
+    WHILE:
+    mv t0, a0
+    andi t0, t0, 1				#	Função que conta os números pares entre a e b, inclusivé
+    xori t0, t0, 1				#	count_even(2, 6) deve retornar 3
+    add t1, t1, t0				#	count_even(1, 5) deve retornar 2
+    addi a0, a0, 1				#	count_even(2, 2) deve retornar 1
+    bgt a0, a1, RET				#	count_even(3, 3) deve retornar 0
+    j WHILE
+
+    VER:
+    andi a0, a0, 1
+    xori a0, a0, 1
+    j RET
+
+    END:
+    mv a0, t1
+
+    RET:
+    ret
+------------------------------------------
+------------------------------------------
+count_odd:
+    li t1, 0
+    beq a0, a1, VER
+
+    WHILE:
+    mv t0, a0
+    andi t0, t0, 1				#	Função que conta os números ímpares entre a e b, inclusivé
+    add t1, t1, t0				#	count_even(1, 5) deve retornar 3
+    addi a0, a0, 1				#	count_even(2, 2) deve retornar 0
+    bgt a0, a1, END				#	count_even(3, 3) deve retornar 1
+    j WHILE
+
+    VER:
+    andi a0, a0, 1
+    j RET
+
+    END:
+    mv a0, t1
+
+    RET:
+    ret
+------------------------------------------
+------------------------------------------
+xpto:
+    addi sp, sp, -8
+    sw ra, 4(sp)
+    sw s0, 0(sp)				#	int xpto(int n){
+    mv s0, a0					#		if(n==0)
+    li a0, 0					#			return n;
+    beqz s0, RET				#		else
+    addi a0, s0, -1				#			return n+xpto(n-1);
+    jal xpto	
+    add a0, a0, s0
+
+    RET: 
+    lw s0, 0(sp)
+    lw ra, 4(sp)
+    addi sp, sp, 8
+    ret
+-------------------------------------------
+-------------------------------------------
+xpto:
+    addi sp, sp, -8
+    sw ra, 4(sp)
+    sw s0, 0(sp)
+    beqz a0, RET					#	int xpto(int n){
+    mv s0, a0						#		if(n==0)
+    srli a0, a0, 1					#			return n;
+    jal xpto						#		else
+    or a0, a0, s0					#			return n | xpto(n>>1);
+
+    RET:
+    lw s0, 0(sp)
+    lw ra, 4(sp)
+    addi sp, sp, 8
+    ret
+------------------------------------------
+------------------------------------------
+count_special:
+    ####################################
+    addi sp, sp, -12
+    sw ra, 8(sp)
+    sw s0, 4(sp)
+    sw s1, 0(sp)
+    ####################################
+    mv s0, a0       # endereco							#	(s0)
+    li s1, 0        # contador
+L1:
+    lbu a0, 0(s0)   # le char
+    beqz a0, L2     # verifica nulo						#	(L2)
+    jal is_special  # verifica especial
+    add s1, s1, a0  # soma 1 se especial, caso contrario soma 0			#	(a0)
+    addi s0, s0, 1  # endereco proximo char
+    j L1
+L2:
+    mv a0, s1       # retorna valor do contador					#	(a0)
+    #######################################
+    lw s1, 0(sp)
+    lw s0, 4(sp)
+    lw ra, 8(sp)
+    addi sp, sp, 12
+    #######################################
+    ret
+--------------------------------------------
+--------------------------------------------
+array_sum:
+    beqz a1, ENDZERO
+    li t1, 0
+
+    WHILE:
+    lw t0, 0(a0)
+    add t1, t1, t0				#	calcule a soma de um array de inteiros
+    addi a0, a0, 4
+    addi a1, a1, -1				#	tamanho do array for zero, a soma deverá ser zero
+    bnez a1, WHILE
+	
+    ENDWHILE:
+    mv a0, t1
+    j RET
+    
+    ENDZERO:
+    li a0, 0
+    
+    RET:
+    ret
+--------------------------------------------
+--------------------------------------------
+strlen:
+    li t0, 0
+
+    WHILE:						#	calcula o tamanho de uma string
+    lb t1, 0(a0)
+    beq t1, zero, END
+    addi t0, t0, 1
+    addi a0, a0, 1
+    j WHILE
+
+    END:
+    mv a0, t0
+    ret
+--------------------------------------------
+--------------------------------------------
+mull:
+    li t0, 0
+
+    A2:    
+    beqz a1, R2
+    add t0, t0, a0
+    addi a1, a1, -1
+    bnez a1, A2
+
+    R2: 
+    mv a0, t0
+    ret
+
+atoi:
+    addi sp, sp, -28
+    sw ra, 0(sp)
+    sw s6, 4(sp)
+    sw s0, 8(sp)
+    sw s1, 12(sp)
+    sw s3, 16(sp)
+    sw s5, 20(sp)
+    sw s2, 24(sp)
+
+    li s0, 48
+    li s1, 57
+    li s3, 0
+    li s5, 0
+    mv s6, a0
+
+    A:  
+    lbu s2, 0(s6)
+    blt s2, s0, R
+    bgt s2, s1, R
+
+    addi s2, s2, -48
+
+    beqz s3, Bit
+    mv a0, s5
+    li a1, 10
+    jal mull
+    mv s5, a0
+
+    Bit:  
+    add s5, s5, s2 
+    addi s3, s3, 1
+    addi s6, s6, 1
+    j A
+
+    R: 
+    mv a0, s5
+    lw s2, 24(sp)
+    lw ra, 0(sp)
+    lw s6, 4(sp)
+    lw s0, 8(sp)
+    lw s1, 12(sp)
+    lw s3, 16(sp)
+    lw s5, 20(sp)
+    addi sp, sp, 28
+    ret
+
+    end:							
+---------------------------------------------
+---------------------------------------------

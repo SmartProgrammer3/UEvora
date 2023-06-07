@@ -1,5 +1,5 @@
 package Trabalho1;
-public class Product  {
+public class Product{
     String name;
     char type;
     int value;

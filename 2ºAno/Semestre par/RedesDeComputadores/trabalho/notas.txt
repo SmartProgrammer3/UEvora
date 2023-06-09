@@ -1,0 +1,19 @@
+// TODO
+
+-assume-se que o servidor é lançado no início de cada aula e começa
+a contar o tempo decorrido das aulas (uma aula tem uma duração de 2)
+
+- servidor TCP que aceita ligações de múltiplos
+clientes em simultâneo na porta 5555
+
+-Cada mensagem trocada não
+poderá ter mais do que 1024 bytes
+
+
+
+
+1) LOGIN
+
+Exemplo:
+CLI: IAM l12345
+SRV: HELLO l12345

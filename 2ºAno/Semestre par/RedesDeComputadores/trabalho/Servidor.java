@@ -4,11 +4,6 @@ import java.util.*;
 
 public class Servidor {
     private static long tempoInicioConexao;
-    final int númeroPorta = 5555; // Porta que o servidor irá ouvir
-
-    
-
-
     public static void main(String[] args) {
         ServerSocket servidor = null;
 
@@ -92,33 +87,30 @@ class ClientThread extends Thread {
                 palavraPasse = inicioUser[3];
             }
 
-
+            
             while( (!comandoInicio.equalsIgnoreCase("IAM") || numeroRegisto.equals(null)) || (!comandoPasse.equalsIgnoreCase("WITHPASS") || palavraPasse.equals(null)) || continuar){
-                output.flush(); // limpar buffer
-
-                if( (comandoInicio.equalsIgnoreCase("IAM") && !numeroRegisto.equals(null)) && (comandoPasse.equalsIgnoreCase("WITHPASS") && !palavraPasse.equals(null))) {
-
-                    if( palavraPasse.equals(tabelaDosLogins.get(numeroRegisto)) ){
-    
-                        output.println("HELLO " + numeroRegisto + "\nEND");
-
-
-                        break;
-                    } else{
-                        output.println("ERRO R" + numeroRegisto + "\nEND");
-                    }
-
-                
-                } else{
-                    output.println("Login Inválido. Use o formato dito em cima." + "\nEND");
-                }
-
                 linhaInput = input.readLine();
                 inicioUser = linhaInput.split(" ");
                 comandoInicio = inicioUser[0];
                 numeroRegisto = inicioUser[1];
                 comandoPasse = inicioUser[2];
                 palavraPasse = inicioUser[3];
+
+                
+                if( (comandoInicio.equalsIgnoreCase("IAM") && !numeroRegisto.equals(null)) && (comandoPasse.equalsIgnoreCase("WITHPASS") && !palavraPasse.equals(null))) {
+                    
+                    if( palavraPasse.equals(tabelaDosLogins.get(numeroRegisto)) ){
+                        
+                        output.println("HELLO " + numeroRegisto + "\nEND");
+                        break;
+                    } else{
+                        output.println("ERROR " + numeroRegisto + "\nEND");
+                    }
+
+                
+                } else{
+                    output.println("Login Inválido. Use o formato dito em cima." + "\nEND");
+                }
             }
 
 

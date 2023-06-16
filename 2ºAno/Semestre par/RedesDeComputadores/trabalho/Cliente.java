@@ -3,43 +3,53 @@ import java.net.*;
 
 
 public class Cliente{
-    // initialize socket and input output streams
-    private Socket socket = null;
-    BufferedReader reader;
-    PrintWriter writer;
-    BufferedReader input;
+    public static void main(String[] args) {
 
-    // constructor to put ip address and port
-    public Cliente(String adress, int porta)
-    {
-
-        // establish a connection
         try {
-            socket = new Socket(adress, porta);
-            System.out.println("Connected\n");
+            Socket socket = new Socket("localhost", 5555);
+            System.out.println("Connectado\n");
             
-            reader = new BufferedReader(new InputStreamReader(socket.getInputStream()));
-            writer = new PrintWriter(socket.getOutputStream(), true);
-            input = new BufferedReader(new InputStreamReader(System.in));
+            BufferedReader reader = new BufferedReader(new InputStreamReader(socket.getInputStream()));
+            PrintWriter writer = new PrintWriter(socket.getOutputStream(), true);
+            BufferedReader input = new BufferedReader(new InputStreamReader(System.in));
 
-            String inputUtilizador = input.readLine();
- 
-            while (inputUtilizador != null) {
-                writer.println(inputUtilizador); // send command to server
+            boolean continuar = true;
+            System.out.println(reader.readLine());
 
-                String serverResponse = reader.readLine(); // receive response from server
-                System.out.println("Server response: " + serverResponse);
+            while (continuar) {
+                String inputUtilizador = input.readLine();
+
+                writer.println(inputUtilizador); 
+
+                if(inputUtilizador.equalsIgnoreCase("EXIT")){
+                    System.out.println("Closing connection...");
+                    continuar = false;
+                }
+                
+             
+                String respostaDoServidor = null;
+                while ((respostaDoServidor = reader.readLine()) != null && !respostaDoServidor.equals("END") ) {
+
+				    System.out.println(respostaDoServidor);
+                }
             }
+            writer.close();
+            reader.close();
+            input.close();
+            socket.close();
         } catch(IOException e) {
             e.printStackTrace();
         }
+
     }
-
-
-    public static void main(String[] args) {
-        Cliente cliente = new Cliente("localhost", 5555);
-    }
-
-
 }
+   
+
+
+
+
+
+
+
+
 

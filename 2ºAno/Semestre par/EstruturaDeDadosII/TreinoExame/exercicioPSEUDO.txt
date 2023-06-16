@@ -1,0 +1,48 @@
+Na BigBang Desenvolvimento, est´a na altura de anunciar as promo¸c˜oes dos funcion´arios. Durante
+o resto do ano, o desempenho de cada um ´e observado e s˜ao estabelecidas prioridades de uns funcion´arios sobre outros, em rela¸c˜ao `a promo¸c˜ao de cada um. Depois, a empresa decide quantos ser˜ao os
+funcion´arios promovidos e escolhe-os, respeitando as prioridades estabelecidas. Estas prioridades s˜ao
+consistentes, no sentido em que nenhum funcion´ario tem, directa ou indirectamente, prioridade sobre
+si pr´oprio.
+O desempenho, ao longo do ´ultimo ano, determinou que (anonimizando a informa¸c˜ao) A tem prioridade
+sobre B e E, B tem prioridade sobre C e F, C tem prioridade sobre D, E tem prioridade sobre F, F tem
+prioridade sobre C, e G tem prioridade sobre E. Nestas condi¸c˜oes, para E poder ser promovido, tˆem de
+ser pelo menos 3 os funcion´arios promovidos, visto que A e G tˆem prioridade sobre E. Por outro lado,
+D s´o ser´a promovido se forem promovidos os 7 funcion´arios.
+Pretende-se calcular, a partir das prioridades estabelecidas, quantos s˜ao os funcion´arios que tˆem de
+ser obrigatoriamente promovidos antes de um dado funcion´ario poder sˆe-lo tamb´em.
+(a) [1,5 valores] Apresente o grafo que usaria para representar a informa¸c˜ao relativa `a situa¸c˜ao
+descrita acima.
+(b) [0,5 valores] Em termos de grafos, e tendo em conta aquele que apresentou na al´ınea anterior, a
+que corresponde o que se pretende contar?
+(c) [2 valores] Descreva o algoritmo que utilizaria para obter o resultado pretendido. (Pode fazˆe-lo
+atrav´es de texto ou recorrendo a pseudo-c´odigo.)
+
+
+c)
+Função DFS(graph, funcionário, count):
+    Se funcionário é o "target":
+        Retorne count
+
+    Se funcionário já foi visitado:
+        Retorne -1
+
+    Marque funcionário como visitado
+
+    Para cada funcionário_adjacente no grafo que tem uma aresta saindo de funcionário:
+        Se funcionário_adjacente tem prioridade sobre funcionário:
+            result = DFS(graph, funcionário_adjacente, count + 1)
+            Se result ≠ -1:
+                Retorne result
+
+    Retorne -1
+
+Função obterFuncionáriosPromovidos(graph, target):
+    count = 0
+
+    Para cada funcionário no grafo:
+        Se funcionário ≠ target:
+            result = DFS(graph, funcionário, 0)
+            Se result ≠ -1:
+                count = max(count, result)
+
+    Retorne count

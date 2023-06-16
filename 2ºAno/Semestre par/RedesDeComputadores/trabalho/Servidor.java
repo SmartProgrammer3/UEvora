@@ -1,83 +1,151 @@
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.OutputStream;
-import java.net.ServerSocket;
-import java.net.Socket;
+import java.io.*;
+import java.net.*;
+import java.util.*;
 
 public class Servidor {
+    private static long tempoInicioConexao;
+    final int númeroPorta = 5555; // Porta que o servidor irá ouvir
+
+    
+
 
     public static void main(String[] args) {
-        int portNumber = 5555; // Porta que o servidor irá ouvir
+        ServerSocket servidor = null;
 
-        // Cria uma instância do banco de dados
-        DataBase database = new DataBase();
 
-        try {
-            ServerSocket serverSocket = new ServerSocket(portNumber);
-            System.out.println("Servidor TCP iniciado na porta " + portNumber);
+
+        try {        
+            servidor = new ServerSocket(5555);
+            tempoInicioConexao = System.currentTimeMillis();
 
             while (true) {
-                // Aguarda por uma conexão de um cliente
-                Socket clientSocket = serverSocket.accept();
-                System.out.println("Cliente conectado: " + clientSocket.getInetAddress());
+                // Aguarda a conexão de um cliente ao servidor
+                Socket cliente = servidor.accept();
+                System.out.println("O cliente juntou-se à sessão: " + cliente.getInetAddress() + ".");
+                
+                ClientThread Thread = new ClientThread(cliente, tempoInicioConexao);
 
-                // Obtém os fluxos de entrada e saída para comunicação com o cliente
-                InputStream inputStream = clientSocket.getInputStream();
-                OutputStream outputStream = clientSocket.getOutputStream();
-
-                // Lê e processa os dados recebidos do cliente
-                byte[] buffer = new byte[1024];
-                int bytesRead = inputStream.read(buffer);
-                String clientMessage = new String(buffer, 0, bytesRead);
-                System.out.println("Mensagem do cliente: " + clientMessage);
-
-                // Verifica se o comando é REG (registro de palavra-passe)
-                if (clientMessage.startsWith("REG")) {
-                    // Extrai o número de aluno e a palavra-passe do comando
-                    String[] commandParts = clientMessage.substring(4).trim().split(" ");
-                    String studentNumber = commandParts[0];
-                    String password = commandParts[1];
-
-                    // Registra o número de aluno e a palavra-passe no banco de dados
-                    database.registrar(studentNumber, password);
-
-                    // Envia uma resposta de confirmação para o cliente
-                    String serverResponse = "REGISTRATION_SUCCESS";
-                    outputStream.write(serverResponse.getBytes());
+                Thread.start();
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        } finally {
+            if (servidor != null) {
+                try {
+                    servidor.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
                 }
+            }
+        }
+    }
+}
 
-                // Verifica se o comando é IAM (login)
-                else if (clientMessage.startsWith("IAM")) {
-                    // Extrai o número de aluno e a palavra-passe do comando
-                    String[] commandParts = clientMessage.substring(4).trim().split(" ");
-                    String studentNumber = commandParts[0];
-                    String password = commandParts[1];
 
-                    // Verifica a autenticação do aluno usando o banco de dados
-                    boolean autenticado = database.autenticar(studentNumber, password);
+class ClientThread extends Thread {
+    private Socket clienteSocket;
 
-                    // Envia a resposta para o cliente
-                    String serverResponse;
-                    if (autenticado) {
-                        serverResponse = "LOGIN_SUCCESS";
-                    } else {
-                        serverResponse = "LOGIN_FAILURE";
+    private Hashtable<String, String> tabelaDosLogins;
+  
+
+    public ClientThread(Socket clientSocket, long serverstart) {
+        this.clienteSocket = clientSocket;
+      
+
+        tabelaDosLogins = new Hashtable<>();
+    }
+
+
+
+    public void run() {
+        try {
+            BufferedReader input = new BufferedReader(new InputStreamReader(clienteSocket.getInputStream())); // Ler as mensagens enviadas pelo cliente
+            PrintWriter output = new PrintWriter(clienteSocket.getOutputStream(), true); // Para enviar mensagens de volta ao cliente
+
+            output.println("Seja bem-vindo! Começe por se registar com o comando REG, o respetivo número, WITHPASS, a respetiva passe (Ex: REG lXXXXX WITHPASS 12345)!");            
+            boolean continuar = true;
+
+            String linhaInput = input.readLine();
+            String[] inicioUser = linhaInput.split(" ");
+            String comandoInicio = inicioUser[0];
+            String numeroRegisto = "", palavraPasse = "";
+            String comandoPasse = inicioUser[2];
+
+
+            while( ((!comandoInicio.equalsIgnoreCase("REG") || numeroRegisto.equals(null)) || (!comandoPasse.equalsIgnoreCase("WITHPASS") || palavraPasse.equals(null))) || continuar){
+
+                if ((comandoInicio.equalsIgnoreCase("REG") && !numeroRegisto.equals(null)) && (comandoPasse.equalsIgnoreCase("WITHPASS") && !palavraPasse.equals(null))) {
+                    numeroRegisto = inicioUser[1];
+                    palavraPasse = inicioUser[3];
+                    tabelaDosLogins.put(numeroRegisto, palavraPasse);
+
+                    output.println("Registo concluído. Faça o login agora, com o comando IAM número WITHPASS passe." + "\nEND");
+                    break;
+                } 
+
+                output.println("Registo Inválido. Use o formato dito em cima." + "\nEND");
+                linhaInput = input.readLine();
+                inicioUser = linhaInput.split(" ");
+                comandoInicio = inicioUser[0];
+                numeroRegisto = inicioUser[1];
+                comandoPasse = inicioUser[2];
+                palavraPasse = inicioUser[3];
+            }
+
+
+            while( (!comandoInicio.equalsIgnoreCase("IAM") || numeroRegisto.equals(null)) || (!comandoPasse.equalsIgnoreCase("WITHPASS") || palavraPasse.equals(null)) || continuar){
+                output.flush(); // limpar buffer
+
+                if( (comandoInicio.equalsIgnoreCase("IAM") && !numeroRegisto.equals(null)) && (comandoPasse.equalsIgnoreCase("WITHPASS") && !palavraPasse.equals(null))) {
+
+                    if( palavraPasse.equals(tabelaDosLogins.get(numeroRegisto)) ){
+    
+                        output.println("HELLO " + numeroRegisto + "\nEND");
+
+
+                        break;
+                    } else{
+                        output.println("ERRO R" + numeroRegisto + "\nEND");
                     }
 
-                    outputStream.write(serverResponse.getBytes());
+                
                 } else{
-                    System.out.println("Cliente desconectado");
+                    output.println("Login Inválido. Use o formato dito em cima." + "\nEND");
                 }
 
-                // Fecha os fluxos e a conexão com o cliente
-                outputStream.close();
-                inputStream.close();
-                clientSocket.close();
-            } 
-        } catch (IOException e) {
+                linhaInput = input.readLine();
+                inicioUser = linhaInput.split(" ");
+                comandoInicio = inicioUser[0];
+                numeroRegisto = inicioUser[1];
+                comandoPasse = inicioUser[2];
+                palavraPasse = inicioUser[3];
+            }
+
+
+
+
+        
+        }catch (Exception e) {
             e.printStackTrace();
         }
     }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 

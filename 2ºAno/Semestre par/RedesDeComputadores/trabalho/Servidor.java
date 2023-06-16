@@ -4,10 +4,14 @@ import java.util.*;
 
 public class Servidor {
     private static long tempoInicioConexao;
+
+    public static long getTempoInicio() {
+        return tempoInicioConexao;
+    }
+
+
     public static void main(String[] args) {
         ServerSocket servidor = null;
-
-
 
         try {        
             servidor = new ServerSocket(5555);
@@ -39,15 +43,32 @@ public class Servidor {
 
 class ClientThread extends Thread {
     private Socket clienteSocket;
+    private long tempoInicioAberturaServidor;
+    private String cliente = "aluno";
 
     private Hashtable<String, String> tabelaDosLogins;
-  
+    private Hashtable<String, String> tabelaDasPresencas;
 
-    public ClientThread(Socket clientSocket, long serverstart) {
-        this.clienteSocket = clientSocket;
+    public long getTempoInicio(){
+        return tempoInicioAberturaServidor;
+    }
+
+    public String getCliente() {
+        return cliente;
+    }
+
+    public void setCliente(String cliente) {
+        this.cliente = cliente;
+    }
+
+
+    public ClientThread(Socket clienteeSocket, long inicioTempoServidor) {
+        this.clienteSocket = clienteeSocket;
+        this.tempoInicioAberturaServidor = inicioTempoServidor;
       
 
         tabelaDosLogins = new Hashtable<>();
+        tabelaDasPresencas = new Hashtable<>();
     }
 
 
@@ -65,6 +86,7 @@ class ClientThread extends Thread {
             String comandoInicio = inicioUser[0];
             String numeroRegisto = "", palavraPasse = "";
             String comandoPasse = inicioUser[2];
+            String texto = "";
 
 
             while( ((!comandoInicio.equalsIgnoreCase("REG") || numeroRegisto.equals(null)) || (!comandoPasse.equalsIgnoreCase("WITHPASS") || palavraPasse.equals(null))) || continuar){
@@ -102,6 +124,8 @@ class ClientThread extends Thread {
                     if( palavraPasse.equals(tabelaDosLogins.get(numeroRegisto)) ){
                         
                         output.println("HELLO " + numeroRegisto + "\nEND");
+                        presencasRegisto(numeroRegisto);
+
                         break;
                     } else{
                         output.println("ERROR " + numeroRegisto + "\nEND");
@@ -113,12 +137,102 @@ class ClientThread extends Thread {
                 }
             }
 
+            while ( (linhaInput = input.readLine()) != null) {           
+                texto = comandos(linhaInput);
+                System.out.println(texto);
+                output.println(texto + "\nEND");
+            }
 
 
-
-        
         }catch (Exception e) {
             e.printStackTrace();
+        }
+    }
+
+
+
+
+    private String comandos(String linha) {
+        String resposta = "";
+        String linhaSemEspaco[] = linha.split(" ");
+        String comando = linhaSemEspaco[0];
+
+        switch(comando.toUpperCase()){
+            case "ASK":
+                resposta = comandoASK(linha);
+                break;
+        }
+
+
+
+
+        return resposta;
+    }
+
+
+    private String comandoASK(String pergunta){
+
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    private void presencasRegisto(String cliente) {
+        long tempoAtrasado = System.currentTimeMillis() - getTempoInicio();
+
+        tempoAtrasado /= 60000; // Está em ms e queremos passar para minutos. 60.000 ms = 1 min
+        String presenca;
+
+        switch (cliente){
+            case "professor":
+
+                setCliente("professor");
+                break;
+
+            default:
+
+                if (tempoAtrasado < 20) {
+                    presenca = "Presente";
+                } 
+                else if ((tempoAtrasado >= 20) && (tempoAtrasado <= 45)){
+                    presenca = "Atrasado";
+                } else {
+                    presenca = "Falta";
+
+                }
+                
+                setCliente(cliente);
+                tabelaDasPresencas.put(cliente, presenca);
+                break;
         }
     }
 }

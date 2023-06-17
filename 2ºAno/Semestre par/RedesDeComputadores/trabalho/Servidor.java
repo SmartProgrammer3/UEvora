@@ -45,9 +45,12 @@ class ClientThread extends Thread {
     private Socket clienteSocket;
     private long tempoInicioAberturaServidor;
     private String cliente = "aluno";
+    private int numeroQuestao = 0;
 
     private Hashtable<String, String> tabelaDosLogins;
     private Hashtable<String, String> tabelaDasPresencas;
+    private Hashtable<Integer, QuestaoResposta> tabelaDasPerguntas;
+    private HashMap<Integer, String> tabelaRespostas; 
 
     public long getTempoInicio(){
         return tempoInicioAberturaServidor;
@@ -69,6 +72,8 @@ class ClientThread extends Thread {
 
         tabelaDosLogins = new Hashtable<>();
         tabelaDasPresencas = new Hashtable<>();
+        tabelaDasPerguntas = new Hashtable<>();
+        tabelaRespostas = new HashMap<>();
     }
 
 
@@ -161,6 +166,18 @@ class ClientThread extends Thread {
             case "ASK":
                 resposta = comandoASK(linha);
                 break;
+            case "ANSWER":
+                linha = linha.substring(7); // Vai retornar sem o comando answer e o " " (6+1 = 7)
+                resposta = comandoANSWER(linha);
+                break;
+            case "LISTQUESTIONS":
+                resposta = comandoListQuestions();
+                break;
+            case "PRESENCE":
+                String numeroRegisto = linhaSemEspaco[1];
+                resposta = comandoPresenca(numeroRegisto);
+                break;
+
         }
 
 
@@ -170,37 +187,94 @@ class ClientThread extends Thread {
     }
 
 
-    private String comandoASK(String pergunta){
 
+
+    // Verificar a presença do cliente
+    private String comandoPresenca(String cliente){
+        if(tabelaDasPresencas.get(cliente) == null){
+            return "Este utilizador não se encontra no servidor.";
+        }
+        return  tabelaDasPresencas.get(cliente);
+    }
+
+    
+    private String comandoListQuestions(){
+        StringBuilder respostaLista = new StringBuilder();
+        
+
+        for (int i = 1; i <= tabelaDasPerguntas.size(); i++) {
+
+            QuestaoResposta question = tabelaDasPerguntas.get(i);
+
+            respostaLista.append("( " + i + " ) " + question.getPergunta() + "\n");
+
+            if (tabelaRespostas.get(i) != null) {
+                respostaLista.append( "( " + getCliente() + " ) " + tabelaRespostas.get(i) + "\n");
+                respostaLista.append("( " + "professor" + " ) " + question.getResposta() + "\n");
+
+            } else if (getCliente().equalsIgnoreCase("professor")) {
+                respostaLista.append("professor " + question.getResposta() + "\n");
+            } else {
+                respostaLista.append("(NOT ANSWERED)\n");
+            }
+        }
+
+        return respostaLista.toString();
     }
 
 
+    private String comandoANSWER(String resposta){
+        String RespostaSemEspaco[] = resposta.split(" ");
+        int numeroQuestao = Integer.parseInt(RespostaSemEspaco[0]);
+        resposta = resposta.substring(2); // Fica só a resposta, sem o número da questão e sem o espaço entre o número e a resposta.
+
+        QuestaoResposta questao = tabelaDasPerguntas.get(numeroQuestao);
+
+        if (questao == null) {
+            return ("Não existe nenhuma pergunta com esse indíce: " + numeroQuestao);
+        }
+
+        if (getCliente().equalsIgnoreCase("professor")) {
+
+            if (questao.getResposta() != null) { // Se a pergunta não foi feita pelo aluno, e foi pelo professor, então esta é diferente de null, o que significa que já tem resposta.
+                return "Resposta já enviada pelo professor para a pergunta Nº " + numeroQuestao;
+            }
+
+            questao.setResposta(resposta);
+            tabelaDasPerguntas.put(numeroQuestao, questao);
+        } else {
+            tabelaRespostas.put(numeroQuestao, resposta);
+        }
+
+        
+        return "REGISTERED: Question " + numeroQuestao;
+    }
 
 
+    private String comandoASK(String pergunta){
+        String resposta = "";
+        int pontoInterrogacao = pergunta.indexOf("?");
 
+        if(pontoInterrogacao == -1){
+            return "Formato da questão Inválido. Deve ter um ponto de interrogação (?)";
+        }
 
+        resposta = pergunta.substring(pontoInterrogacao + 1);
+        pergunta = pergunta.substring(4, pontoInterrogacao + 1); // Substring 4 -> ponto de interrogação +1, de modo a remover o comando da pergunta (ask).
+        System.out.println("Utilizador pergunta: " + pergunta);
 
+        numeroQuestao++;
+        if (getCliente().equalsIgnoreCase("professor")) {
 
+            QuestaoResposta questao = new QuestaoResposta(pergunta, resposta);
+            tabelaDasPerguntas.put(numeroQuestao, questao);
+        } else {
+            QuestaoResposta questao = new QuestaoResposta(pergunta, null);
+            tabelaDasPerguntas.put(numeroQuestao, questao);
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+        }
+        return "QUESTION" + " " + numeroQuestao + ": " + pergunta;
+    }
 
 
 
@@ -237,6 +311,30 @@ class ClientThread extends Thread {
     }
 }
 
+
+
+class QuestaoResposta{
+    private String Pergunta;
+    private String Resposta;
+
+    public QuestaoResposta(String pergunta, String resposta) {
+        setPergunta(pergunta); 
+        setResposta(resposta);
+    }
+
+    public String getPergunta() {
+        return Pergunta;
+    }
+    public void setPergunta(String pergunta) {
+        Pergunta = pergunta;
+    }
+    public String getResposta() {
+        return Resposta;
+    }
+    public void setResposta(String resposta) {
+        Resposta = resposta;
+    }
+}
 
 
 

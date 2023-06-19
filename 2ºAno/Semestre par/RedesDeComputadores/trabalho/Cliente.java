@@ -1,49 +1,73 @@
 import java.io.*;
 import java.net.*;
-
+import java.util.Scanner;
 
 
 public class Cliente{
+    final static String path = "C:/Users/gonca/OneDrive/Ambiente de Trabalho/Uevora-CloneGithub/UEvora/2ºAno/Semestre Par/RedesDeComputadores/trabalho/Ficheiro";
     public static void main(String[] args) {
-
         try {
             Socket socket = new Socket("localhost", 5555);
             System.out.println("Connectado\n");
 
+            InputStream reader = socket.getInputStream();
+            OutputStream writer =socket.getOutputStream();
+            Scanner s = new Scanner(System.in);
+            byte[] dddd = new byte[1024]; 
+            String inputUtilizador;
+            int numerobytes;
+            
 
-            BufferedReader reader = new BufferedReader(new InputStreamReader(socket.getInputStream()));
-            PrintWriter writer = new PrintWriter(socket.getOutputStream(), true);
-            BufferedReader input = new BufferedReader(new InputStreamReader(System.in));
+            numerobytes = reader.read(dddd);
+            String resposta = new String(dddd, 0, numerobytes);
 
             boolean continuar = true;
-            System.out.println(reader.readLine());
+            System.out.println(resposta);
 
             while (continuar) {
-                String inputUtilizador = input.readLine();
+                inputUtilizador = s.nextLine();
 
-                if (inputUtilizador.length() > 1024) {
-                    System.out.println("A mensagem excede o tamanho máximo permitido de 1024 bytes.");
-                    continue;
-                }
+                dddd = inputUtilizador.getBytes();
 
-                writer.println(inputUtilizador); 
+                writer.write(dddd, 0, dddd.length); 
+                writer.flush();
 
                 if(inputUtilizador.equalsIgnoreCase("EXIT")){
-                    System.out.println("Closing connection...");
+                    System.out.println("A fechar a conexão com o servidor.");
                     continuar = false;
+                } 
+
+
+                String respostaDoServidor;
+                numerobytes = reader.read(dddd);
+                respostaDoServidor = new String(dddd, 0, numerobytes);
+
+                if(respostaDoServidor.endsWith("FIM")){
+                    System.out.println(respostaDoServidor.substring(0, respostaDoServidor.length() - 4));
+                    continue;
+                }
+                while(!respostaDoServidor.endsWith("FIM") ) {
+                    
+                    System.out.println(respostaDoServidor );
+                    
+                    numerobytes = reader.read(dddd);
+                    respostaDoServidor = new String(dddd, 0, numerobytes);
                 }
 
 
-                String respostaDoServidor = null;
-                while ((respostaDoServidor = reader.readLine()) != null && !respostaDoServidor.equals("FIM") ) {
 
-                    System.out.println(respostaDoServidor);
-                }
+
+
+
+
+
+
             }
             writer.close();
             reader.close();
-            input.close();
+            s.close();
             socket.close();
+         
         } catch(IOException e) {
             e.printStackTrace();
         }

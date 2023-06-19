@@ -6,7 +6,6 @@ public class Servidor {
     private static long tempoInicioConexao;
     private static Hashtable<Integer, QuestaoResposta> tabelaDasPerguntas;
     private static HashMap<Integer, String> tabelaRespostas;
-    private static final int buffer = 1024;
 
     public static long getTempoInicio() {
         return tempoInicioConexao;
@@ -33,7 +32,7 @@ public class Servidor {
                 Socket cliente = servidor.accept();
                 System.out.println("O cliente juntou-se à sessão: " + cliente.getInetAddress() + ".");
                 
-                ClientThread clientThread = new ClientThread(cliente, tempoInicioConexao, tabelaDasPerguntas, tabelaRespostas, buffer);
+                ClientThread clientThread = new ClientThread(cliente, tempoInicioConexao, tabelaDasPerguntas, tabelaRespostas);
                 clientThread.start();
             }
         } catch (IOException e) {
@@ -56,7 +55,8 @@ class ClientThread extends Thread {
     private Socket clienteSocket;
     private long tempoInicioAberturaServidor;
     private String cliente = "aluno";
-    private  int tamanhoMaximo = 1024;
+    private InputStream input;
+    private OutputStream output;
 
     private Hashtable<String, String> tabelaDosLogins;
     private Hashtable<String, String> tabelaDasPresencas;
@@ -75,29 +75,34 @@ class ClientThread extends Thread {
         this.cliente = cliente;
     }
 
-    public ClientThread(Socket clienteeSocket, long inicioTempoServidor, Hashtable<Integer, QuestaoResposta> tabelaDasPerguntas, HashMap<Integer, String> tabelaRespostas, int tamanhoMaximo) {
+    public ClientThread(Socket clienteeSocket, long inicioTempoServidor, Hashtable<Integer, QuestaoResposta> tabelaDasPerguntas, HashMap<Integer, String> tabelaRespostas) throws IOException {
         this.clienteSocket = clienteeSocket;
         this.tempoInicioAberturaServidor = inicioTempoServidor;
         this.tabelaDasPerguntas = tabelaDasPerguntas;
         this.tabelaRespostas = tabelaRespostas;
-        this.tamanhoMaximo = tamanhoMaximo;
       
 
         tabelaDosLogins = new Hashtable<>();
         tabelaDasPresencas = new Hashtable<>();
+
+        input = clienteSocket.getInputStream();
+        output = clienteSocket.getOutputStream();
     }
-
-
 
     public void run() {
         try {
-            BufferedReader input = new BufferedReader(new InputStreamReader(clienteSocket.getInputStream())); // Ler as mensagens enviadas pelo cliente
-            PrintWriter output = new PrintWriter(clienteSocket.getOutputStream(), true); // Para enviar mensagens de volta ao cliente
+            
+            byte[] ddd = new byte[1024];
+        
+            ddd = ("Seja bem-vindo! Começe por se registar com o comando REG, o respetivo número, WITHPASS, a respetiva passe (Ex: REG lXXXXX WITHPASS 12345)!").getBytes();
+            output.write( ddd,0, ddd.length);            
+            output.flush();
 
-            output.println("Seja bem-vindo! Começe por se registar com o comando REG, o respetivo número, WITHPASS, a respetiva passe (Ex: REG lXXXXX WITHPASS 12345)!");            
             boolean continuar = true;
 
-            String linhaInput = input.readLine();
+            int numerobytes;
+            numerobytes = input.read(ddd);
+            String linhaInput = new String(ddd, 0, numerobytes);
             String[] inicioUser = linhaInput.split(" ");
             String comandoInicio = inicioUser[0];
             String numeroRegisto = "", palavraPasse = "";
@@ -111,13 +116,22 @@ class ClientThread extends Thread {
                     numeroRegisto = inicioUser[1];
                     palavraPasse = inicioUser[3];
                     tabelaDosLogins.put(numeroRegisto, palavraPasse);
-
-                    output.println("Registo concluído. Faça o login agora, com o comando IAM número WITHPASS passe." + "\nFIM");
+                    
+                  
+                    ddd = ("Registo concluído. Faça o login agora, com o comando IAM número WITHPASS passe." + "\nFIM").getBytes();
+                    System.out.println(ddd.length);
+                    output.write(ddd,0,ddd.length);  
+                    output.flush();
                     break;
                 } 
+                ddd = ("Registo Inválido. Use o formato dito em cima." + "\nFIM").getBytes();
+                System.out.println(ddd.length);
+                output.write(ddd,0,ddd.length);  
+                output.flush();
 
-                output.println("Registo Inválido. Use o formato dito em cima." + "\nFIM");
-                linhaInput = input.readLine();
+
+                numerobytes = input.read(ddd);
+                linhaInput = new String(ddd, 0, numerobytes);
                 inicioUser = linhaInput.split(" ");
                 comandoInicio = inicioUser[0];
                 numeroRegisto = inicioUser[1];
@@ -127,49 +141,64 @@ class ClientThread extends Thread {
 
             
             while( (!comandoInicio.equalsIgnoreCase("IAM") || numeroRegisto.equals(null)) || (!comandoPasse.equalsIgnoreCase("WITHPASS") || palavraPasse.equals(null)) || continuar){
-                linhaInput = input.readLine();
+                numerobytes = input.read(ddd);
+                linhaInput = new String(ddd, 0, numerobytes);
                 inicioUser = linhaInput.split(" ");
                 comandoInicio = inicioUser[0];
                 numeroRegisto = inicioUser[1];
                 comandoPasse = inicioUser[2];
                 palavraPasse = inicioUser[3];
-
+               
                 
                 if( (comandoInicio.equalsIgnoreCase("IAM") && !numeroRegisto.equals(null)) && (comandoPasse.equalsIgnoreCase("WITHPASS") && !palavraPasse.equals(null))) {
-                    
+                   
                     if( palavraPasse.equals(tabelaDosLogins.get(numeroRegisto)) ){
                         setCliente(numeroRegisto);
-                        output.println("HELLO " + numeroRegisto + "\nFIM");
+                        System.out.println("olaaa");
+                        
+                        ddd = ("HELLO " + numeroRegisto + "\nFIM").getBytes();
+                        output.write(ddd,0,ddd.length); 
                         presencasRegisto(numeroRegisto);
+                        System.out.println(ddd);
 
                         break;
                     } else{
-                        output.println("ERROR " + numeroRegisto + "\nFIM");
+                       
+                        ddd = ("ERROR " + numeroRegisto + "\nFIM").getBytes();
+                        output.write(ddd,0,ddd.length); 
                     }
 
                 
                 } else{
-                    output.println("Login Inválido. Use o formato dito em cima." + "\nFIM");
+                    ddd = ("Login Inválido. Use o formato dito em cima." + "\nFIM").getBytes();
+                    output.write(ddd,0,ddd.length);  
                 }
             }
 
-            while ( (linhaInput = input.readLine()) != null) {   
-                
-                if (linhaInput.length() > tamanhoMaximo) {
-                    output.println("ERRO, tamanho máximo da mensagem superior a 1024 bytes.");
-                    continue;
-                }        
+            
+            
+            while ( (numerobytes = input.read(ddd)) != -1  ) {   
+                linhaInput = new String(ddd, 0, numerobytes);
+                if (linhaInput.equals("exit")) {
+            
+                    ddd = ("Até FIM").getBytes();
+                    output.write(ddd,0,ddd.length); 
+                    break;
+                }
                 
                 texto = comandos(linhaInput);
                 System.out.println(texto);
-                output.println(texto + "\nFIM");
+     
+                ddd = (texto + "\nFIM").getBytes();
+                output.write(ddd,0,ddd.length); 
             }
-
 
         }catch (Exception e) {
             e.printStackTrace();
         }
     }
+
+
 
 
 
@@ -198,7 +227,11 @@ class ClientThread extends Thread {
                 String numeroQuestao = linhaSemEspaco[1];
                 resposta = comandoRemoveAnswer(numeroQuestao);
                 break;
+            
 
+
+            default:
+                return "Não tens comando para isso";
 
         }
         return resposta;
@@ -355,8 +388,6 @@ class ClientThread extends Thread {
 
 
 
-
-
     // Verificar a presença 
     private void presencasRegisto(String cliente) {
         long tempoAtrasado = System.currentTimeMillis() - getTempoInicio();
@@ -384,7 +415,48 @@ class ClientThread extends Thread {
                 break;
         }
     }
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 // Classe que guarda as perguntas e respostas, respetivamente

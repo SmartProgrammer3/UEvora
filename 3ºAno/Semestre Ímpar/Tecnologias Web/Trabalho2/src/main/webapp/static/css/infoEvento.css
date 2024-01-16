@@ -1,0 +1,105 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    margin: 0;
+    padding: 20px;
+}
+h1 {
+    color: #333;
+    text-align: center;
+}
+
+.container {
+    width: 80%;
+    margin: 0 auto;
+    background: #fff;
+    padding: 20px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.event-info, .participants, .classification {
+    margin-bottom: 20px;
+    padding: 15px;
+    border-radius: 5px;
+    background: #e9e9e9;
+}
+
+.event-info p, .participants p, .classification p {
+    margin: 5px 0;
+    line-height: 1.6;
+}
+
+.participant {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+    padding: 10px;
+    background: #ddd;
+    border-radius: 5px;
+}
+
+.participant div {
+    margin: 0 10px;
+}
+
+.participants-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.participants-table, .participants-table th, .participants-table td {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: left;
+}
+
+.participants-table th {
+    background-color: #f2f2f2;
+}
+
+.participants-table tr:nth-child(even) {
+    background-color: #f9f9f9;
+}
+
+.participants-table tr:hover {
+    background-color: #f1f1f1;
+}
+
+
+.classification-button {
+    display: block;
+    width: 100%;
+    padding: 10px;
+    margin-top: 20px;
+    background: #4CAF50;
+    color: white;
+    text-align: center;
+    text-decoration: none;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.classification-button:hover {
+    background: #45a049;
+}
+
+.back-button {
+    display: block;
+    width: auto;
+    margin: 20px auto;
+    padding: 10px 20px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    text-align: center;
+    text-decoration: none;
+    font-size: 16px;
+}
+
+.back-button:hover {
+    background-color: #45a049;
+}

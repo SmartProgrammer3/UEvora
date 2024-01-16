@@ -1,0 +1,138 @@
+body {
+    font-family: 'Lobster', 'Rowdies', sans-serif;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+#header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap; 
+    padding: 10px;
+    background-color: #333;
+    color: white;
+}
+
+
+#login-button {
+    margin-left: auto; 
+}
+
+#login-button button {
+    background-color: orange; 
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+}
+
+#login-button button:hover {
+    background-color: darkorange;
+}
+
+#wrapper {
+    #wrapper {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-around; /* Distribui os itens igualmente */
+        align-items: flex-start; /* Alinha os itens ao topo */
+        background-image: url('../static/img/background.png');
+        background-size: cover;
+        padding: 20px;
+        color: white;
+    }
+    
+}
+
+.section {
+    flex: 1 1 300px; /* Ocupa espaço igual, mas não menos que 300px */
+    background-color: rgba(0, 0, 0, 0.5);
+    margin-bottom: 20px;
+    padding: 20px;
+    border-radius: 10px;
+}
+
+
+.section h2 {
+    margin-top: 0;
+}
+
+.section p {
+    font-style: italic;
+}
+
+.more-info-button {
+    display: block;
+    width: 100%;
+    padding: 10px;
+    margin-top: 10px;
+    background-color: #444;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.more-info-button:hover {
+    background-color: #555;
+}
+    
+#footer {
+    background-color: #333;
+    color: white;
+    padding: 20px;
+    text-align: center;
+}
+
+#footer-content {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+
+#footer-left, #footer-center, #footer-right {
+    flex: 1;
+    padding: 10px;
+}
+
+.footer-image img {
+    width: 100%;
+    max-width: 100px; /* Ajusta o tamanho da imagem */
+    height: auto;
+}
+
+#voltar button {
+    background-color: orange; 
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+}
+
+#voltar button:hover {
+    background-color: darkorange;
+}
+
+
+@media (max-width: 600px) {
+    .section {
+        margin-bottom: 10px;
+        padding: 10px;
+    }
+
+    #footer-content {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    #footer-left, #footer-center, #footer-right {
+        text-align: center;
+        margin-bottom: 20px;
+    }
+
+    #login-button button {
+        padding: 5px 10px; /* Reduz o tamanho do botão em telas menores */
+    }
+}

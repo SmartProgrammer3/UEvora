@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../styles.css">
+    <script src="../util.js"></script>
+    <title>Farmácias Aderentes</title>
+</head>
+
+<body>
+    <div id="cabecalho">
+        <div id="titulo">
+            <img id="logo" alt="logo" src="../imagens/logo.png" height="70%">
+            <div id="centro">
+                <h1 id="nome">Centro de Vacinação Alentejano</h1>
+            </div>
+        </div>
+        <div id="botaoNavegacao">
+            <div class="item">
+                <a href="../farmacias.html">
+                    <button class="item-butao">Início</button>
+                </a>
+            </div>
+            <div class="item">
+                <button class="item-butao">Utente</button>
+                <div class="item-subitems">
+                    <a href="../utente/addsche.html">Fazer Agendamento</a>
+                    <a href="../utente/listsche.html">Lista de Agendamentos</a>
+                    <a href="../utente/removesche.html">Remover Agendamento</a>
+                </div>
+            </div>
+            <div class="item">
+                <button class="item-butao">Gestão</button>
+                <div class="item-subitems">
+                    <a href="../gestao/gripe.html">Lista de Farmácias Gripe</a>
+                    <a href="../gestao/covid19.html">Lista de Farmácias Covid-19</a>
+                    <a href="../gestao/graficos.html">Gráficos</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="list-sche">
+            <div id="nome-list">Agendamento de Vacinas</div>
+            <div id="procura-sche">
+                <input type="text" id="userID" placeholder="Insira seu ID de usuário">
+                <input type="text" id="vaccine" placeholder="Insira a vacina">
+                <input type="text" id="entityID" placeholder="Insira o ID da farmácia">
+                <input type="text" id="scheduleDate" placeholder="Insira a data">
+                <button id="pesquisar" onclick="agendarVacina()">Agendar Vacina</button>
+            </div>
+            
+            <ul id="listaAgendamentos"></ul>
+        </div>
+
+    </div>
+
+    <div id="conteudo">
+        <div id="index-conteudo-inicial"></div>
+    </div>
+
+    <div id="rodape">
+        <div id="creditos">
+            <p>Pedro Emílio & Luís Carvalho @ TW2023<br />Todos os direitos reservados</p>
+        </div>
+        <div id="colaboracao">
+            <p>Colaboração com:</p>
+            <a target="_blank" href="https://www.farmaciasportuguesas.pt/">
+                <img alt="FarmaciasPortuguesas" src="../imagens/r.png" height="50%">
+            </a>
+        </div>
+        <div id="contactos">
+            <p>Contacte-nos em:</p>
+            <a target="_blank" href="https://www.uevora.pt/">
+                <img alt="Uevora" src="../imagens/UniLogo.png" height="60%">
+            </a>
+        </div>
+    </div>
+</body>

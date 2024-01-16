@@ -1,0 +1,625 @@
+
+body {
+    height: 100%;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    font-family: serif;
+    background-color: #f8f1e8;
+    user-select: none;
+}
+
+/*
+ * Cabeçalho
+ */
+
+#cabecalho {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    height: 100px;
+    font-weight: 500;
+    color: #000;
+    background-color: #088F8F;
+    padding: 0 25px;
+}
+
+#titulo {
+    pointer-events: none;
+    width: 100%;
+    height: 70px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+#centro {
+    pointer-events: none;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+#nome {
+    font-size: 56px;
+    font-weight: 700;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+#botaoNavegacao { 
+    height: 34px;
+    margin-left: -25px;
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    background-color: #088F8F;
+}
+
+.item {
+    position: relative;
+    display: inline-block;
+}
+
+.item-butao {
+    background-color: #08cc60;
+    color: black;
+    padding: 8px 16px;
+    font-size: 16px;
+    font-weight: 700;
+    font-family: "Ubuntu", sans-serif;
+    border: none;
+}
+
+.item-subitems {
+    display: none;
+    position: absolute;
+    color: black;
+    background-color: #08cc60;
+    overflow: auto;
+    white-space: nowrap;
+}
+
+.item-subitems a {
+    color: black;
+    padding: 12px 10px;
+    text-decoration: none;
+    display: block;
+    outline: 0;
+}
+
+.item-subitems a:hover {
+    background-color: #33f0fd;
+}
+
+.item:hover .item-subitems { 
+    display: block;
+}
+
+.item:hover .item-butao {
+    cursor: pointer;
+    background-color: #33f0fd;
+}
+
+/*
+ * rodape
+ */
+
+#rodape {
+    padding: 0 25px;
+    width: calc(100% - 50px);
+    height: 50px;
+    font-size: 13px;
+    font-weight: 700;
+    color: #000;
+    background-color: #088F8F;
+    display: flex;
+}
+
+#creditos {
+    width: calc(100% / 3);
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
+    align-self: center;
+}
+
+#colaboracao {
+    width: calc(100% / 3);
+    height: 100%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+}
+
+#colaboracao a {
+    height: 100%;
+    display: flex;
+    align-items: center;
+    margin-left: 10px;
+}
+
+#contactos {
+    width: calc(100% / 3);
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: end;
+}
+
+#contactos a {
+    height: 100%;
+    display: flex;
+    align-items: center;
+}
+
+#contactos p {
+    padding-right: 10px;
+}
+
+/*
+ * =========================================================================
+ */
+
+/*
+ * conteudo
+ */
+
+#paginaAtual {
+    color: #000;
+}
+
+#conteudo {
+    height: calc(100vh - 40px);
+    min-height: 380px;
+    width: 100vw;
+    margin-top: -10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    overflow: hidden;
+}
+
+#index-conteudo-inicial {
+    width: 100%;
+    height: 100%;
+    background-image: url("imagens/backgroun.png");
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-attachment: local;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#text {
+
+    text-align: left;
+    background-color: white;
+    color: #000;
+    width: 1400px;
+    height: 600px;
+    position: absolute;
+    top: 13em;
+    right: 16em;
+    border-radius: 1em;
+    box-shadow: 3px 3px 50px 3px gray;
+}
+
+#text li {
+    position: absolute;
+    top: 20em;
+}
+
+#listaFarmacias {
+    position: absolute;
+    top: 25%;
+}
+
+#nome-list{
+    text-align: center;
+    font-size: 60px;
+    white-space: nowrap;
+}
+
+#box {
+    text-align: center;
+    background-color: white;
+    color: #000;
+    width: 600px;
+    height: 200px;
+    position: absolute;
+    top: 20em;
+    left: 36%;
+    border-radius: 1em;
+    box-shadow: 3px 3px 50px 3px gray;
+}
+
+.list{
+    text-align: left;
+    background-color: white;
+    color: #000;
+    width: 550px;
+    height: 400px;
+    position: absolute;
+    top: 20em;
+    right: 45em;
+    border-radius: 1em;
+    box-shadow: 3px 3px 50px 3px gray;
+}
+
+.list li {
+    margin-top: -10px;
+    margin-bottom: 10px;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    background-color: #f9f9f9;
+}
+
+.list li a {
+    text-decoration: none;
+    color: #333;
+    font-weight: bold;
+}
+
+
+.listFarmacia{
+    text-align: left;
+    background-color: white;
+    color: #000;
+    width: 750px;
+    height: 400px;
+    position: absolute;
+    top: 20em;
+    right: 45em;
+    border-radius: 1em;
+    box-shadow: 3px 3px 50px 3px gray;
+}
+
+.listFarmacia li {
+    margin-top: -10px;
+    margin-bottom: 10px;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    background-color: #f9f9f9;
+}
+
+.listFarmacia li a {
+    text-decoration: none;
+    color: #333;
+    font-weight: bold;
+}
+
+.pagination{
+    text-align: center;
+}
+.pagination a{
+    color: black;
+    text-decoration: none;
+    padding: 8px 15px;
+    display: inline-block;
+}
+.pagination a.active{
+    background-color: hsl(120, 100%, 70%);
+    font-weight: bold;
+    border-radius: 5px;
+}
+.pagination a:hover:not(.active){
+    background-color: hsl(0, 0%, 77%);
+    border-radius: 5px;
+}
+
+
+.overlay-text {
+    position: absolute;
+    top: 90%; 
+    left: 50%; 
+    transform: translate(-50%, -50%); 
+    color: #fff; 
+    padding: 10px 20px; 
+    font-size: 20px; 
+    text-align: center;
+}
+
+.overlay-text2 {
+    position: absolute;
+    top: 23%; 
+    left: 50%; 
+    transform: translate(-50%, -50%); 
+    color: #fff; 
+    padding: 10px 20px; 
+    font-size: 20px; 
+    text-align: center;
+}
+
+/*
+* Lista de Farmácias de Gripe e Covid-19
+*/
+
+#list-gripe {
+    text-align: left;
+    background-color: white;
+    color: #000;
+    width: 680px;
+    height: 550px;
+    position: absolute;
+    top: 13em;
+    left: 33%;
+    border-radius: 1em;
+    box-shadow: 3px 3px 50px 3px gray;
+}
+
+#list-gripe li {
+    margin-top: -10px;
+    margin-bottom: 10px;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    background-color: #f9f9f9;
+}
+
+#list-gripe li a {
+    text-decoration: none;
+    color: #333;
+    font-weight: bold;
+}
+
+#list-covid {
+    text-align: left;
+    background-color: white;
+    color: #000;
+    width: 790px;
+    height: 550px;
+    position: absolute;
+    top: 13em;
+    left: 33%;
+    border-radius: 1em;
+    box-shadow: 3px 3px 50px 3px gray;
+}
+
+#list-covid li {
+    margin-top: -10px;
+    margin-bottom: 10px;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    background-color: #f9f9f9;
+}
+
+#list-covid li a {
+    text-decoration: none;
+    color: #333;
+    font-weight: bold;
+}
+
+/*
+* Farmácias
+*/
+
+#procura {
+    position: absolute;
+    top: 4em;
+    right: 25em;
+    display: flex;
+    align-items: center;
+    margin-bottom: 5px; 
+}
+
+#procuraLocalidade {
+    position: absolute;
+    top: 4em;
+    right: 0.5em;
+    display: flex;
+    align-items: center;
+    margin-bottom: 5px; 
+}
+
+#nFarmacia {
+    padding: 8px;
+    margin-right: 10px; 
+    border: 1px solid #ccc; 
+    border-radius: 10px;
+}
+
+#nFarmacia:focus {
+    outline: none;
+    border-color: #007BFF; 
+}
+
+#pesquisar {
+    padding: 10px;
+    background-color: #007BFF; 
+    color: #fff; 
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+}
+
+#butao {
+    border-radius: 10px;
+}
+
+#pesquisar:hover {
+    background-color: #0056b3; 
+}
+
+#procura-sche {
+    position: absolute;
+    top: 10em;
+    right: 6em;
+    display: flex;
+    align-items: center;
+    margin-bottom: 5px; 
+}
+
+#userID {
+    padding: 8px;
+    margin-right: 10px; 
+    border: 1px solid #ccc; 
+}
+
+#userID:focus {
+    outline: none;
+    border-color: #007BFF; 
+}
+
+#agendamentoID {
+    padding: 8px;
+    margin-right: 10px; 
+    border: 1px solid #ccc; 
+}
+
+#agendamentoID:focus {
+    outline: none;
+    border-color: #007BFF; 
+}
+
+#entityID {
+    position: absolute;
+    top: 3em;
+    padding: 8px;
+    margin-right: 10px; 
+    border: 1px solid #ccc; 
+}
+
+#entityID:focus {
+    outline: none;
+    border-color: #007BFF; 
+}
+
+#scheduleDate {
+    position: absolute;
+    top: 3em;
+    right: 8.55em;
+    padding: 8px;
+    margin-right: 10px; 
+    border: 1px solid #ccc; 
+}
+
+#scheduleDate:focus {
+    outline: none;
+    border-color: #007BFF;
+}
+
+#vaccine {
+    padding: 8px;
+    margin-right: 10px; 
+    border: 1px solid #ccc; 
+}
+
+#vaccine:focus {
+    outline: none;
+    border-color: #007BFF; 
+}
+
+#list-sche {
+    position: absolute;
+    top: 5em;
+    right: 6em;
+    display: flex;
+    align-items: center;
+    margin-bottom: 5px; 
+}
+
+#listaAgendamentos {
+    position: absolute;
+    top: 35%;
+}
+
+#userID {
+    padding: 8px;
+    margin-right: 10px; 
+    border: 1px solid #ccc; 
+}
+
+#userID:focus {
+    outline: none;
+    border-color: #007BFF; 
+}
+
+.list-sche{
+    text-align: left;
+    background-color: white;
+    color: #000;
+    width: 650px;
+    height: 400px;
+    position: absolute;
+    top: 20em;
+    right: 45em;
+    border-radius: 1em;
+    box-shadow: 3px 3px 50px 3px gray;
+}
+
+.list-sche li {
+    margin-top: -10px;
+    margin-bottom: 10px;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    background-color: #f9f9f9;
+}
+
+.list-sche li a {
+    text-decoration: none;
+    color: #333;
+    font-weight: bold;
+}
+
+/*
+* Gráficos
+*/
+
+#listaFarmaciasGripe {
+    position: absolute;
+    top: 25%;
+}
+
+#listaFarmaciasCovid {
+    position: absolute;
+    top: 25%;
+}
+
+#graficoLocalidades {
+    position: absolute;
+    right: 7%;
+    height: 100px;
+    width: 100px;
+}
+
+#graficoLocalidadesCovid{
+    position: absolute;
+    right: 7%;
+    height: 100px;
+    width: 100px;
+}
+
+#blocoGraficoLocalidades {
+    background-color: white;
+    text-align: center;
+    position: absolute;
+    top: 350%;
+    right: 60%;
+    height: 300px;
+    width: 700px;
+    border-radius: 1em;
+    box-shadow: 3px 3px 50px 3px gray;
+}
+
+#blocoGraficoLocalidadesCovid {
+    background-color: white;
+    text-align: center;
+    position: absolute;
+    top: 350%;
+    right: 10%;
+    height: 300px;
+    width: 700px;
+    border-radius: 1em;
+    box-shadow: 3px 3px 50px 3px gray;
+}

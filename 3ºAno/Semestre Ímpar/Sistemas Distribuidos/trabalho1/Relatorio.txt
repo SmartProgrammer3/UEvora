@@ -1,0 +1,33 @@
+
+Desenvolvimento:
+
+Primeiramente começámos por implementar as classes Artista e Donativo. Estas classes são importante pois vão conter
+toda a informação relativas aos artistas e aos donativos, respetivamente. É também feita toda a encapsulação necessária.
+
+Seguidamente implementámos o objeto remoto que foi desenvolvido na classe RemoteObjec-
+tImpl. Possui todos os métodos fundamentais que serão usados pelo objeto remoto. 
+
+Depois implementámos o Servidor, Cliente, ClienteAdmin:
+    - O Servidor consiste basicamente na inicialização da base de dados e do objeto remoto.
+    - O Cliente, criámos um menu de interação com o utilizador e implementámos todas as funções necessárias ao gerenciamento dos artistas e dos donativos.,
+    sendo possível, registar um artista, listar artistas com filtros (localização, arte, ou ambas), listar localizações diferentes onde existem artistas a atuar, 
+    enviar um donativo a um artista e listar todos os donativos recebidos por um determinado artista.
+    - Por sua vez, na classe ClientAdmin, temos todas as funções reservadas ao administrador, como listar artistas por estado e aprovar um artista que tenha o estado de
+    "não aprovado". 
+
+De seguida, começámos a desenvolver a função responsável pela comunicação com a base de
+dados que é feita na classe ConexaoBD. Para além da conexão, estão todos os métodos
+necessários, de modo a conseguir manipular a nossa base de dados com inserções de dados nas tabelas, consulta de dados. As tabelas criadas são as seguintes:
+    - Tabela dos artistas:
+        • nomeArtista: Nome do Artista
+        • tipoDeArte: Tipo de arte do Artista
+        • localizacao: Localizacão do Artista 
+        • aAtuar: Se o artista está a atuar ou não
+        • estado: Aprovado ou não aprovado
+        • artistid: Identificação do artista, que é um inteiro único (Chave primária)
+    - Tabela dos donativos:
+        • artistID: Identificação do artista (Chave estrangeira da tabela dos artistas)
+        • valorDonativo: Valor do donativo
+        • doacaoid: ID do donativo, único (Chave primária)
+
+

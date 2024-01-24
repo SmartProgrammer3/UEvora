@@ -1,0 +1,22 @@
+localhost:
+Iniciar rmi: rmiregistry -J-classpath -Jbuild 9000
+Compilar: javac -cp resources/postgresql.jar -d build *.java
+Correr servidor: java -cp build:resources/postgresql.jar Servidor.java 9000 localhost bdtrab2 user1 umaPass
+Correr cliente: java -cp build:resources/postgresql.jar Cliente.java localhost 9000
+
+
+Criar tabela: CREATE TABLE nome (arg1,arg2,arg3,...);
+                DROP TABLE table_name; 
+                \d -> ver tabelas
+                psql sdist -U sdist -h localhost
+		psql bdtrab2 -U user1 -h localhost
+Donativos: CREATE TABLE donativos (artistID integer, valorDonativo integer, doacaoId integer);
+            select * from donativos ;
+Artistas : CREATE TABLE artistas (nomeartista varchar(128), tipodearte varchar(128), localizacao varchar(128), aatuar varchar(128), estado varchar(128), artistid integer);
+            select * from artistas ;
+
+
+// Meter alguem a administrador
+UPDATE utilizadores
+set tipodeutilizador='administrador'
+WHERE username = 'Luis';

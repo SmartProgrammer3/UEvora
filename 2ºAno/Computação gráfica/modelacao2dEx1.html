@@ -1,0 +1,33 @@
+// Escreva um programa que use o C2D para desenhar um caminho entre os pontos de coordenadas 
+// (0,0) e (64,64) que tenha um arco de raio 16.
+
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <script>
+    function main() {
+      let gc = document.getElementById("acanvas").getContext("2d");
+      gc.fillStyle = "lightgray";
+      gc.fillRect(0,0,128,128);
+
+      gc.translate(16,16);
+      gc.beginPath();
+        gc.moveTo(0,0);
+        gc.arcTo(64, 0, 64, 64, 16);
+        gc.lineTo(64, 64);
+        gc.lineTo(8,8);
+      gc.closePath();
+      gc.strokeStyle = "crimson";
+      gc.stroke();
+      gc.fillStyle = "cyan";
+      gc.fill();
+    }
+  </script>
+</head>
+<body>
+  <canvas id="acanvas" height="128px" width="128px">
+    <script>main();</script>
+  </canvas>
+</body>
+</html>
